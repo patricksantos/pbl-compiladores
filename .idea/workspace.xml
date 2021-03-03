@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DelimitadorComentario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+    <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="novo DelimitadorComentario">
+      <change afterPath="$PROJECT_DIR$/out/production/Automato finito/DelimitadorComentario.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Automato finito/main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/AutomatoDelCom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Automato finito/AutomatoDelCom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DelimitadorComentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DelimitadorComentario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +37,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -96,8 +97,16 @@
       <option name="presentableId" value="Default" />
       <updated>1614508231954</updated>
       <workItem from="1614695874200" duration="2116000" />
-      <workItem from="1614733509726" duration="9997000" />
+      <workItem from="1614733509726" duration="11323000" />
     </task>
+    <task id="LOCAL-00001" summary="novo DelimitadorComentario">
+      <created>1614743589555</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1614743589555</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,5 +123,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="novo DelimitadorComentario" />
+    <option name="LAST_COMMIT_MESSAGE" value="novo DelimitadorComentario" />
   </component>
 </project>
