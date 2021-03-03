@@ -1,23 +1,14 @@
 public class DelimitadorComentario {
-    private enum Estado {
-        EstadoInicial,
-        EstadoA,
-        EstadoB,
-        EstadoC,
-        EstadoD,
-    }
-
     /** ---- Retorno do Lexema Analisado ---- **/
 
     public String getLexema(String texto, int posicao) { // Estado Inicial
         String lexema = ""; // Lexema que irá ser retornado
-        int estado = 0; // Estado do Autômato
 
         try{
             for (int i = posicao; i < texto.length(); i++) {
                 char c = texto.charAt(i);
                 if (c == '/') {
-                    lexema = estadoInicial(texto, i, lexema, estado);
+                    lexema = estadoInicial(texto, i, lexema);
                     break;
                 }
                 if(i == texto.length() - 1)
@@ -32,11 +23,12 @@ public class DelimitadorComentario {
 
     /** ---- Estados ---- **/
 
-    private String estadoInicial(String texto, int posicao, String lexema, int estado){
+    private String estadoInicial(String texto, int posicao, String lexema){
         char c = texto.charAt(posicao);
+        lexema += c;
+
         if( c == '/' ){
-            estado = Estado.EstadoInicial.ordinal();
-            return proximoEstado(texto, posicao, lexema, estado);
+            return estadoA(texto, posicao + 1, lexema);
         }
         else if(texto.charAt(posicao - 1) == '*'){
             return estadoFinal(lexema);
@@ -46,15 +38,15 @@ public class DelimitadorComentario {
         throw new RuntimeException("Error de execução");
     }
 
-    private String estadoA(String texto, int posicao, String lexema, int estado){
+    private String estadoA(String texto, int posicao, String lexema){
         char c = texto.charAt(posicao);
+        lexema += c;
 
         if( c == '*' && texto.charAt(posicao - 1) == '/' ){
-            return proximoEstado(texto, posicao, lexema, estado);
+            return estadoB(texto, posicao + 1, lexema);
         }
         else if( c == '/' && texto.charAt(posicao - 1) == '/' ){
-            estado = Estado.EstadoD.ordinal();
-            return proximoEstado(texto, posicao, lexema, estado);
+            return estadoD(texto, posicao + 1, lexema);
         }
         else{
             relatorErro();
@@ -63,41 +55,43 @@ public class DelimitadorComentario {
         throw new RuntimeException("Error de execução");
     }
 
-    private String estadoB(String texto, int posicao, String lexema, int estado){
+    private String estadoB(String texto, int posicao, String lexema){
         for (int i = posicao; i < texto.length(); i++)
         {
             char c = texto.charAt(i);
             if(c == '*') {
-                return proximoEstado(texto, i, lexema, estado);
+                lexema += c;
+                return estadoC(texto, i + 1, lexema);
             }
             else{
-                lexema = mesmoEstado(texto, i, lexema);
+                lexema += c;;
             }
         }
         throw new RuntimeException("Error de execução");
     }
 
-    private String estadoC(String texto, int posicao, String lexema, int estado){
+    private String estadoC(String texto, int posicao, String lexema){
         char c = texto.charAt(posicao);
+        lexema += c;
 
         if( c == '/' && texto.charAt(posicao - 1) == '*') {
-            return proximoEstado(texto, posicao, lexema, estado);
+            return estadoFinal(lexema);
         }
         else {
-            return estadoAnterior(texto, posicao, lexema, estado);
+            return estadoB(texto, posicao + 1, lexema);
         }
     }
 
-    private String estadoD(String texto, int posicao, String lexema, int estado){
+    private String estadoD(String texto, int posicao, String lexema){
         for (int i = posicao; i < texto.length(); i++)
         {
             char c = texto.charAt(i);
             if(c == 'n' && texto.charAt(i - 1) == '\\') {
-                estado = 3;
-                return proximoEstado(texto, i, lexema, estado);
+                lexema += c;
+                return estadoFinal(lexema);
             }
             else{
-                lexema = mesmoEstado(texto, i, lexema);
+                lexema += c;
             }
         }
         throw new RuntimeException("Error de execução");
@@ -105,52 +99,6 @@ public class DelimitadorComentario {
 
     private String estadoFinal(String lexema){
         return lexema;
-    }
-
-    /** ---- Logica entre os Estados ---- **/
-
-    private String proximoEstado(String texto, int posicao, String lexema, int estado){
-        char c = texto.charAt(posicao);
-        lexema += c;
-
-        if(estado == Estado.EstadoInicial.ordinal()){
-            estado++;
-            return estadoA(texto, posicao + 1, lexema, estado);
-        }
-        else if(estado == Estado.EstadoA.ordinal()){
-            estado++;
-            return estadoB(texto, posicao + 1, lexema, estado);
-        }
-        else if(estado == Estado.EstadoB.ordinal()){
-            estado++;
-            return estadoC(texto, posicao + 1, lexema, estado);
-        }
-        else if(estado == Estado.EstadoC.ordinal()){
-            return estadoFinal(lexema);
-        }
-        else if(estado == Estado.EstadoD.ordinal()){ // Estado A 2
-            return estadoD(texto, posicao + 1, lexema, estado);
-        }
-
-        throw new RuntimeException("Error de execução");
-    }
-
-    private String mesmoEstado(String texto, int posicao, String lexema){
-        char c = texto.charAt(posicao);
-        lexema += c;
-        return lexema;
-    }
-
-    private String estadoAnterior(String texto, int posicao, String lexema, int estado){
-        char c = texto.charAt(posicao);
-        lexema += c;
-
-        if(estado == Estado.EstadoC.ordinal()){ // Estado C
-            estado--;
-            return estadoB(texto, posicao + 1, lexema, estado);
-        }
-
-        throw new RuntimeException("Error de execução");
     }
 
     /** ---- Metodos Gerais ---- **/
