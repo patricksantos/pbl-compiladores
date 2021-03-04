@@ -1,39 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="novo DelimitadorComentario">
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/entities/Token.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/IEscritaArquivos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/ILeitorArquivo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAnalisadorLexico.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAutomato.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_03_2021_11_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_03_2021_11_08__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criacao da arquitetura de software usada no projeto">
+      <change afterPath="$PROJECT_DIR$/diagrama.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/AutomatoDelCom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/DelimitadorComentario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/DelimitadorComentarioOld$Estado.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/DelimitadorComentarioOld.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/EscritaArquivos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/LeitorArquivos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/Token.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AnalisadorLexico.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AutomatoDelCom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ControllerAnalisadorLexico.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DelimitadorComentario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DelimitadorComentarioOld.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/impl/EscritaArquivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LeitorArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/impl/LeitorArquivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Token.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +34,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
@@ -72,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores" />
       <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src\modules\AnalisadorLexico\usecases\impl" />
       <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src" />
     </key>
@@ -84,28 +56,28 @@
   <component name="RunManager" selected="Application.main">
     <configuration name="AnalisadorLexicoImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="modules.AnalisadorLexico.usecases.impl.AnalisadorLexicoImpl" />
-      <module name="Automato finito" />
+      <module name="pbl-compiladores" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="AutomatoDelCom" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="old.AutomatoDelCom" />
-      <module name="Automato finito" />
+      <module name="pbl-compiladores" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="DelimitadorComentario" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="old.DelimitadorComentario" />
-      <module name="Automato finito" />
+      <module name="pbl-compiladores" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main" />
-      <module name="Automato finito" />
+      <module name="pbl-compiladores" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -117,6 +89,53 @@
         </value>
       </option>
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="pbl-compiladores" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="pbl-compiladores" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -146,7 +165,7 @@
       <workItem from="1614775169612" duration="1214000" />
       <workItem from="1614779208918" duration="7737000" />
       <workItem from="1614864911410" duration="5068000" />
-      <workItem from="1614870021146" duration="1023000" />
+      <workItem from="1614870021146" duration="1626000" />
     </task>
     <task id="LOCAL-00001" summary="novo DelimitadorComentario">
       <created>1614743589555</created>
@@ -162,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614785733825</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="criacao da arquitetura de software usada no projeto">
+      <created>1614871154812</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1614871154812</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,6 +208,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="novo DelimitadorComentario" />
-    <option name="LAST_COMMIT_MESSAGE" value="novo DelimitadorComentario" />
+    <MESSAGE value="criacao da arquitetura de software usada no projeto" />
+    <option name="LAST_COMMIT_MESSAGE" value="criacao da arquitetura de software usada no projeto" />
   </component>
 </project>
