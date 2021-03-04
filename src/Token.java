@@ -4,25 +4,13 @@
  * */
 public class Token {
     private String tipo; //Tipo de token identificado
-    private String lexema; //lexema do token
-    private int idTabela; //caso o token for um identificador, o id dele na tabela de símbolos;
+    private String lexema; //lexema do token ou id ta tabela de símbolo se for um token identificador
 
     /**
      * @param tipo tipo do token que foi identificado
-     * @param lexema lexema do token
+     * @param lexema lexema do token ou id ta tabela de símbolo se for um token identificador
      * */
     public Token(String tipo, String lexema){
-        this.lexema = lexema;
-        this.tipo = tipo;
-    }
-
-    /**
-     * Sobreescrita de método caso o token for um identificador ou palavra reservada
-     * @param tipo tipo do token que foi identificado
-     * @param lexema lexema do token
-     * @param idTabela posição do token na tabela de símbolos
-     * */
-    public Token(String tipo, String lexema, int idTabela){
         this.lexema = lexema;
         this.tipo = tipo;
     }
@@ -39,13 +27,6 @@ public class Token {
      * */
     public String getLexema(){
         return this.lexema;
-    }
-
-    /**
-     * @return o id na tabela de símbolos do token
-     * */
-    public int getIdTabela(){
-        return this.idTabela;
     }
 
     /**

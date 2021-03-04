@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="novo DelimitadorComentario">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_03_2021_11_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_03_2021_11_08__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/DelimitadorComentario.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Automato finito/DelimitadorComentario.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Automato finito/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Automato finito/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DelimitadorComentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DelimitadorComentario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/exemplo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscritaArquivos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LeitorArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LeitorArquivos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AnalisadorLexico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +46,25 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="Application.AnalisadorLexico">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AnalisadorLexico" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AnalisadorLexico" />
+      <module name="Automato finito" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AutomatoDelCom" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AutomatoDelCom" />
       <module name="Automato finito" />
@@ -58,33 +79,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main" />
-      <module name="Automato finito" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.main" />
+        <item itemvalue="Application.AnalisadorLexico" />
         <item itemvalue="Application.DelimitadorComentario" />
         <item itemvalue="Application.AutomatoDelCom" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -125,15 +128,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="novo DelimitadorComentario" />
     <option name="LAST_COMMIT_MESSAGE" value="novo DelimitadorComentario" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1614864125070">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1614864125070" />
+    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1614864125070">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1614864125070" />
+    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1614864125070">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1614864125070" />
+    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1614864125070">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1614864125070" />
   </component>
 </project>

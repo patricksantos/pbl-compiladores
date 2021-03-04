@@ -1,7 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -17,13 +14,25 @@ public class EscritaArquivos {
      * */
     public EscritaArquivos(ArrayList<Token> tokens){
         this.tokens = tokens;
-        diretorio = "." + File.pathSeparator + "output";
+        diretorio = "./output";
     }
 
-    public void escrita() throws IOException {
-        BufferedWriter escrita = new BufferedWriter(new FileWriter(this.diretorio));
+    public EscritaArquivos(){
+        diretorio = "./output";
+    }
+
+    public void escrita(String nome,String teste) throws IOException {
+
+        int auxiliar = nome.lastIndexOf("a");
+        String arquivoSaida = "Saida" + nome.substring(auxiliar + 1);
+
+        //BufferedWriter escritas = new BufferedWriter(new FileWriter(this.diretorio + "/" + arquivoSaida));
+        FileOutputStream arq = new FileOutputStream(this.diretorio + "/" + arquivoSaida);
+        DataOutputStream escrever = new DataOutputStream(arq);
+        teste = teste.trim();
+
         for(Token token: this.tokens){
-            escrita.write(token.info());
+            escrever.writeChars(token.info());
         }
     }
 

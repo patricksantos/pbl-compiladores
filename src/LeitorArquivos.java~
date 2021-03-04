@@ -33,7 +33,6 @@ public class LeitorArquivos {
         while (linha != null){
             linhas.add(linha);
             linha = leitor.readLine();
-
         }
         //O arquivo já foi lido então, quando a função for chamanda novamente o proximo arquivo será lido.
         //arquivoAtual++;
