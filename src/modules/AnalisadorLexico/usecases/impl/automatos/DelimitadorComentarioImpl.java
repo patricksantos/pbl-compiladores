@@ -1,7 +1,13 @@
-public class DelimitadorComentario {
+package modules.AnalisadorLexico.usecases.impl.automatos;
+
+import modules.AnalisadorLexico.entities.Token;
+import modules.AnalisadorLexico.usecases.facades.IAutomato;
+
+public class DelimitadorComentarioImpl implements IAutomato {
     /** ---- Retorno do Lexema Analisado ---- **/
 
-    public String getLexema(String texto, int posicao) { // Estado Inicial
+    @Override
+    public Token getToken(String texto, int posicao) {
         String lexema = ""; // Lexema que irá ser retornado
 
         try{
@@ -15,9 +21,9 @@ public class DelimitadorComentario {
                     throw new RuntimeException("Não é um comentario");
             }
 
-            return lexema;
+            return new Token("'Comentario'",lexema);
         }catch (Exception e){
-            return e.getMessage();
+            return new Token("Erro", "");
         }
     }
 
@@ -49,7 +55,7 @@ public class DelimitadorComentario {
             return estadoD(texto, posicao + 1, lexema);
         }
         else{
-            relatorErro();
+            getError();
         }
 
         throw new RuntimeException("Error de execução");
@@ -102,8 +108,8 @@ public class DelimitadorComentario {
     }
 
     /** ---- Metodos Gerais ---- **/
-
-    private void relatorErro(){
+    @Override
+    public void getError(){
         throw new RuntimeException("Não é um comentario");
     }
 

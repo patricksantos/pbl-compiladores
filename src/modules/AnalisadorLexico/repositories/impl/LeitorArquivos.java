@@ -1,10 +1,19 @@
-import java.io.*;
-import java.util.*;
+package modules.AnalisadorLexico.repositories.impl;
+
+import modules.AnalisadorLexico.repositories.facades.ILeitorArquivo;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Classe responsável por ler os arquivos de entrada.
 * */
-public class LeitorArquivos {
+public class LeitorArquivos implements ILeitorArquivo {
 
     private HashMap<String,File> lista_arquivos;//Arquivos encontrados na pasta input
     private File diretorio;//diretorio onde os arquivos foram salvos
@@ -23,6 +32,7 @@ public class LeitorArquivos {
     /**
      * Método responsável por ler os dados contidos em um arquivo.
      * */
+    @Override
     public ArrayList<String> leituraArquivo(String nomeArquivo) throws IOException {
 
         ArrayList<String> linhas = new ArrayList<>();
@@ -44,10 +54,12 @@ public class LeitorArquivos {
     /**
      * @return a quantidade de arquivos na pasta
      * */
+    @Override
     public int getNumeroArquivos(){
         return this.numeroArquivos;
     }
 
+    @Override
     public Set<String> getNomesArquivos(){
         return  this.lista_arquivos.keySet();
     }
