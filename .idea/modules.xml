@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Automato finito.iml" filepath="$PROJECT_DIR$/Automato finito.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pbl-compiladores.iml" filepath="$PROJECT_DIR$/pbl-compiladores.iml" />
     </modules>
   </component>
 </project>
