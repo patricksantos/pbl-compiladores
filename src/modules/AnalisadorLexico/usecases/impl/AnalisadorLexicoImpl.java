@@ -3,6 +3,7 @@ package modules.AnalisadorLexico.usecases.impl;
 import modules.AnalisadorLexico.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
 import modules.AnalisadorLexico.usecases.facades.IAutomato;
+import modules.AnalisadorLexico.usecases.impl.automatos.Delimitadores;
 import modules.AnalisadorLexico.usecases.impl.automatos.OperadoresAritmeticosImpl;
 import modules.AnalisadorLexico.usecases.impl.automatos.OperadoresLogicosImpl;
 
@@ -13,6 +14,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     IAutomato delimitadorComentario;
     private IAutomato operadorLogico;
     private IAutomato operadorAritmetico;
+    private IAutomato delimitadores;
     private int linhaAtual; // Guarda a linha atual que o analisador está lendo
     private int posicao; // Guarda a posição atual na linha que o automato está lendo
     private int quantidadeLinhas; // Quantidade de linhas que o arquivo tem
@@ -27,6 +29,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         //this.quantidadeLinhas = conteudoArquivo.size();
         this.operadorLogico = new OperadoresLogicosImpl(this);
         this.operadorAritmetico = new OperadoresAritmeticosImpl(this);
+        this.delimitadores = new Delimitadores(this);
     }
 
     @Override
@@ -49,16 +52,18 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         for(String linha: this.conteudoArquivo){
 
             while(this.posicao < linha.length()) {
-
+                //System.out.println(posicao + " " + linhaAtual + " " + linha.charAt(posicao));
                 if(operadorLogico.getToken(linha, this.posicao) == null){
-                    if(operadorAritmetico.getToken(linha,this.posicao) == null){
-                        this.posicao++;
+                    if(operadorAritmetico.getToken(linha, this.posicao) == null){
+                        if(delimitadores.getToken(linha, this.posicao) == null) {
+                            this.posicao++;
+                        }
                     }
                 }
 
-
             }
             this.posicao = 0;
+            this.linhaAtual++;
         }
         return this.tokens;
     }

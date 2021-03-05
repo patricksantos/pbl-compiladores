@@ -5,7 +5,7 @@ import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
 import modules.AnalisadorLexico.usecases.facades.IAutomato;
 
 public class OperadoresAritmeticosImpl implements IAutomato {
-    /** ---- Retorno do Lexema Analisado ---- **/
+
     private IAnalisadorLexico analisador;
     public OperadoresAritmeticosImpl(IAnalisadorLexico analisador){
         this.analisador = analisador;
@@ -13,8 +13,8 @@ public class OperadoresAritmeticosImpl implements IAutomato {
 
     public String getLexema(String texto, int posicao) { // Estado Inicial
         String lexema = ""; // Lexema que irá ser retornado
-
-        try{
+        return "a";
+        /*try{
             for (int i = posicao; i < texto.length(); i++) {
                 char c = texto.charAt(i);
                 if (c == '/') {
@@ -28,12 +28,12 @@ public class OperadoresAritmeticosImpl implements IAutomato {
             return lexema;
         }catch (Exception e){
             return e.getMessage();
-        }
+        }*/
     }
 
     /** ---- Estados ---- **/
 
-    private String estadoInicial(String texto, int posicao, String lexema){
+    private Token estadoInicial(String texto, int posicao, String lexema){
         char c = texto.charAt(posicao);
         lexema += c;
 
@@ -50,56 +50,89 @@ public class OperadoresAritmeticosImpl implements IAutomato {
             return estadoF(texto, posicao + 1, lexema);
         }
 
-
-        throw new RuntimeException("Error de execução");
+        return null;
+        //throw new RuntimeException("Error de execução");
     }
 
-    private String estadoA(String texto, int posicao, String lexema){
-        char c = texto.charAt(posicao);
-        lexema += c;
-
-        if( c == '+'){
-            return estadoB(texto, posicao + 1, lexema);
+    private Token estadoA(String texto, int posicao, String lexema){
+        //System.out.println("EstadoA");
+        if(posicao < texto.length()) {
+            char c = texto.charAt(posicao);
+            if (c == '+') {
+                lexema += c;
+                return estadoB(texto, posicao + 1, lexema);
+            } else {
+                //retornar token do tipo + e voltar uma posição
+                Token token = new Token("Operador aritmético", lexema);
+                this.analisador.adicionarToken(token);
+                this.analisador.setPosicao(posicao);
+                return token;
+            }
         }
-        else{
-            //retornar token do tipo + e voltar uma posição
-            return lexema;
-        }
+        //retornar token do tipo + e voltar uma posição
+        Token token = new Token("Operador aritmético", lexema);
+        this.analisador.adicionarToken(token);
+        this.analisador.setPosicao(posicao);
+        return token;
 
     }
 
-    private String estadoB(String texto, int posicao, String lexema){
+    private Token estadoB(String texto, int posicao, String lexema){
+        //System.out.println("EstadoB");
         //adiciona o token operador lógico na lista de token do tipo ++
-        return lexema;
+        Token token = new Token("Operador aritmético", lexema);
+        this.analisador.adicionarToken(token);
+        this.analisador.setPosicao(posicao);
+        return token;
     }
 
-    private String estadoC(String texto, int posicao, String lexema){
-        char c = texto.charAt(posicao);
-        lexema += c;
-
-        if( c == '-') {
-            return estadoD(texto, posicao + 1, lexema);
+    private Token estadoC(String texto, int posicao, String lexema){
+        //System.out.println("EstadoC");
+        if(posicao < texto.length()) {
+            char c = texto.charAt(posicao);
+            if (c == '-') {
+                lexema += c;
+                return estadoD(texto, posicao + 1, lexema);
+            } else {
+                //retornar token do tipo - e voltar uma posição
+                Token token = new Token("Operador aritmético", lexema);
+                this.analisador.adicionarToken(token);
+                this.analisador.setPosicao(posicao);
+                return token;
+            }
         }
-        else{
-            //retornar token do tipo - e voltar uma posição
-            return lexema;
-        }
-
+        //retornar token do tipo - e voltar uma posição
+        Token token = new Token("Operador aritmético", lexema);
+        this.analisador.adicionarToken(token);
+        this.analisador.setPosicao(posicao);
+        return token;
     }
 
-    private String estadoD(String texto, int posicao, String lexema){
+    private Token estadoD(String texto, int posicao, String lexema){
+        //System.out.println("EstadoD" + lexema);
         //adiciona o token operador lógico na lista de token do tipo --
-        return lexema;
+        Token token = new Token("Operador aritmético", lexema);
+        this.analisador.adicionarToken(token);
+        this.analisador.setPosicao(posicao);
+        return token;
     }
 
-    private String estadoE(String texto, int posicao, String lexema){
+    private Token estadoE(String texto, int posicao, String lexema){
+        //System.out.println("EstadoE");
         //adiciona o token operador lógico na lista de token do tipo *
-        return lexema;
+        Token token = new Token("Operador aritmético",lexema);
+        this.analisador.adicionarToken(token);
+        this.analisador.setPosicao(posicao);
+        return token;
     }
 
-    private String estadoF(String texto, int posicao, String lexema){
+    private Token estadoF(String texto, int posicao, String lexema){
+        //System.out.println("EstadoF");
         //adiciona o token operador lógico na lista de token do tipo /
-        return lexema;
+        Token token = new Token("Operador aritmético", lexema);
+        this.analisador.adicionarToken(token);
+        this.analisador.setPosicao(posicao);
+        return token;
     }
 
     private String estadoFinal(String lexema){
@@ -114,7 +147,15 @@ public class OperadoresAritmeticosImpl implements IAutomato {
 
     @Override
     public Token getToken(String texto, int posicao) {
-        return null;
+        String lexema = ""; // Lexema que irá ser retornado
+        Token token;
+        //try {
+        //antes de mandar o texto para o automato dar um trim para tirar os espaços em brancos que vem antes e depois das frases.
+        token = estadoInicial(texto, posicao, lexema);
+        return token;
+        /*}catch (Exception e){
+            return e.getMessage();
+        }*/
     }
 
     @Override
