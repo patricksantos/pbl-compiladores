@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criacao da arquitetura de software usada no projeto">
-      <change afterPath="$PROJECT_DIR$/diagrama.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/IEscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/IEscritaArquivos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/impl/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/impl/EscritaArquivos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAnalisadorLexico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +62,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.main">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AnalisadorLexicoImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="modules.AnalisadorLexico.usecases.impl.AnalisadorLexicoImpl" />
       <module name="pbl-compiladores" />
@@ -82,64 +101,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="pbl-compiladores" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="pbl-compiladores" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.main" />
@@ -149,7 +110,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -199,16 +160,39 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="novo DelimitadorComentario" />
     <MESSAGE value="criacao da arquitetura de software usada no projeto" />
     <option name="LAST_COMMIT_MESSAGE" value="criacao da arquitetura de software usada no projeto" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="485" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1614950187431">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="485" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1360.728@0.0.1360.728" timestamp="1614950187431" />
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1614955930348">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1614955930348" />
+    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1614955930348">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1614955930348" />
+    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1614955930348">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1614955930348" />
+    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1614955930348">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1614955930348" />
   </component>
 </project>

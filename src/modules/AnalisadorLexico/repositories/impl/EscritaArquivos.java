@@ -39,4 +39,23 @@ public class EscritaArquivos implements IEscritaArquivos {
         escrever.close();
     }
 
+    @Override
+    public void escrita(ArrayList<Token> tokens ,String nomeArquivo) throws IOException {
+        //String arquivoSaida = nomeArquivo.replace("entrada", "saida");
+
+        int auxiliar = nomeArquivo.lastIndexOf("a");
+        String arquivoSaida = "Saida" + nomeArquivo.substring(auxiliar + 1);
+
+        FileOutputStream arquivo = new FileOutputStream(this.diretorio + "/" + arquivoSaida);
+        DataOutputStream escrever = new DataOutputStream(arquivo);
+
+        for(Token token: tokens){
+            escrever.writeBytes(token.info());
+            escrever.writeChars("\n");
+        }
+
+        escrever.flush();
+        escrever.close();
+    }
+
 }

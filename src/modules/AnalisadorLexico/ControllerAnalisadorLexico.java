@@ -1,5 +1,6 @@
 package modules.AnalisadorLexico;
 
+import modules.AnalisadorLexico.entities.Token;
 import modules.AnalisadorLexico.repositories.facades.IEscritaArquivos;
 import modules.AnalisadorLexico.repositories.facades.ILeitorArquivo;
 import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
@@ -17,6 +18,23 @@ public class ControllerAnalisadorLexico {
         this.leitorArquivo = leitorArquivo;
         this.escritaArquivos = escritaArquivos;
         this.analisadorLexico = analisadorLexico;
+
+    }
+
+    public void iniciarLeitura() throws IOException {
+            this.AnalisarArquivos();
+    }
+
+    public void AnalisarArquivos() throws IOException {
+
+        Set<String> nomesArquivos = leitorArquivo.getNomesArquivos();
+        for(String arquivo: nomesArquivos){
+            ArrayList<String> conteudo = this.leitorArquivo.leituraArquivo(arquivo);
+            ArrayList<Token> tokens = analisadorLexico.analiseArquivo(conteudo);
+            System.out.println(tokens.size());
+            this.escritaArquivos.escrita(tokens,arquivo);
+        }
+
     }
 
     public void escreverArquivo(String arquivo, String conteudo) throws IOException {

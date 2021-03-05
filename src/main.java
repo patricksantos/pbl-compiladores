@@ -36,8 +36,8 @@ public class main {
         IAnalisadorLexico analisadorLexico = new AnalisadorLexicoImpl(delimitadorComentario);
 
         ControllerAnalisadorLexico controllerAnalisadorLexico = new ControllerAnalisadorLexico(leitorArquivo, escritaArquivos, analisadorLexico);
-
-        controllerAnalisadorLexico.escreverToken();
+        controllerAnalisadorLexico.iniciarLeitura();
+        //controllerAnalisadorLexico.escreverToken();
 
     }
 }
