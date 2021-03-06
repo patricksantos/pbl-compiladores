@@ -2,26 +2,41 @@ package modules.AnalisadorLexico.usecases.impl.automatos;
 
 import modules.AnalisadorLexico.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
-import modules.AnalisadorLexico.usecases.facades.IAutomato;
+import modules.AnalisadorLexico.usecases.facades.automatos.IDelimitadores;
 
-public class Delimitadores implements IAutomato {
+public class DelimitadoresImpl implements IDelimitadores {
 
-    private IAnalisadorLexico analisador;
+    private int posicaoFinal;
 
-    public Delimitadores(IAnalisadorLexico analisador){
-        this.analisador = analisador;
-    }
     @Override
     public Token getToken(String texto, int posicao) {
         String lexema = ""; // Lexema que irá ser retornado
-        Token token;
         //try {
         //antes de mandar o texto para o automato dar um trim para tirar os espaços em brancos que vem antes e depois das frases.
-        token = estadoInicial(texto, posicao, lexema);
-        return token;
+        return estadoInicialFinal(texto, posicao, lexema);
         /*}catch (Exception e){
             return e.getMessage();
         }*/
+    }
+
+    /** ---- Estados ---- **/
+
+    private Token estadoInicialFinal(String texto, int posicao, String lexema){
+        char c = texto.charAt(posicao);
+        lexema += c;
+
+        if( c == '.' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ';' ){
+            setPosicaoFinal(posicao + 1);
+            return new Token("Delimitador", lexema);
+        }
+
+        return null;
+        //throw new RuntimeException("Error de execução");
+    }
+
+    @Override
+    public int getPosicaoFinal(){
+        return this.posicaoFinal;
     }
 
     @Override
@@ -29,20 +44,8 @@ public class Delimitadores implements IAutomato {
 
     }
 
-    /** ---- Estados ---- **/
-
-    private Token estadoInicial(String texto, int posicao, String lexema){
-        char c = texto.charAt(posicao);
-        lexema += c;
-
-        if( c == '.' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ';' ){
-            Token token = new Token("Delimitador", lexema);
-            this.analisador.adicionarToken(token);
-            this.analisador.setPosicao(posicao + 1);
-            return token;
-        }
-
-        return null;
-        //throw new RuntimeException("Error de execução");
+    public void setPosicaoFinal(int posicaoFinal) {
+        this.posicaoFinal = posicaoFinal;
     }
+
 }

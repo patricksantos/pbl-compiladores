@@ -2,8 +2,11 @@ package modules.AnalisadorLexico.usecases.impl.automatos;
 
 import modules.AnalisadorLexico.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.IAutomato;
+import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresRelacionais;
 
-public class OperadoresRelacionais implements IAutomato {
+public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
+    private int posicaoFinal;
+
     @Override
     public Token getToken(String texto, int posicao) {
 
@@ -68,8 +71,18 @@ public class OperadoresRelacionais implements IAutomato {
     private Token estadoG(String texto, int posicao, String lexema){
         return null;
     }
+
     @Override
     public void getError() {
 
+    }
+
+    @Override
+    public int getPosicaoFinal(){
+        return this.posicaoFinal;
+    }
+
+    public void setPosicaoFinal(int posicaoFinal) {
+        this.posicaoFinal = posicaoFinal;
     }
 }

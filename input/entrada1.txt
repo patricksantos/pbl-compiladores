@@ -1,0 +1,31 @@
++
+
+// oi
+
+/*
+    Operador Aritmeticos
+*/
+
++
+++
+-
+--
+/
+
+/* Operador Logicos */
+
+*
+&&
+||
+!
+
+/* Delimitadores */
+
+.
+(
+)
+{
+}
+[
+]
+;
