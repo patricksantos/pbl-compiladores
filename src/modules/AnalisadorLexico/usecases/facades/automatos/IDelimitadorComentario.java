@@ -1,6 +1,6 @@
 package modules.AnalisadorLexico.usecases.facades.automatos;
 
-import modules.AnalisadorLexico.entities.Token;
+import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.IAutomato;
 
 import java.util.ArrayList;

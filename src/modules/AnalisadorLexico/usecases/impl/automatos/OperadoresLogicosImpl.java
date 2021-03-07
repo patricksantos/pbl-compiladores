@@ -1,6 +1,6 @@
 package modules.AnalisadorLexico.usecases.impl.automatos;
 
-import modules.AnalisadorLexico.entities.Token;
+import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresLogicos;
 
 public class OperadoresLogicosImpl implements IOperadoresLogicos {

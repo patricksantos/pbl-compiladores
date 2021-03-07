@@ -1,6 +1,6 @@
-package modules.AnalisadorLexico.repositories.impl;
+package infrastructure.repositories;
 
-import modules.AnalisadorLexico.repositories.facades.ILeitorArquivo;
+import domain.repositories.ILeitorArquivo;
 
 import java.io.BufferedReader;
 import java.io.File;

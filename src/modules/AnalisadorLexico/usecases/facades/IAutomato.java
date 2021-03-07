@@ -1,6 +1,6 @@
 package modules.AnalisadorLexico.usecases.facades;
 
-import modules.AnalisadorLexico.entities.Token;
+import domain.entities.Token;
 
 public interface IAutomato {
 

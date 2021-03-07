@@ -1,7 +1,6 @@
 package modules.AnalisadorLexico.usecases.impl.automatos;
 
-import modules.AnalisadorLexico.entities.Token;
-import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
+import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresAritmeticos;
 
 public class OperadoresAritmeticosImpl implements IOperadoresAritmeticos {

@@ -1,6 +1,6 @@
-package modules.AnalisadorLexico.repositories.facades;
+package domain.repositories;
 
-import modules.AnalisadorLexico.entities.Token;
+import domain.entities.Token;
 
 import java.io.IOException;
 import java.util.ArrayList;

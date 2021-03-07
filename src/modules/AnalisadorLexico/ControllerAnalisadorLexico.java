@@ -1,14 +1,16 @@
 package modules.AnalisadorLexico;
 
-import modules.AnalisadorLexico.entities.Token;
-import modules.AnalisadorLexico.repositories.facades.IEscritaArquivos;
-import modules.AnalisadorLexico.repositories.facades.ILeitorArquivo;
-import modules.AnalisadorLexico.repositories.impl.EscritaArquivos;
-import modules.AnalisadorLexico.repositories.impl.LeitorArquivos;
+import domain.entities.Token;
+import domain.repositories.IEscritaArquivos;
+import domain.repositories.ILeitorArquivo;
+import infrastructure.repositories.EscritaArquivos;
+import infrastructure.repositories.LeitorArquivos;
 import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
 import modules.AnalisadorLexico.usecases.facades.automatos.*;
 import modules.AnalisadorLexico.usecases.impl.AnalisadorLexicoImpl;
 import modules.AnalisadorLexico.usecases.impl.automatos.*;
+import modules.TabelaSimbolos.usecases.facade.ITabelaSimbolos;
+import modules.TabelaSimbolos.usecases.impl.TabelaSimbolosImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ public class ControllerAnalisadorLexico {
         IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores = new PalavrasReservadasIdentificadoresImpl();
         IOperadoresRelacionais operadoresRelacionais = new OperadoresRelacionaisImpl();
         ICadeiasCaracteres cadeiasCaracteres = new CadeiasCaracteresImpl();
+        ITabelaSimbolos tabelaSimbolos = new TabelaSimbolosImpl();
 
-        this.analisadorLexico = new AnalisadorLexicoImpl(delimitadorComentario, operadoresLogicos, operadoresAritmeticos, delimitadores, palavrasReservadasIdentificadores, operadoresRelacionais, cadeiasCaracteres);
+        this.analisadorLexico = new AnalisadorLexicoImpl(tabelaSimbolos, delimitadorComentario, operadoresLogicos, operadoresAritmeticos, delimitadores, palavrasReservadasIdentificadores, operadoresRelacionais, cadeiasCaracteres);
 
         this.leitorArquivo = new LeitorArquivos();
         this.escritaArquivos = new EscritaArquivos();

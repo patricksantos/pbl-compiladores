@@ -1,7 +1,6 @@
 package modules.AnalisadorLexico.usecases.impl.automatos;
 
-import modules.AnalisadorLexico.entities.Token;
-import modules.AnalisadorLexico.usecases.facades.IAutomato;
+import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresRelacionais;
 
 public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
@@ -112,7 +111,7 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
         return estadoFinal(posicao, lexema);
     }
 
-    private Token estadoFinal(int posicao,String lexema){
+    private Token estadoFinal(int posicao, String lexema){
         setPosicaoFinal(posicao);
         return new Token("Operador relacional",lexema);
     }

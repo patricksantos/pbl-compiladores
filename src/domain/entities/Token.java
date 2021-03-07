@@ -1,4 +1,4 @@
-package modules.AnalisadorLexico.entities;
+package domain.entities;
 
 /**
  * Classe que representa um token

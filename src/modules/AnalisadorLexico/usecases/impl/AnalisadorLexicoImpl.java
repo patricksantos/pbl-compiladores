@@ -1,8 +1,9 @@
 package modules.AnalisadorLexico.usecases.impl;
 
-import modules.AnalisadorLexico.entities.Token;
+import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
 import modules.AnalisadorLexico.usecases.facades.automatos.*;
+import modules.TabelaSimbolos.usecases.facade.ITabelaSimbolos;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,8 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private final IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores;
     private final ICadeiasCaracteres cadeiasCaracteres;
 
+    private final ITabelaSimbolos tabelaSimbolos;
+
     private int linhaAtual; // Guarda a linha atual que o analisador está lendo
     private int posicao; // Guarda a posição atual na linha que o automato está lendo
     private int quantidadeLinhas; // Quantidade de linhas que o arquivo tem
@@ -23,7 +26,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private ArrayList<String> conteudoArquivo; // As linhas que foram lidas no arquivo de entrada
     private ArrayList<Token> tokens; // Guarda os tokens identficados no arquivo
 
-    public AnalisadorLexicoImpl(IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos, IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores, IOperadoresRelacionais operadoresRelacionais, ICadeiasCaracteres cadeiasCaracteres) {
+    public AnalisadorLexicoImpl(ITabelaSimbolos tabelaSimbolos ,IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos, IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores, IOperadoresRelacionais operadoresRelacionais, ICadeiasCaracteres cadeiasCaracteres) {
         this.delimitadorComentario = delimitadorComentario;
         this.linhaAtual = 0;
         this.posicao = 0;
@@ -33,6 +36,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         this.palavrasReservadasIdentificadores = palavrasReservadasIdentificadores;
         this.operadoresRelacionais = operadoresRelacionais;
         this.cadeiasCaracteres = cadeiasCaracteres;
+        this.tabelaSimbolos = tabelaSimbolos;
     }
 
     @Override
@@ -81,6 +85,8 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
             this.posicao = 0;
         }
 
+        this.tabelaSimbolos.getTokensTabela();
+
         return this.tokens;
     }
 
@@ -115,24 +121,10 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
 
         if(resultadoDelimitadores == null) {
             operadoresRelacionais(linha);
-            // palavrasReservadasIdentificadores(linha);
-            //setPosicao(posicao + 1);
         }
         else{
             setPosicao(delimitadores.getPosicaoFinal());
             this.tokens.add(resultadoDelimitadores);
-        }
-    }
-
-    private void palavrasReservadasIdentificadores(String linha){
-        Token resultadoPalavrasReservadasIdentificadores = palavrasReservadasIdentificadores.getToken(linha, this.posicao);
-
-        if(resultadoPalavrasReservadasIdentificadores == null) {
-            setPosicao(posicao + 1);
-        }
-        else{
-            setPosicao(palavrasReservadasIdentificadores.getPosicaoFinal());
-            this.tokens.add(resultadoPalavrasReservadasIdentificadores);
         }
     }
 
@@ -141,9 +133,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         Token resultadoOperadoresRelacionais = this.operadoresRelacionais.getToken(linha, this.posicao);
 
         if(resultadoOperadoresRelacionais == null) {
-            // palavrasReservadasIdentificadores(linha);
             cadeiasCaracteres(linha);
-            //setPosicao(posicao + 1);
         }
         else{
             setPosicao(operadoresRelacionais.getPosicaoFinal());
@@ -156,12 +146,24 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         Token resultadoCadeiasCaracteres = this.cadeiasCaracteres.getToken(linha, this.posicao);
 
         if(resultadoCadeiasCaracteres == null) {
-            // palavrasReservadasIdentificadores(linha);
-            setPosicao(posicao + 1);
+            palavrasReservadasIdentificadores(linha);
         }
         else{
             setPosicao(cadeiasCaracteres.getPosicaoFinal());
             this.tokens.add(resultadoCadeiasCaracteres);
+        }
+    }
+
+    private void palavrasReservadasIdentificadores(String linha){
+        Token resultadoPalavrasReservadasIdentificadores = palavrasReservadasIdentificadores.getToken(linha, this.posicao);
+
+        if(resultadoPalavrasReservadasIdentificadores == null) {
+            setPosicao(posicao + 1);
+        }
+        else{
+            setPosicao(palavrasReservadasIdentificadores.getPosicaoFinal());
+            this.tokens.add(resultadoPalavrasReservadasIdentificadores);
+            this.tabelaSimbolos.setSimbolo(resultadoPalavrasReservadasIdentificadores.getLexema(), resultadoPalavrasReservadasIdentificadores.getTipo());
         }
     }
 

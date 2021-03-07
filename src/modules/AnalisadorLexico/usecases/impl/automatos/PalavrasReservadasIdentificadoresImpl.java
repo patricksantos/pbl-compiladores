@@ -1,10 +1,7 @@
 package modules.AnalisadorLexico.usecases.impl.automatos;
 
-import modules.AnalisadorLexico.entities.Token;
+import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.automatos.IPalavrasReservadasIdentificadores;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservadasIdentificadores {
     private int posicaoFinal;
@@ -21,7 +18,6 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
 
     private Token estadoA(String texto, int posicao, String lexema){
         String c = texto.substring(posicao, posicao + 1);
-        System.out.println(c);
         lexema += c;
 
         if(c.matches("[a-zA-Z]")){
@@ -49,8 +45,6 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
                 }
             }
             else if(c.matches("[0-9_]")){
-
-                System.out.println("AQUII " + lexema);
                 lexema += c;
                 return estadoC(texto, i + 1, lexema);
             }
@@ -69,9 +63,13 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
 
     private Token estadoC(String texto, int posicao, String lexema){
 
+        if( posicao >= texto.length() ){
+            setPosicaoFinal(posicao);
+            return new Token("Identificador", lexema);
+        }
+
         for(int i = posicao; i < texto.length(); i++){
             String c = texto.substring(i, i + 1);
-            System.out.println("C");
 
             if( c.matches("\\w") ){
                 lexema += c;
@@ -93,10 +91,9 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
 
 //    private boolean isPalavraReservada(String lexema){
 //        String regexPalavraReservada = "[var | const | typedef | struct | extends | procedure | function | start | return | if | else | then | while | read | print | int | real | boolean | string | true | false | global | local]";
-////        Pattern pattern = Pattern.compile(regexPalavraReservada);
-////        Matcher matcher = pattern.matcher(lexema);
-////        boolean matchFound = matcher.find();
-//        return lexema.matches(regexPalavraReservada);
+//        Pattern pattern = Pattern.compile(regexPalavraReservada);
+//        Matcher matcher = pattern.matcher(lexema);
+//        return matcher.find();
 //    }
 
     private boolean isPalavraReservada(String lexema){

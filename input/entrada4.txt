@@ -1,1 +1,2 @@
-oi2
+var2 aquii3
+oi_const2 aquii3
