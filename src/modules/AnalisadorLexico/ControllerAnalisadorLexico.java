@@ -6,15 +6,9 @@ import modules.AnalisadorLexico.repositories.facades.ILeitorArquivo;
 import modules.AnalisadorLexico.repositories.impl.EscritaArquivos;
 import modules.AnalisadorLexico.repositories.impl.LeitorArquivos;
 import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
-import modules.AnalisadorLexico.usecases.facades.automatos.IDelimitadorComentario;
-import modules.AnalisadorLexico.usecases.facades.automatos.IDelimitadores;
-import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresAritmeticos;
-import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresLogicos;
+import modules.AnalisadorLexico.usecases.facades.automatos.*;
 import modules.AnalisadorLexico.usecases.impl.AnalisadorLexicoImpl;
-import modules.AnalisadorLexico.usecases.impl.automatos.DelimitadorComentarioImpl;
-import modules.AnalisadorLexico.usecases.impl.automatos.DelimitadoresImpl;
-import modules.AnalisadorLexico.usecases.impl.automatos.OperadoresAritmeticosImpl;
-import modules.AnalisadorLexico.usecases.impl.automatos.OperadoresLogicosImpl;
+import modules.AnalisadorLexico.usecases.impl.automatos.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,8 +24,9 @@ public class ControllerAnalisadorLexico {
         IOperadoresLogicos operadoresLogicos = new OperadoresLogicosImpl();
         IOperadoresAritmeticos operadoresAritmeticos = new OperadoresAritmeticosImpl();
         IDelimitadores delimitadores = new DelimitadoresImpl();
+        IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores = new PalavrasReservadasIdentificadoresImpl();
 
-        this.analisadorLexico = new AnalisadorLexicoImpl(delimitadorComentario, operadoresLogicos, operadoresAritmeticos, delimitadores);
+        this.analisadorLexico = new AnalisadorLexicoImpl(delimitadorComentario, operadoresLogicos, operadoresAritmeticos, delimitadores, palavrasReservadasIdentificadores);
 
         this.leitorArquivo = new LeitorArquivos();
         this.escritaArquivos = new EscritaArquivos();

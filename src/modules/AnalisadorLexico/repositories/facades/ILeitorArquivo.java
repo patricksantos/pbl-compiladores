@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public interface ILeitorArquivo {
-    public ArrayList<String> leituraArquivo(String nomeArquivo) throws IOException;
+    ArrayList<String> leituraArquivo(String nomeArquivo) throws IOException;
 
-    public int getNumeroArquivos();
+    int getNumeroArquivos();
 
-    public Set<String> getNomesArquivos();
+    Set<String> getNomesArquivos();
 }

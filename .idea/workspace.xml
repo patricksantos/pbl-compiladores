@@ -1,43 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="PBL 2.0">
-      <change afterPath="$PROJECT_DIR$/input/entrada1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/ICadeiasCaracteres.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IDelimitadorComentario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IDelimitadores.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IIdentificadores.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IOperadoresAritmeticos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IOperadoresLogicos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IOperadoresRelacionais.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IPalavrasReservadas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/ISimbolo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_03_2021_11_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_03_2021_11_08__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="PBL 2.1">
+      <change afterPath="$PROJECT_DIR$/input/entrada4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrada1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrada2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrada3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/META-INF/pbl-compiladores.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemplos/Entrada1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/exemplos/Entrada2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Entrada2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Entrada1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/ControllerAnalisadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/ControllerAnalisadorLexico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/facades/IAutomato.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/facades/IAutomato.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/Delimitadores.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionais.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAutomato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAutomato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/ILeitorArquivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/ILeitorArquivo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IPalavrasReservadas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IPalavrasReservadasIdentificadores.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/Delimitadores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionais.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionaisImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +28,8 @@
       <list>
         <option value="package-info" />
         <option value="JavaFXApplication" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -82,8 +61,8 @@
       <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores\input" />
       <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores" />
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores\input" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="modules.AnalisadorLexico.usecases.impl.automatos" />
@@ -120,19 +99,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.main" />
@@ -159,7 +125,9 @@
       <workItem from="1614779208918" duration="7737000" />
       <workItem from="1614864911410" duration="5068000" />
       <workItem from="1614870021146" duration="1626000" />
-      <workItem from="1615042803316" duration="25504000" />
+      <workItem from="1615042803316" duration="25645000" />
+      <workItem from="1615081664076" duration="4750000" />
+      <workItem from="1615086519538" duration="6820000" />
     </task>
     <task id="LOCAL-00001" summary="novo DelimitadorComentario">
       <created>1614743589555</created>
@@ -182,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614871154812</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="PBL 2.1">
+      <created>1615069126800</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615069126801</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +179,7 @@
     <MESSAGE value="novo DelimitadorComentario" />
     <MESSAGE value="criacao da arquitetura de software usada no projeto" />
     <MESSAGE value="PBL 2.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="PBL 2.0" />
+    <MESSAGE value="PBL 2.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="PBL 2.1" />
   </component>
 </project>

@@ -2,10 +2,7 @@ package modules.AnalisadorLexico.usecases.impl;
 
 import modules.AnalisadorLexico.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.IAnalisadorLexico;
-import modules.AnalisadorLexico.usecases.facades.automatos.IDelimitadorComentario;
-import modules.AnalisadorLexico.usecases.facades.automatos.IDelimitadores;
-import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresAritmeticos;
-import modules.AnalisadorLexico.usecases.facades.automatos.IOperadoresLogicos;
+import modules.AnalisadorLexico.usecases.facades.automatos.*;
 
 import java.util.ArrayList;
 
@@ -15,6 +12,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private final IOperadoresLogicos operadoresLogicos;
     private final IOperadoresAritmeticos operadoresAritmeticos;
     private final IDelimitadores delimitadores;
+    private final IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores;
 
     private int linhaAtual; // Guarda a linha atual que o analisador está lendo
     private int posicao; // Guarda a posição atual na linha que o automato está lendo
@@ -23,13 +21,14 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private ArrayList<String> conteudoArquivo; // As linhas que foram lidas no arquivo de entrada
     private ArrayList<Token> tokens; // Guarda os tokens identficados no arquivo
 
-    public AnalisadorLexicoImpl(IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos, IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores) {
+    public AnalisadorLexicoImpl(IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos, IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores) {
         this.delimitadorComentario = delimitadorComentario;
         this.linhaAtual = 0;
         this.posicao = 0;
         this.operadoresLogicos = operadoresLogicos;
         this.operadoresAritmeticos = operadoresAritmeticos;
         this.delimitadores = delimitadores;
+        this.palavrasReservadasIdentificadores = palavrasReservadasIdentificadores;
     }
 
     @Override
@@ -107,11 +106,24 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         Token resultadoDelimitadores = delimitadores.getToken(linha, this.posicao);
 
         if(resultadoDelimitadores == null) {
+            // palavrasReservadasIdentificadores(linha);
             setPosicao(posicao + 1);
         }
         else{
             setPosicao(delimitadores.getPosicaoFinal());
             this.tokens.add(resultadoDelimitadores);
+        }
+    }
+
+    private void palavrasReservadasIdentificadores(String linha){
+        Token resultadoPalavrasReservadasIdentificadores = palavrasReservadasIdentificadores.getToken(linha, this.posicao);
+
+        if(resultadoPalavrasReservadasIdentificadores == null) {
+            setPosicao(posicao + 1);
+        }
+        else{
+            setPosicao(palavrasReservadasIdentificadores.getPosicaoFinal());
+            this.tokens.add(resultadoPalavrasReservadasIdentificadores);
         }
     }
 

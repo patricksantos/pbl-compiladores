@@ -1,6 +1,15 @@
-+
+// Palavras Reservadas
 
-// oi
+var
+const
+int
+real
+
+// Identificadores
+
+teste
+id1d
+joao
 
 /*
     Operador Aritmeticos

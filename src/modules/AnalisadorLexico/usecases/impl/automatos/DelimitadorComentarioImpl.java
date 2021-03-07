@@ -148,7 +148,7 @@ public class DelimitadorComentarioImpl implements IDelimitadorComentario {
         return this.posicaoFinal;
     }
 
-    public void setPosicaoFinal(int posicaoFinal) {
+    private void setPosicaoFinal(int posicaoFinal) {
         this.posicaoFinal = posicaoFinal;
     }
 
@@ -157,7 +157,7 @@ public class DelimitadorComentarioImpl implements IDelimitadorComentario {
         return this.linhaFinal;
     }
 
-    public void setLinhaFinal(int linhaFinal) {
+    private void setLinhaFinal(int linhaFinal) {
         this.linhaFinal = linhaFinal;
     }
 }

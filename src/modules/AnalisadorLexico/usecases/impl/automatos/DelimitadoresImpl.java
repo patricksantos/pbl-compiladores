@@ -44,7 +44,7 @@ public class DelimitadoresImpl implements IDelimitadores {
 
     }
 
-    public void setPosicaoFinal(int posicaoFinal) {
+    private void setPosicaoFinal(int posicaoFinal) {
         this.posicaoFinal = posicaoFinal;
     }
 
