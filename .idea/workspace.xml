@@ -2,21 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="PBL 2.1">
-      <change afterPath="$PROJECT_DIR$/input/entrada4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exemplos/Entrada1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/exemplos/Entrada2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Entrada2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Entrada1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/Entrada1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/Entrada1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/Entrada2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada4.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/ControllerAnalisadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/ControllerAnalisadorLexico.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/ILeitorArquivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/repositories/facades/ILeitorArquivo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IPalavrasReservadas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IPalavrasReservadasIdentificadores.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionaisImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionaisImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +105,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -168,12 +165,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="novo DelimitadorComentario" />
@@ -181,5 +179,31 @@
     <MESSAGE value="PBL 2.0" />
     <MESSAGE value="PBL 2.1" />
     <option name="LAST_COMMIT_MESSAGE" value="PBL 2.1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="485" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1615096431300">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="485" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1360.728@0.0.1360.728" timestamp="1615096431300" />
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1615100431765">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615100431765" />
+    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1615100431765">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1615100431765" />
+    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1615100431765">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1615100431765" />
+    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1615100431765">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1615100431765" />
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1615093958325">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615093958324" />
   </component>
 </project>

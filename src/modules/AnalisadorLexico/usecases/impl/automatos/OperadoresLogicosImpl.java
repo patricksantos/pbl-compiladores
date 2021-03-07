@@ -32,7 +32,7 @@ public class OperadoresLogicosImpl implements IOperadoresLogicos {
             return estadoB(texto, posicao + 1, lexema);
         }
         else if(c == '!'){
-            return estadoFinal(posicao + 1, lexema);
+            return estadoC(texto,posicao + 1, lexema);
         }
 
         return null;
@@ -68,6 +68,22 @@ public class OperadoresLogicosImpl implements IOperadoresLogicos {
 
         setPosicaoFinal(posicao - 1);
         return null;
+        //Erro na identificação do token
+        //throw new RuntimeException("Error de execução");
+    }
+
+    private Token estadoC(String texto, int posicao, String lexema){
+
+        if(posicao < texto.length()) {
+            char c = texto.charAt(posicao);
+
+            if (c == '=') {
+                setPosicaoFinal(posicao - 1);
+                return null;
+            }
+        }
+
+        return estadoFinal(posicao + 1, lexema);
         //Erro na identificação do token
         //throw new RuntimeException("Error de execução");
     }

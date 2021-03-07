@@ -1,0 +1,29 @@
+/* 
+	teste08 - sem erros
+*/
+
+const int MAX = 10, MAX2 = 50;
+	
+string Mensagem = "Hello w#orld";
+
+procedure start {  // comeca aqui o programa principal 
+
+	int idade; 
+	real salario;
+	string nome;
+
+	print("Digite o nome");
+	read(nome);
+	print("Digite a idade");
+	read(idade);
+	
+	if (idade >= 150) print("pode apo$sentar kkkk");
+	else {
+		print("vai tra&balhar");
+		salario = salario; // hehehe
+		salario == salario; // hehehe
+		salario ! salario; // hehehe
+		salario != salario; // hehehe
+	}	
+ 
+} // fim start

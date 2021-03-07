@@ -50,12 +50,12 @@ public class OperadoresAritmeticosImpl implements IOperadoresAritmeticos {
                 lexema += c;
                 return estadoFinal(posicao + 1, lexema);
             } else {
-                //retornar token do tipo + e voltar uma posição
+                //retornar token do tipo +
                 setPosicaoFinal(posicao);
                 return new Token("Operador Aritmético", lexema);
             }
         }
-        //retornar token do tipo + e voltar uma posição
+        //retornar token do tipo +
         setPosicaoFinal(posicao);
         return new Token("Operador Aritmético", lexema);
     }
@@ -68,12 +68,12 @@ public class OperadoresAritmeticosImpl implements IOperadoresAritmeticos {
                 lexema += c;
                 return estadoFinal(posicao + 1, lexema);
             } else {
-                //retornar token do tipo - e voltar uma posição
+                //retornar token do tipo -
                 setPosicaoFinal(posicao);
                 return new Token("Operador Aritmético", lexema);
             }
         }
-        //retornar token do tipo - e voltar uma posição
+        //retornar token do tipo - o
         setPosicaoFinal(posicao);
         return new Token("Operador Aritmético", lexema);
     }

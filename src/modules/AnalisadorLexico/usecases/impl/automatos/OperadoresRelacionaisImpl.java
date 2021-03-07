@@ -14,8 +14,7 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
         Token token;
         //try {
         //antes de mandar o texto para o automato dar um trim para tirar os espaços em brancos que vem antes e depois das frases.
-        token = estadoInicial(texto, posicao, lexema);
-        return token;
+        return estadoInicial(texto, posicao, lexema);
         /*}catch (Exception e){
             return e.getMessage();
         }*/
@@ -24,6 +23,7 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
     /** ---- Estados ---- **/
 
     private Token estadoInicial(String texto, int posicao, String lexema){
+
         char c = texto.charAt(posicao);
         lexema += c;
 
@@ -31,13 +31,13 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
             return estadoA(texto, posicao + 1, lexema);
         }
         else if(c == '<'){
-            return estadoC(texto, posicao + 1, lexema);
+            return estadoB(texto, posicao + 1, lexema);
         }
         else if(c == '!'){
-            return estadoF(texto, posicao + 1, lexema);
+            return estadoC(texto, posicao + 1, lexema);
         }
         else if(c == '='){
-            return estadoG(texto, posicao + 1, lexema);
+            return estadoD(texto, posicao + 1, lexema);
         }
 
         return null;
@@ -45,31 +45,76 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
     }
 
     private Token estadoA(String texto, int posicao, String lexema){
-        return null;
+
+        if(posicao < texto.length()) {
+            char c = texto.charAt(posicao);
+            if (c == '=') {
+                lexema += c;
+                return estadoFinal(posicao + 1, lexema);
+            } else {
+                //retornar token do tipo >
+                return estadoFinal(posicao, lexema);
+            }
+        }
+        //retornar token do tipo >
+        //setPosicaoFinal(posicao);
+        return estadoFinal(posicao, lexema);
     }
 
     private Token estadoB(String texto, int posicao, String lexema){
-        return null;
+
+        if(posicao < texto.length()) {
+            char c = texto.charAt(posicao);
+            if (c == '=') {
+                lexema += c;
+                return estadoFinal(posicao + 1, lexema);
+            } else {
+                //retornar token do tipo <
+                return estadoFinal(posicao, lexema);
+            }
+        }
+        //retornar token do tipo <
+        //setPosicaoFinal(posicao);
+        return estadoFinal(posicao, lexema);
+
     }
 
     private Token estadoC(String texto, int posicao, String lexema){
+
+        if(posicao < texto.length()) {
+            char c = texto.charAt(posicao);
+            if (c == '=') {
+                lexema += c;
+                return estadoFinal(posicao + 1, lexema);
+            } else {
+                setPosicaoFinal(posicao-1);
+                return null;
+            }
+        }
+        setPosicaoFinal(posicao-1);
         return null;
     }
 
     private Token estadoD(String texto, int posicao, String lexema){
-        return null;
+
+        if(posicao < texto.length()) {
+            char c = texto.charAt(posicao);
+            if (c == '=') {
+                lexema += c;
+                return estadoFinal(posicao + 1, lexema);
+            } else {
+                //retornar token do tipo =
+                return estadoFinal(posicao, lexema);
+            }
+        }
+        //retornar token do tipo =
+        //setPosicaoFinal(posicao);
+        return estadoFinal(posicao, lexema);
     }
 
-    private Token estadoE(String texto, int posicao, String lexema){
-        return null;
-    }
-
-    private Token estadoF(String texto, int posicao, String lexema){
-        return null;
-    }
-
-    private Token estadoG(String texto, int posicao, String lexema){
-        return null;
+    private Token estadoFinal(int posicao,String lexema){
+        setPosicaoFinal(posicao);
+        return new Token("Operador relacional",lexema);
     }
 
     @Override

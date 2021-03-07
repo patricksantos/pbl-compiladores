@@ -12,7 +12,9 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private final IOperadoresLogicos operadoresLogicos;
     private final IOperadoresAritmeticos operadoresAritmeticos;
     private final IDelimitadores delimitadores;
+    private final IOperadoresRelacionais operadoresRelacionais;
     private final IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores;
+    private final ICadeiasCaracteres cadeiasCaracteres;
 
     private int linhaAtual; // Guarda a linha atual que o analisador está lendo
     private int posicao; // Guarda a posição atual na linha que o automato está lendo
@@ -21,7 +23,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private ArrayList<String> conteudoArquivo; // As linhas que foram lidas no arquivo de entrada
     private ArrayList<Token> tokens; // Guarda os tokens identficados no arquivo
 
-    public AnalisadorLexicoImpl(IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos, IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores) {
+    public AnalisadorLexicoImpl(IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos, IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores, IOperadoresRelacionais operadoresRelacionais, ICadeiasCaracteres cadeiasCaracteres) {
         this.delimitadorComentario = delimitadorComentario;
         this.linhaAtual = 0;
         this.posicao = 0;
@@ -29,6 +31,8 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         this.operadoresAritmeticos = operadoresAritmeticos;
         this.delimitadores = delimitadores;
         this.palavrasReservadasIdentificadores = palavrasReservadasIdentificadores;
+        this.operadoresRelacionais = operadoresRelacionais;
+        this.cadeiasCaracteres = cadeiasCaracteres;
     }
 
     @Override
@@ -68,6 +72,10 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
                     setLinhaAtual(delimitadorComentario.getLinhaFinal());
                     setPosicao(delimitadorComentario.getPosicaoFinal());
                 }
+                /*if(linha.charAt(posicao) >= '$' && linha.charAt(posicao) <= '~'){
+                    System.out.println("opa");
+                }
+                posicao++;*/
             }
 
             this.posicao = 0;
@@ -106,8 +114,9 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         Token resultadoDelimitadores = delimitadores.getToken(linha, this.posicao);
 
         if(resultadoDelimitadores == null) {
+            operadoresRelacionais(linha);
             // palavrasReservadasIdentificadores(linha);
-            setPosicao(posicao + 1);
+            //setPosicao(posicao + 1);
         }
         else{
             setPosicao(delimitadores.getPosicaoFinal());
@@ -124,6 +133,35 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         else{
             setPosicao(palavrasReservadasIdentificadores.getPosicaoFinal());
             this.tokens.add(resultadoPalavrasReservadasIdentificadores);
+        }
+    }
+
+    private void operadoresRelacionais(String linha){
+
+        Token resultadoOperadoresRelacionais = this.operadoresRelacionais.getToken(linha, this.posicao);
+
+        if(resultadoOperadoresRelacionais == null) {
+            // palavrasReservadasIdentificadores(linha);
+            cadeiasCaracteres(linha);
+            //setPosicao(posicao + 1);
+        }
+        else{
+            setPosicao(operadoresRelacionais.getPosicaoFinal());
+            this.tokens.add(resultadoOperadoresRelacionais);
+        }
+    }
+
+    private void cadeiasCaracteres(String linha){
+
+        Token resultadoCadeiasCaracteres = this.cadeiasCaracteres.getToken(linha, this.posicao);
+
+        if(resultadoCadeiasCaracteres == null) {
+            // palavrasReservadasIdentificadores(linha);
+            setPosicao(posicao + 1);
+        }
+        else{
+            setPosicao(cadeiasCaracteres.getPosicaoFinal());
+            this.tokens.add(resultadoCadeiasCaracteres);
         }
     }
 
