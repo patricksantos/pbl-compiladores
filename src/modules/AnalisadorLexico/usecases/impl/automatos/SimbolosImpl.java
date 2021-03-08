@@ -27,7 +27,7 @@ public class SimbolosImpl implements ISimbolo {
                 (texto.charAt(posicao) >= '#' && texto.charAt(posicao) <= '~') ) {*/
         if(texto.charAt(posicao) == '!' ||
                 (texto.charAt(posicao) >= '#' && texto.charAt(posicao) <= '~') ) {
-            return estadoFinal(posicao+1,lexema);
+            return estadoFinal(posicao + 1, lexema);
         }
 
         return null;

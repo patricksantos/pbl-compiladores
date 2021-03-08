@@ -31,9 +31,10 @@ public class ControllerAnalisadorLexico {
         ICadeiasCaracteres cadeiasCaracteres = new CadeiasCaracteresImpl();
         ITabelaSimbolos tabelaSimbolos = new TabelaSimbolosImpl();
         ISimbolo simbolos = new SimbolosImpl();
+        INumero numeros = new NumeroImpl();
 
         this.analisadorLexico = new AnalisadorLexicoImpl(tabelaSimbolos, delimitadorComentario, operadoresLogicos, operadoresAritmeticos,
-                delimitadores, palavrasReservadasIdentificadores, operadoresRelacionais, cadeiasCaracteres,simbolos);
+                delimitadores, palavrasReservadasIdentificadores, operadoresRelacionais, cadeiasCaracteres, simbolos, numeros);
 
         this.leitorArquivo = new LeitorArquivos();
         this.escritaArquivos = new EscritaArquivos();

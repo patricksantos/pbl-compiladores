@@ -29,6 +29,11 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
 
     private Token estadoB(String texto, int posicao, String lexema){
 
+        if( posicao >= texto.length() ){
+            setPosicaoFinal(posicao);
+            return new Token("Identificador", lexema);
+        }
+
         for(int i = posicao; i < texto.length(); i++){
             String c = texto.substring(i, i + 1);
 
@@ -36,7 +41,7 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
             {
                 lexema += c;
                 if( i + 1 == texto.length() ){
-                    setPosicaoFinal(i);
+                    setPosicaoFinal(i + 1);
                     if(isPalavraReservada(lexema))
                     {
                         return new Token("Palavra Reservada", lexema);
@@ -74,12 +79,12 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
             if( c.matches("\\w") ){
                 lexema += c;
                 if( i + 1 == texto.length() ){
-                    setPosicaoFinal(i);
+                    setPosicaoFinal(i + 1);
                     return new Token("Identificador", lexema);
                 }
             }
             else {
-                setPosicaoFinal(i);
+                setPosicaoFinal(i + 1);
                 return new Token("Identificador", lexema);
             }
         }

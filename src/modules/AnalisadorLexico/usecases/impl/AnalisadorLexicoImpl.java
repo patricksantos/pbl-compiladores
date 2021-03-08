@@ -17,6 +17,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private final IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores;
     private final ICadeiasCaracteres cadeiasCaracteres;
     private final ISimbolo simbolos;
+    private final INumero numeros;
 
     private final ITabelaSimbolos tabelaSimbolos;
 
@@ -29,7 +30,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
 
     public AnalisadorLexicoImpl(ITabelaSimbolos tabelaSimbolos ,IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos,
                                 IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores,
-                                IOperadoresRelacionais operadoresRelacionais, ICadeiasCaracteres cadeiasCaracteres, ISimbolo simbolos) {
+                                IOperadoresRelacionais operadoresRelacionais, ICadeiasCaracteres cadeiasCaracteres, ISimbolo simbolos, INumero numeros) {
         this.delimitadorComentario = delimitadorComentario;
         this.linhaAtual = 0;
         this.posicao = 0;
@@ -41,6 +42,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         this.cadeiasCaracteres = cadeiasCaracteres;
         this.tabelaSimbolos = tabelaSimbolos;
         this.simbolos = simbolos;
+        this.numeros = numeros;
     }
 
     @Override
@@ -159,10 +161,10 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     }
 
     private void palavrasReservadasIdentificadores(String linha){
-        System.out.println(posicao);
         Token resultadoPalavrasReservadasIdentificadores = palavrasReservadasIdentificadores.getToken(linha, this.posicao);
         if(resultadoPalavrasReservadasIdentificadores == null) {
-            simbolos(linha);
+            //simbolos(linha);
+            numeros(linha);
             //setPosicao(posicao + 1);
         }
         else{
@@ -172,12 +174,24 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
     }
 
+    private void numeros(String linha){
+
+        Token resultadoNumeros = this.numeros.getToken(linha, this.posicao);
+
+        if(resultadoNumeros == null) {
+            simbolos(linha);
+        }
+        else{
+            setPosicao(numeros.getPosicaoFinal());
+            this.tokens.add(resultadoNumeros);
+        }
+    }
+
     private void simbolos(String linha){
 
         Token resultadoSimbolos = this.simbolos.getToken(linha, this.posicao);
 
         if(resultadoSimbolos == null) {
-            // palavrasReservadasIdentificadores(linha);
             setPosicao(posicao + 1);
         }
         else{
