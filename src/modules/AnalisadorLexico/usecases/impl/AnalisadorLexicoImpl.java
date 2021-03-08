@@ -16,6 +16,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private final IOperadoresRelacionais operadoresRelacionais;
     private final IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores;
     private final ICadeiasCaracteres cadeiasCaracteres;
+    private final ISimbolo simbolos;
 
     private final ITabelaSimbolos tabelaSimbolos;
 
@@ -26,7 +27,9 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private ArrayList<String> conteudoArquivo; // As linhas que foram lidas no arquivo de entrada
     private ArrayList<Token> tokens; // Guarda os tokens identficados no arquivo
 
-    public AnalisadorLexicoImpl(ITabelaSimbolos tabelaSimbolos ,IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos, IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores, IOperadoresRelacionais operadoresRelacionais, ICadeiasCaracteres cadeiasCaracteres) {
+    public AnalisadorLexicoImpl(ITabelaSimbolos tabelaSimbolos ,IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos,
+                                IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores,
+                                IOperadoresRelacionais operadoresRelacionais, ICadeiasCaracteres cadeiasCaracteres, ISimbolo simbolos) {
         this.delimitadorComentario = delimitadorComentario;
         this.linhaAtual = 0;
         this.posicao = 0;
@@ -37,6 +40,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         this.operadoresRelacionais = operadoresRelacionais;
         this.cadeiasCaracteres = cadeiasCaracteres;
         this.tabelaSimbolos = tabelaSimbolos;
+        this.simbolos = simbolos;
     }
 
     @Override
@@ -155,15 +159,30 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     }
 
     private void palavrasReservadasIdentificadores(String linha){
+        System.out.println(posicao);
         Token resultadoPalavrasReservadasIdentificadores = palavrasReservadasIdentificadores.getToken(linha, this.posicao);
-
         if(resultadoPalavrasReservadasIdentificadores == null) {
-            setPosicao(posicao + 1);
+            simbolos(linha);
+            //setPosicao(posicao + 1);
         }
         else{
             setPosicao(palavrasReservadasIdentificadores.getPosicaoFinal());
             this.tokens.add(resultadoPalavrasReservadasIdentificadores);
             this.tabelaSimbolos.setSimbolo(resultadoPalavrasReservadasIdentificadores.getLexema(), resultadoPalavrasReservadasIdentificadores.getTipo());
+        }
+    }
+
+    private void simbolos(String linha){
+
+        Token resultadoSimbolos = this.simbolos.getToken(linha, this.posicao);
+
+        if(resultadoSimbolos == null) {
+            // palavrasReservadasIdentificadores(linha);
+            setPosicao(posicao + 1);
+        }
+        else{
+            setPosicao(simbolos.getPosicaoFinal());
+            this.tokens.add(resultadoSimbolos);
         }
     }
 

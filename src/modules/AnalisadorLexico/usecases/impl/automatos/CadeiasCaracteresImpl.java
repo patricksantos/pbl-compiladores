@@ -6,8 +6,7 @@ import modules.AnalisadorLexico.usecases.facades.automatos.ICadeiasCaracteres;
 public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
 
     private int posicaoFinal;
-    private String referencialLetra = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
-    private String referencialDigito = "123456789";
+    private int posicaoInicial;
 
     @Override
     public Token getToken(String texto, int posicao) {
@@ -35,22 +34,46 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
     private Token estadoA(String texto, int posicao, String lexema){
 
         if(posicao < texto.length()) {
-            char c = texto.charAt(posicao);
-            //int auxiliarLetra = referencialLetra.indexOf(c);
-            //int auxiliarDigito = referencialDigito.indexOf(c);
+            //verifica se o usuário fechou as aspas, pegando o texto após a abertura das aspas.
+            if(!texto.substring(posicao).contains("\"") ){
+                this.setPosicaoFinal(posicaoInicial);
+                return null;
+            }
 
-            while (c != '"' ) {
+            char c = texto.charAt(posicao);
+
+            while (c != '"' && posicao < texto.length()) {
+
                 //Confere se está nas regras de formação de uma cadeia de caracteres
-                if((texto.charAt(posicao) >= ' ' && texto.charAt(posicao) <= '!') || (texto.charAt(posicao) >= '#' && texto.charAt(posicao) <= '~') ) {
-                    lexema += c;
-                    posicao++;
-                    c = texto.charAt(posicao);
-                   // auxiliarLetra = referencialLetra.indexOf(c);
-                   // auxiliarDigito = referencialDigito.indexOf(c);
+                if((texto.charAt(posicao) >= ' ' && texto.charAt(posicao) <= '!') ||
+                        (texto.charAt(posicao) >= '#' && texto.charAt(posicao) <= '~') ) {
+                    //Verifica a ocorrencia de \"
+                    if(c == '\\'){
+                        lexema += c;
+                        posicao++;
+                        if(posicao < texto.length()){
+                            char auxiliar = texto.charAt(posicao);
+                            if(auxiliar == '"'){
+                                lexema+=auxiliar;
+                                posicao++;
+                            }
+                        }
+                    }else {
+                        lexema += c;
+                        posicao++;
+                    }if(posicao < texto.length()) {
+                        c = texto.charAt(posicao);
+                    }
                 }else{
+                    //this.setPosicaoFinal(this.posicaoInicial);
                     return null;
                 }
             }
+            if(posicao >= texto.length()){
+                this.setPosicaoFinal(posicaoInicial);
+                return null;
+            }
+
             lexema += c;
             return estadoFinal(posicao + 1, lexema);
         }
