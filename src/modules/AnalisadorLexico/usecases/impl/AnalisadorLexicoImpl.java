@@ -27,6 +27,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
 
     private ArrayList<String> conteudoArquivo; // As linhas que foram lidas no arquivo de entrada
     private ArrayList<Token> tokens; // Guarda os tokens identficados no arquivo
+    private ArrayList<Token> erros; //Guarda os tokens que representam erros
 
     public AnalisadorLexicoImpl(ITabelaSimbolos tabelaSimbolos ,IDelimitadorComentario delimitadorComentario, IOperadoresLogicos operadoresLogicos,
                                 IOperadoresAritmeticos operadoresAritmeticos, IDelimitadores delimitadores, IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores,
@@ -65,6 +66,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
 
         this.conteudoArquivo = conteudoArquivo;
         this.tokens = new ArrayList<>();
+        this.erros = new ArrayList<>();
 
         for(this.linhaAtual = 0; this.linhaAtual < this.conteudoArquivo.size(); this.linhaAtual++)
         {
@@ -105,7 +107,12 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(operadoresLogicos.getPosicaoFinal());
-            this.tokens.add(resultadoOperadoresLogicos);
+            resultadoOperadoresLogicos.setLinha(this.linhaAtual);
+            if(resultadoOperadoresLogicos.getError()){
+                this.erros.add(resultadoOperadoresLogicos);
+            }else {
+                this.tokens.add(resultadoOperadoresLogicos);
+            }
         }
     }
 
@@ -118,7 +125,12 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(operadoresAritmeticos.getPosicaoFinal());
-            this.tokens.add(resultadoOperadoresAritmeticos);
+            resultadoOperadoresAritmeticos.setLinha(this.linhaAtual);
+            if(resultadoOperadoresAritmeticos.getError()){
+                this.erros.add(resultadoOperadoresAritmeticos);
+            }else{
+                this.tokens.add(resultadoOperadoresAritmeticos);
+            }
         }
     }
 
@@ -130,7 +142,12 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(delimitadores.getPosicaoFinal());
-            this.tokens.add(resultadoDelimitadores);
+            resultadoDelimitadores.setLinha(this.linhaAtual);
+            if(resultadoDelimitadores.getError()){
+                this.erros.add(resultadoDelimitadores);
+            }else{
+                this.tokens.add(resultadoDelimitadores);
+            }
         }
     }
 
@@ -143,7 +160,12 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(operadoresRelacionais.getPosicaoFinal());
-            this.tokens.add(resultadoOperadoresRelacionais);
+            resultadoOperadoresRelacionais.setLinha(this.linhaAtual);
+            if(resultadoOperadoresRelacionais.getError()){
+                this.erros.add(resultadoOperadoresRelacionais);
+            }else{
+                this.tokens.add(resultadoOperadoresRelacionais);
+            }
         }
     }
 
@@ -156,7 +178,12 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(cadeiasCaracteres.getPosicaoFinal());
-            this.tokens.add(resultadoCadeiasCaracteres);
+            resultadoCadeiasCaracteres.setLinha(this.linhaAtual);
+            if(resultadoCadeiasCaracteres.getError()){
+                this.erros.add(resultadoCadeiasCaracteres);
+            }else{
+                this.tokens.add(resultadoCadeiasCaracteres);
+            }
         }
     }
 
@@ -169,8 +196,13 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(palavrasReservadasIdentificadores.getPosicaoFinal());
-            this.tokens.add(resultadoPalavrasReservadasIdentificadores);
-            this.tabelaSimbolos.setSimbolo(resultadoPalavrasReservadasIdentificadores.getLexema(), resultadoPalavrasReservadasIdentificadores.getTipo());
+            resultadoPalavrasReservadasIdentificadores.setLinha(this.linhaAtual);
+            if(resultadoPalavrasReservadasIdentificadores.getError()){
+                this.erros.add(resultadoPalavrasReservadasIdentificadores);
+            }else{
+                this.tokens.add(resultadoPalavrasReservadasIdentificadores);
+                this.tabelaSimbolos.setSimbolo(resultadoPalavrasReservadasIdentificadores.getLexema(), resultadoPalavrasReservadasIdentificadores.getTipo());
+            }
         }
     }
 
@@ -183,7 +215,12 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(numeros.getPosicaoFinal());
-            this.tokens.add(resultadoNumeros);
+            resultadoNumeros.setLinha(this.linhaAtual);
+            if(resultadoNumeros.getError()){
+                this.erros.add(resultadoNumeros);
+            }else{
+                this.tokens.add(resultadoNumeros);
+            }
         }
     }
 
@@ -196,7 +233,8 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         }
         else{
             setPosicao(simbolos.getPosicaoFinal());
-            this.tokens.add(resultadoSimbolos);
+            resultadoSimbolos.setLinha(this.linhaAtual);
+            this.erros.add(resultadoSimbolos);
         }
     }
 
@@ -217,5 +255,10 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
 
     public void setLinhaAtual(int linhaAtual) {
         this.linhaAtual = linhaAtual;
+    }
+
+    @Override
+    public ArrayList<Token> getErros(){
+        return this.erros;
     }
 }

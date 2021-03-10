@@ -50,7 +50,7 @@ public class ControllerAnalisadorLexico {
         for(String arquivo: nomesArquivos){
             ArrayList<String> conteudo = this.leitorArquivo.leituraArquivo(arquivo);
             ArrayList<Token> tokens = analisadorLexico.analiseArquivo(conteudo);
-            this.escritaArquivos.escrita(tokens, arquivo);
+            this.escritaArquivos.escrita(tokens,analisadorLexico.getErros(),arquivo);
         }
 
     }

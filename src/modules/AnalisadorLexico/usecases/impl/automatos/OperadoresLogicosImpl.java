@@ -50,8 +50,9 @@ public class OperadoresLogicosImpl implements IOperadoresLogicos {
             }
         }
 
-        setPosicaoFinal(posicao - 1);
-        return null;
+        //setPosicaoFinal(posicao - 1);
+        setPosicaoFinal(posicao);
+        return new Token("OpMF",lexema,true);
         //Erro na identificação do token
         //throw new RuntimeException("Error de execução");
     }
@@ -66,8 +67,9 @@ public class OperadoresLogicosImpl implements IOperadoresLogicos {
             }
         }
 
-        setPosicaoFinal(posicao - 1);
-        return null;
+        //setPosicaoFinal(posicao - 1);
+        setPosicaoFinal(posicao);
+        return new Token("OpMF",lexema,true);
         //Erro na identificação do token
         //throw new RuntimeException("Error de execução");
     }
@@ -90,7 +92,7 @@ public class OperadoresLogicosImpl implements IOperadoresLogicos {
 
     private Token estadoFinal(int posicao, String lexema){
         setPosicaoFinal(posicao);
-        return new Token("Operador lógico",lexema);
+        return new Token("LOG", lexema,false);
     }
 
     /** ---- Metodos Gerais ---- **/

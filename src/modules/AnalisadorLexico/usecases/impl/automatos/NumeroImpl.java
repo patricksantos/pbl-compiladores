@@ -30,7 +30,7 @@ public class NumeroImpl implements INumero {
 
         if( posicao >= texto.length() ){
             setPosicaoFinal(posicao);
-            return new Token("Números", lexema);
+            return new Token("NRO", lexema,false);
         }
 
         for(int i = posicao; i < texto.length(); i++){
@@ -42,7 +42,7 @@ public class NumeroImpl implements INumero {
                 if( i + 1 == texto.length() )
                 {
                     setPosicaoFinal(i + 1);
-                    return new Token("Números", lexema);
+                    return new Token("NRO", lexema, false);
                 }
             }
             else if( c == '.'){
@@ -50,7 +50,7 @@ public class NumeroImpl implements INumero {
                 return this.estadoC(texto, i + 1, lexema);
             }else {
                 setPosicaoFinal(i);
-                return new Token("Números", lexema);
+                return new Token("NRO", lexema, false);
             }
         }
 
@@ -60,7 +60,7 @@ public class NumeroImpl implements INumero {
     private Token estadoC(String texto, int posicao, String lexema){
         if( posicao >= texto.length()){
             setPosicaoFinal(posicao - 1);
-            return new Token("Números", lexema.replace(".", ""));
+            return new Token("NRO", lexema.replace(".", ""), false);
         }
 
         String c = texto.substring(posicao, posicao + 1);
@@ -71,7 +71,7 @@ public class NumeroImpl implements INumero {
         }
         else if( c.matches(".") ) {
             setPosicaoFinal(posicao - 1);
-            return new Token("Números", lexema.replace(".", ""));
+            return new Token("NRO", lexema.replace(".", ""),false);
         }
 
         return null;
@@ -80,7 +80,7 @@ public class NumeroImpl implements INumero {
     private Token estadoD(String texto, int posicao, String lexema){
         if( posicao >= texto.length() ){
             setPosicaoFinal(posicao);
-            return new Token("Números", lexema);
+            return new Token("NRO", lexema, false);
         }
 
         for(int i = posicao; i < texto.length(); i++){
@@ -91,12 +91,12 @@ public class NumeroImpl implements INumero {
                 if( i + 1 == texto.length() )
                 {
                     setPosicaoFinal(i + 1);
-                    return new Token("Números", lexema);
+                    return new Token("NRO", lexema, false);
                 }
             }
             else {
                 setPosicaoFinal(i);
-                return new Token("Números", lexema);
+                return new Token("NRO", lexema, false);
             }
         }
 

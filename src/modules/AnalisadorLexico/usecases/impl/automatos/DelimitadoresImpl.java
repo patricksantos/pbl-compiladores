@@ -24,9 +24,9 @@ public class DelimitadoresImpl implements IDelimitadores {
         char c = texto.charAt(posicao);
         lexema += c;
 
-        if( c == '.' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ';' ){
+        if( c == '.' || c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == ';' || c == ',' ){
             setPosicaoFinal(posicao + 1);
-            return new Token("Delimitador", lexema);
+            return new Token("DEL", lexema,false);
         }
 
         return null;

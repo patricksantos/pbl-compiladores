@@ -40,7 +40,7 @@ public class EscritaArquivos implements IEscritaArquivos {
     }
 
     @Override
-    public void escrita(ArrayList<Token> tokens, String nomeArquivo) throws IOException {
+    public void escrita(ArrayList<Token> tokens, ArrayList<Token> erros,String nomeArquivo) throws IOException {
         //String arquivoSaida = nomeArquivo.replace("entrada", "saida");
 
         int auxiliar = nomeArquivo.lastIndexOf("a");
@@ -54,6 +54,12 @@ public class EscritaArquivos implements IEscritaArquivos {
             escrever.writeChars("\n");
         }
 
+        escrever.writeChars("\n");
+
+        for(Token token : erros){
+            escrever.writeBytes(token.info());
+            escrever.writeChars("\n");
+        }
         escrever.flush();
         escrever.close();
     }

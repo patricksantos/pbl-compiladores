@@ -31,7 +31,7 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
 
         if( posicao >= texto.length() ){
             setPosicaoFinal(posicao);
-            return new Token("Identificador", lexema);
+            return new Token("IDE", lexema, false);
         }
 
         for(int i = posicao; i < texto.length(); i++){
@@ -44,9 +44,9 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
                     setPosicaoFinal(i + 1);
                     if(isPalavraReservada(lexema))
                     {
-                        return new Token("Palavra Reservada", lexema);
+                        return new Token("PRE", lexema, false);
                     }
-                    return new Token("Identificador", lexema);
+                    return new Token("IDE", lexema, false);
                 }
             }
             else if(c.matches("[0-9_]")){
@@ -57,9 +57,9 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
                 setPosicaoFinal(i);
                 if(isPalavraReservada(lexema))
                 {
-                    return new Token("Palavra Reservada", lexema);
+                    return new Token("PRE", lexema, false);
                 }
-                return new Token("Identificador", lexema);
+                return new Token("IDE", lexema, false);
             }
         }
 
@@ -70,7 +70,7 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
 
         if( posicao >= texto.length() ){
             setPosicaoFinal(posicao);
-            return new Token("Identificador", lexema);
+            return new Token("IDE", lexema, false);
         }
 
         for(int i = posicao; i < texto.length(); i++){
@@ -80,12 +80,12 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
                 lexema += c;
                 if( i + 1 == texto.length() ){
                     setPosicaoFinal(i + 1);
-                    return new Token("Identificador", lexema);
+                    return new Token("IDE", lexema,false);
                 }
             }
             else {
                 setPosicaoFinal(i + 1);
-                return new Token("Identificador", lexema);
+                return new Token("IDE", lexema, false);
             }
         }
 
@@ -102,7 +102,7 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
 //    }
 
     private boolean isPalavraReservada(String lexema){
-        return lexema.matches("var") || lexema.matches("const,") || lexema.matches("typedef") || lexema.matches("struct") || lexema.matches("extends") || lexema.matches("function") || lexema.matches("procedure")
+        return lexema.matches("var") || lexema.matches("const") || lexema.matches("typedef") || lexema.matches("struct") || lexema.matches("extends") || lexema.matches("function") || lexema.matches("procedure")
                 || lexema.matches("start") || lexema.matches("return") || lexema.matches("if") || lexema.matches("else") || lexema.matches("then") || lexema.matches("while") || lexema.matches("read") || lexema.matches("print")
                 || lexema.matches("int") || lexema.matches("real") || lexema.matches("boolean") || lexema.matches("string") || lexema.matches("true") || lexema.matches("false") || lexema.matches("global")
                 || lexema.matches("local");

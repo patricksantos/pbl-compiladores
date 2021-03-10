@@ -113,7 +113,7 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
 
     private Token estadoFinal(int posicao, String lexema){
         setPosicaoFinal(posicao);
-        return new Token("Operador relacional",lexema);
+        return new Token("REL",lexema, false);
     }
 
     @Override

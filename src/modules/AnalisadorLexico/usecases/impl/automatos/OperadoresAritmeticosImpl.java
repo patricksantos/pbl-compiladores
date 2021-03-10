@@ -50,13 +50,15 @@ public class OperadoresAritmeticosImpl implements IOperadoresAritmeticos {
                 return estadoFinal(posicao + 1, lexema);
             } else {
                 //retornar token do tipo +
-                setPosicaoFinal(posicao);
-                return new Token("Operador Aritmético", lexema);
+                //setPosicaoFinal(posicao);
+                //return new Token("Operador Aritmético", lexema);
+                return estadoFinal(posicao, lexema);
             }
         }
         //retornar token do tipo +
-        setPosicaoFinal(posicao);
-        return new Token("Operador Aritmético", lexema);
+        //setPosicaoFinal(posicao);
+        //return new Token("Operador Aritmético", lexema);
+        return estadoFinal(posicao, lexema);
     }
 
     private Token estadoB(String texto, int posicao, String lexema){
@@ -68,18 +70,20 @@ public class OperadoresAritmeticosImpl implements IOperadoresAritmeticos {
                 return estadoFinal(posicao + 1, lexema);
             } else {
                 //retornar token do tipo -
-                setPosicaoFinal(posicao);
-                return new Token("Operador Aritmético", lexema);
+                //setPosicaoFinal(posicao);
+                //return new Token("Operador Aritmético", lexema);
+                estadoFinal(posicao, lexema);
             }
         }
         //retornar token do tipo - o
-        setPosicaoFinal(posicao);
-        return new Token("Operador Aritmético", lexema);
+        //setPosicaoFinal(posicao);
+        //return new Token("Operador Aritmético", lexema);
+        return estadoFinal(posicao, lexema);
     }
 
     private Token estadoFinal(int posicao, String lexema){
         setPosicaoFinal(posicao);
-        return new Token("Operador Aritmético", lexema);
+        return new Token("ART", lexema, false);
     }
 
     /** ---- Metodos Gerais ---- **/

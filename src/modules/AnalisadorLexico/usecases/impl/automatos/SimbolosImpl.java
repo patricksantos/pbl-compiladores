@@ -37,7 +37,7 @@ public class SimbolosImpl implements ISimbolo {
 
     private Token estadoFinal(int posicao, String lexema){
         setPosicaoFinal(posicao);
-        return new Token("Símbolo",lexema);
+        return new Token("SIB",lexema,true);
     }
 
     @Override

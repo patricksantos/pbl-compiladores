@@ -24,6 +24,7 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
         lexema += c;
 
         if( c == '"' ){
+            this.posicaoInicial = posicao;
             return estadoA(texto, posicao + 1, lexema);
         }
 
@@ -36,8 +37,9 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
         if(posicao < texto.length()) {
             //verifica se o usuário fechou as aspas, pegando o texto após a abertura das aspas.
             if(!texto.substring(posicao).contains("\"") ){
-                this.setPosicaoFinal(posicaoInicial);
-                return null;
+
+                this.setPosicaoFinal(texto.length());
+                return new Token("CMF",texto.substring(this.posicaoInicial),true);
             }
 
             char c = texto.charAt(posicao);
@@ -65,24 +67,25 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
                         c = texto.charAt(posicao);
                     }
                 }else{
-                    //this.setPosicaoFinal(this.posicaoInicial);
-                    return null;
+                    this.setPosicaoFinal(texto.length());
+                    return new Token("CMF",texto.substring(this.posicaoInicial),true);
                 }
             }
             if(posicao >= texto.length()){
-                this.setPosicaoFinal(posicaoInicial);
-                return null;
+                this.setPosicaoFinal(texto.length());
+                return new Token("CMF",texto.substring(this.posicaoInicial),true);
             }
 
             lexema += c;
             return estadoFinal(posicao + 1, lexema);
         }
-        return null;
+        this.setPosicaoFinal(texto.length());
+        return new Token("CMF",texto.substring(this.posicaoInicial),true);
     }
 
     private Token estadoFinal(int posicao, String lexema){
         setPosicaoFinal(posicao);
-        return new Token("Cadeia de caracteres", lexema);
+        return new Token("CAD", lexema,false);
     }
 
     @Override

@@ -14,4 +14,6 @@ public interface IAnalisadorLexico {
     public void setPosicao(int posicao);
 
     public ArrayList<Token> analiseArquivo(ArrayList<String> conteudoArquivo);
+
+    public ArrayList<Token> getErros();
 }

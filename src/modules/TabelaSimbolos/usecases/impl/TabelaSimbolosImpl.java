@@ -24,12 +24,12 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
         for(Map.Entry<String, String> map : this.tabelaSimbolos.entrySet()){
             if( this.isPalavraReservada(map.getValue()) )
             {
-                Token token = new Token(map.getValue(), "");
+                Token token = new Token(map.getValue(), "",false);
                 tokens.add(token);
             }
             else
             {
-                Token token = new Token(map.getValue(), map.getKey());
+                Token token = new Token(map.getValue(), map.getKey(),false);
                 tokens.add(token);
             }
         }

@@ -21,7 +21,7 @@ public class DelimitadorComentarioImpl implements IDelimitadorComentario {
                 return null;
             }
             else {
-                return new Token("Comentario", result);
+                return new Token("Comentario", result, false);
             }
         }catch (Exception e){
             return null;
