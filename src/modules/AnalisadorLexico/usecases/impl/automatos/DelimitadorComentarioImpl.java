@@ -79,8 +79,6 @@ public class DelimitadorComentarioImpl implements IDelimitadorComentario {
 
     private String estadoB(ArrayList<String> arquivo, String texto, int linha, int posicao, String lexema){
         StringBuilder lexemaBuilder = new StringBuilder(lexema);
-        System.out.println(lexemaBuilder.toString());
-
 
         if( posicao + 1 == texto.length()){
             if( linha + 1 >= arquivo.size() )

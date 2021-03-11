@@ -70,10 +70,11 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
 
         for(this.linhaAtual = 0; this.linhaAtual < this.conteudoArquivo.size(); this.linhaAtual++)
         {
-            String linha = this.conteudoArquivo.get(this.linhaAtual);
 
-            while( this.posicao < linha.length() )
+            while( this.posicao < this.conteudoArquivo.get(this.linhaAtual).length() )
             {
+                String linha = this.conteudoArquivo.get(this.linhaAtual);
+
                 Token resultadoDelimitadorComentario = delimitadorComentario.getToken(this.conteudoArquivo, linha, this.linhaAtual, this.posicao);
 
                 if( resultadoDelimitadorComentario == null )
