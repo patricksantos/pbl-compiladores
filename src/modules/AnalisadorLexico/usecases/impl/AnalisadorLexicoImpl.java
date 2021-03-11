@@ -81,8 +81,15 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
                     operadoresLogicos(linha);
                 }
                 else{
+                    int l = this.linhaAtual;
                     setLinhaAtual(delimitadorComentario.getLinhaFinal());
                     setPosicao(delimitadorComentario.getPosicaoFinal());
+
+                    if(resultadoDelimitadorComentario.getError()){
+                        resultadoDelimitadorComentario.setLinha(l);
+                        this.erros.add(resultadoDelimitadorComentario);
+                        break;
+                    }
                 }
                 /*if(linha.charAt(posicao) >= '$' && linha.charAt(posicao) <= '~'){
                     System.out.println("opa");

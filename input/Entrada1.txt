@@ -1,4 +1,11 @@
-// Palavras Reservadas
+
+/* dddddd
+ddddddaaaaa
+dsjkadksakdd
+
+*/
+
+// Palavras Reservadas //
 
 var
 const
@@ -11,9 +18,6 @@ teste
 id1d
 joao
 
-/*
-    Operador Aritmeticos
-*/
 
 +
 ++
@@ -21,14 +25,12 @@ joao
 --
 /
 
-/* Operador Logicos */
 
 *
 &&
 ||
 !
 
-/* Delimitadores */
 
 .
 (
