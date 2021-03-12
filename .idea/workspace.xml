@@ -4,11 +4,12 @@
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input/Entrada1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/Entrada1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada5.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,25 +198,41 @@
     <option name="LAST_COMMIT_MESSAGE" value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1615494390357">
+    <state width="1317" height="120" key="GridCell.Tab.0.bottom" timestamp="1615556665322">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615494390357" />
-    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1615494390357">
+    <state width="1317" height="120" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
+    <state width="1317" height="120" key="GridCell.Tab.0.center" timestamp="1615556665321">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1615494390357" />
-    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1615494390357">
+    <state width="1317" height="120" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1615556665321" />
+    <state width="1317" height="120" key="GridCell.Tab.0.left" timestamp="1615556665321">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1615494390357" />
-    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1615494390357">
+    <state width="1317" height="120" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1615556665321" />
+    <state width="1317" height="120" key="GridCell.Tab.0.right" timestamp="1615556665322">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1615494390357" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1615490150064">
+    <state width="1317" height="120" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
+    <state width="1317" height="120" key="GridCell.Tab.1.bottom" timestamp="1615556665322">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615490150064" />
+    <state width="1317" height="120" key="GridCell.Tab.1.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
+    <state width="1317" height="120" key="GridCell.Tab.1.center" timestamp="1615556665322">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="120" key="GridCell.Tab.1.center/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
+    <state width="1317" height="120" key="GridCell.Tab.1.left" timestamp="1615556665322">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="120" key="GridCell.Tab.1.left/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
+    <state width="1317" height="120" key="GridCell.Tab.1.right" timestamp="1615556665322">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state width="1317" height="120" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1615545702275">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615545702275" />
   </component>
 </project>

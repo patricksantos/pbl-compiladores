@@ -71,8 +71,8 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     @Override
     public ArrayList<Token> analiseArquivo(ArrayList<String> conteudoArquivo) {
         //Seta as informações padrões para o inicio da análise do arquivo.
-        setLinhaAtual(0);
-        setPosicao(0);
+        this.setLinhaAtual(0);
+        this.setPosicao(0);
         this.conteudoArquivo = conteudoArquivo;
         this.tokens = new ArrayList<>();
         this.erros = new ArrayList<>();
@@ -80,6 +80,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         //Passar pelas linhas do arquivo
         for(this.linhaAtual = 0; this.linhaAtual < this.conteudoArquivo.size(); this.linhaAtual++)
         {
+
             //Passa pelos caracteres da linha
             while( this.posicao < this.conteudoArquivo.get(this.linhaAtual).length() )
             {
@@ -109,6 +110,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
                     System.out.println("opa");
                 }
                 posicao++;*/
+                System.out.println("OI");
             }
 
             this.posicao = 0;
@@ -277,6 +279,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
 
         if(resultadoNumeros == null) {
             simbolos(linha);
+            //setPosicao(posicao + 1);
         }
         else{
             setPosicao(numeros.getPosicaoFinal());
@@ -299,9 +302,18 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         Token resultadoSimbolos = this.simbolos.getToken(linha, this.posicao);
 
         if(resultadoSimbolos == null) {
+
+            if (this.posicao < linha.length()){
+                char auxiliar = linha.charAt(posicao);
+                if(auxiliar != ' ') {
+                    if(auxiliar != '\t') {
+                        Token tokenErro = new Token("CNPA", auxiliar + "", true);
+                        tokenErro.setLinha(this.linhaAtual);
+                        this.erros.add(tokenErro);
+                    }
+                }
+            }
             setPosicao(posicao + 1);
-            Token tokenErro =  new Token("CNA",linha.charAt(posicao)+"",true);
-            this.erros.add(tokenErro);
         }
         else{
             setPosicao(simbolos.getPosicaoFinal());

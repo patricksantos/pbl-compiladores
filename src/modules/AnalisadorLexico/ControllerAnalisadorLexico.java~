@@ -47,9 +47,7 @@ public class ControllerAnalisadorLexico {
     private void analisarArquivos() throws IOException {
 
         Set<String> nomesArquivos = leitorArquivo.getNomesArquivos();
-
         for(String arquivo: nomesArquivos){
-            System.out.println(arquivo);
             ArrayList<String> conteudo = this.leitorArquivo.leituraArquivo(arquivo);
             ArrayList<Token> tokens = analisadorLexico.analiseArquivo(conteudo);
             this.escritaArquivos.escrita(tokens,analisadorLexico.getErros(),arquivo);

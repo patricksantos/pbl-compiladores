@@ -1,0 +1,40 @@
+
+/* dddddd
+ddddddaaaaa
+dsjkadksakdd */ aaa
+
+// Palavras Reservadas //
+
+var
+const
+int
+real
+
+// Identificadores
+
+teste
+id1d
+joao
+
+
++
+++
+-
+--
+/
+
+
+*
+&&
+||
+!
+
+
+.
+(
+)
+{
+}
+[
+]
+;
