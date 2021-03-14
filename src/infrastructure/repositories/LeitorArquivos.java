@@ -23,19 +23,25 @@ public class LeitorArquivos implements ILeitorArquivo {
     public LeitorArquivos(){
         this.diretorio = new File("./input");
         this.lista_arquivos = new HashMap<String,File>();
+        //Salva os arquivos encontrados na pasta input
         File[] arquivos = diretorio.listFiles();
+        //Os nome do arquivo é utilizado para recuperar o arquivo.
         for(File arquivo: arquivos){
             lista_arquivos.put(arquivo.getName(),arquivo);
         }
+        //Salva a quantidade de arquivos que foram lidos
         this.numeroArquivos = lista_arquivos.size();
     }
     /**
      * Método responsável por ler os dados contidos em um arquivo.
+     * @param nomeArquivo nome do arquivo que será lido
+     * @return uma lista, cada linha do arquivo é guardada em uma posição da lista
      * */
     @Override
     public ArrayList<String> leituraArquivo(String nomeArquivo) throws IOException {
 
         ArrayList<String> linhas = new ArrayList<>();
+        //Recupera o arquivo na lista de arquivos a partir do nome
         File arquivo = this.lista_arquivos.get(nomeArquivo);
         BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
         String linha = leitor.readLine();
@@ -43,11 +49,7 @@ public class LeitorArquivos implements ILeitorArquivo {
         while (linha != null){
             linhas.add(linha);
             linha = leitor.readLine();
-
         }
-        //O arquivo já foi lido então, quando a função for chamanda novamente o proximo arquivo será lido.
-        //arquivoAtual++;
-
         return linhas;
     }
 
@@ -59,6 +61,9 @@ public class LeitorArquivos implements ILeitorArquivo {
         return this.numeroArquivos;
     }
 
+    /**
+     * @return os nomes dos arquivos que foram encontrados na pasta input
+     * */
     @Override
     public Set<String> getNomesArquivos(){
         return  this.lista_arquivos.keySet();

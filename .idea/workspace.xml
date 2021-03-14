@@ -3,13 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/Entrada1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/Entrada1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/entities/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/entities/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/LeitorArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/LeitorArquivos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/CadeiasCaracteresImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/CadeiasCaracteresImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionaisImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionaisImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/SimbolosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/SimbolosImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,9 +233,9 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state width="1317" height="120" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1615545702275">
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1615695212606">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615545702275" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615695212606" />
   </component>
 </project>

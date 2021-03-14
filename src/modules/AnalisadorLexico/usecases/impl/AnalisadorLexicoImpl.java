@@ -8,7 +8,10 @@ import modules.TabelaSimbolos.usecases.facade.ITabelaSimbolos;
 import java.util.ArrayList;
 /**
  * Classe responsável por controlar o fluxo dos automatos, e disponibilizar o conteudo que será lido por eles.
- * */
+ * O caracterserá testado pelo primeiro automato, caso nenhum token for detectado, o proximo automato será chamado e
+ * assim por diante. Caso ele passe por todos os automátos e nenhum automato for encontrado, será considerado como um
+ * caractere que não pertence a linguagem.
+ * * */
 
 public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     //Automatos
@@ -23,9 +26,10 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
     private final INumero numeros; //Automato de números
 
     private final ITabelaSimbolos tabelaSimbolos;
+
     //Variaveis de controle do cursor de leitura do arquivo
     private int linhaAtual; // Guarda a linha atual que o analisador está lendo
-    private int posicao; // Guarda a posição atual na linha que o automato está lendo
+    private int posicao; // Guarda a posição atual na linha que o analisador léxico está lendo
     private int quantidadeLinhas; // Quantidade de linhas que o arquivo tem
 
     private ArrayList<String> conteudoArquivo; // As linhas que foram lidas no arquivo de entrada
@@ -81,12 +85,12 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         for(this.linhaAtual = 0; this.linhaAtual < this.conteudoArquivo.size(); this.linhaAtual++)
         {
 
-            //Passa pelos caracteres da linha
             while( this.posicao < this.conteudoArquivo.get(this.linhaAtual).length() )
             {
-                //Pega uma linha para leitura
+                //Pega a linha que está sendo linda atualmente
                 String linha = this.conteudoArquivo.get(this.linhaAtual);
 
+                //Manda a linha e a posição na linha que irá começar a leitura, para analisar caractere por caractere.
                 Token resultadoDelimitadorComentario = delimitadorComentario.getToken(this.conteudoArquivo, linha, this.linhaAtual, this.posicao);
                 //Caso não encontre nenhum comentário, outro automato é chamado.
                 if( resultadoDelimitadorComentario == null )
@@ -106,13 +110,9 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
                         break;
                     }
                 }
-                /*if(linha.charAt(posicao) >= '$' && linha.charAt(posicao) <= '~'){
-                    System.out.println("opa");
-                }
-                posicao++;*/
-                System.out.println("OI");
-            }
 
+            }
+            //Como outra linha será lida, a posição é resetada, para que a leitura começãr do inicio.
             this.posicao = 0;
         }
 
@@ -121,28 +121,30 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         return this.tokens;
     }
 
+    /************************************************* Automatos ******************************************************\
+
     /**
      * Método responsável por chamar o automáto que identifica operadores lógicos, e caso encontre um token desse tipo,
      * o adiciona na lista de token.
      * @param linha linha que está sendo analisada atualmente.
      * */
     private void operadoresLogicos(String linha){
-        //Chama o automato de operadores lógicos
+        //Chama o automato de operadores lógicos, mandando a linha e a posição na linha que está sendo analisada.
         Token resultadoOperadoresLogicos = operadoresLogicos.getToken(linha, this.posicao);
 
-        /*Caso o automato retone null, significa que não foi identificado nenhum token, e é chamado o proximo automato
-        para descobrir se faz parte dele*/
+        //Caso o automato retone null, significa que não foi identificado nenhum token, e é chamado o proximo automato
+
         if(resultadoOperadoresLogicos == null)
         {
             operadoresAritmeticos(linha);
         }
-        /*Caso encontre, é adicionado na lista de token se um token foi identificado, ou na lista de erros, se foi
-        encontrado algum erro*/
+        /*Caso encontre um token, é adicionado na lista de tokens, ou na lista de erros, se o
+        token encontrado representa um token de erro*/
         else{
-            /* Atualiza a posição na linha contida no analisador lexico para a ultima posição que foi analisada pelo
-            automato de operadores lógicos.*/
+            /*Atualiza a posição na linha contida no analisador lexico para a ultima posição que foi analisada pelo
+            automato de operadores lógicos, para que a verificação continue de onde o automato parou.*/
             setPosicao(operadoresLogicos.getPosicaoFinal());
-            //Adiciona no token o número da linha que o mesmo estava no arquivo de entrada.
+            //Adiciona no token o número da linha que o token estava no arquivo de entrada.
             resultadoOperadoresLogicos.setLinha(this.linhaAtual);
 
             if(resultadoOperadoresLogicos.getError()){
@@ -151,6 +153,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
                 this.tokens.add(resultadoOperadoresLogicos);
             }
         }
+        // A mesma lógica se repete para os outros automatos.
     }
 
     /**

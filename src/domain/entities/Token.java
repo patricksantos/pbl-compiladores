@@ -5,13 +5,14 @@ package domain.entities;
  * */
 public class Token {
     private String tipo; //Tipo de token identificado
-    private String lexema; //lexema do token ou id ta tabela de símbolo se for um token identificador
-    private String linha; //Número da linha onde ocorreu o token
-    private boolean erro;
+    private String lexema; //lexema do token
+    private String linha; // Número da linha onde ocorreu o token
+    private boolean erro; // Indica se é um token de erro
 
     /**
      * @param tipo tipo do token que foi identificado
      * @param lexema lexema do token ou id ta tabela de símbolo se for um token identificador
+     * @param erro identifica se é um token de erro
      * */
     public Token(String tipo, String lexema, boolean erro){
         this.lexema = lexema;
@@ -34,9 +35,11 @@ public class Token {
     }
 
     /**
+     * Método utilizado para adicionar a linha do arquivo de entrada onde ocorreu o token
      * @param linha número da linha onde ocorreu o token
      * */
     public void setLinha(int linha){
+        //é adicionado 1 para começar a contagem do 1
         linha++;
         if(linha < 10){
             this.linha = "0" + linha;
@@ -46,11 +49,16 @@ public class Token {
         }
 
     }
-
+    /**
+     * @param erro indica se o token é de erro ou não
+     * */
     public void setErro(boolean erro){
         this.erro = erro;
     }
 
+    /**
+     * @return true caso seja um token de erro, e false caso o contrario.
+     * */
     public boolean getError(){
         return this.erro;
     }
