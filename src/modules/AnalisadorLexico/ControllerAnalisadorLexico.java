@@ -22,14 +22,15 @@ public class ControllerAnalisadorLexico {
     private final IAnalisadorLexico analisadorLexico;
 
     public ControllerAnalisadorLexico() {
+        ITabelaSimbolos tabelaSimbolos = new TabelaSimbolosImpl();
+
         IDelimitadorComentario delimitadorComentario = new DelimitadorComentarioImpl();
         IOperadoresLogicos operadoresLogicos = new OperadoresLogicosImpl();
         IOperadoresAritmeticos operadoresAritmeticos = new OperadoresAritmeticosImpl();
         IDelimitadores delimitadores = new DelimitadoresImpl();
-        IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores = new PalavrasReservadasIdentificadoresImpl();
+        IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores = new PalavrasReservadasIdentificadoresImpl(tabelaSimbolos);
         IOperadoresRelacionais operadoresRelacionais = new OperadoresRelacionaisImpl();
         ICadeiasCaracteres cadeiasCaracteres = new CadeiasCaracteresImpl();
-        ITabelaSimbolos tabelaSimbolos = new TabelaSimbolosImpl();
         ISimbolo simbolos = new SimbolosImpl();
         INumero numeros = new NumeroImpl();
 

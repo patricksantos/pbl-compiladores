@@ -3,16 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/entities/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/entities/Token.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/LeitorArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/LeitorArquivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/AnalisadorLexicoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAutomato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/IAutomato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IDelimitadorComentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/facades/automatos/IDelimitadorComentario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/CadeiasCaracteresImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/CadeiasCaracteresImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadoresImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/NumeroImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/NumeroImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresAritmeticosImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresLogicosImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionaisImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/OperadoresRelacionaisImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/PalavrasReservadasIdentificadoresImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/PalavrasReservadasIdentificadoresImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/SimbolosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/SimbolosImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/TabelaSimbolosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/TabelaSimbolosImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +112,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -130,6 +137,7 @@
       <workItem from="1615431334847" duration="10548000" />
       <workItem from="1615442086676" duration="401000" />
       <workItem from="1615470913357" duration="1659000" />
+      <workItem from="1615733313321" duration="5790000" />
     </task>
     <task id="LOCAL-00001" summary="novo DelimitadorComentario">
       <created>1614743589555</created>
@@ -184,13 +192,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="novo DelimitadorComentario" />
@@ -199,43 +206,5 @@
     <MESSAGE value="PBL 2.1" />
     <MESSAGE value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
     <option name="LAST_COMMIT_MESSAGE" value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1317" height="120" key="GridCell.Tab.0.bottom" timestamp="1615556665322">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
-    <state width="1317" height="120" key="GridCell.Tab.0.center" timestamp="1615556665321">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1615556665321" />
-    <state width="1317" height="120" key="GridCell.Tab.0.left" timestamp="1615556665321">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1615556665321" />
-    <state width="1317" height="120" key="GridCell.Tab.0.right" timestamp="1615556665322">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
-    <state width="1317" height="120" key="GridCell.Tab.1.bottom" timestamp="1615556665322">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.1.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
-    <state width="1317" height="120" key="GridCell.Tab.1.center" timestamp="1615556665322">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.1.center/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
-    <state width="1317" height="120" key="GridCell.Tab.1.left" timestamp="1615556665322">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.1.left/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
-    <state width="1317" height="120" key="GridCell.Tab.1.right" timestamp="1615556665322">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="120" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1615556665322" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1615695212606">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615695212606" />
   </component>
 </project>

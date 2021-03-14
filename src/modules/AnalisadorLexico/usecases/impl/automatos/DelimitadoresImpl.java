@@ -45,17 +45,11 @@ public class DelimitadoresImpl implements IDelimitadores {
     }
 
     /**
-     * Método herdado da interface.
-     * */
-    @Override
-    public void getError() {
-
-    }
-    /**
      * Método que atualiza a ultima posição que foi lida pelo automato.
      * @param posicaoFinal a posição atualizada.
      * */
-    private void setPosicaoFinal(int posicaoFinal) {
+    @Override
+    public void setPosicaoFinal(int posicaoFinal) {
         this.posicaoFinal = posicaoFinal;
     }
 

@@ -51,13 +51,7 @@ public class SimbolosImpl implements ISimbolo {
         setPosicaoFinal(posicao);
         return new Token("SIB",lexema,true);
     }
-    /**
-     * Método herdado da interface.
-     * */
-    @Override
-    public void getError() {
 
-    }
     /**
      * @return a posição que o analisador léxico irá analisar, depois de sair desse automato
      * */
@@ -65,10 +59,12 @@ public class SimbolosImpl implements ISimbolo {
     public int getPosicaoFinal() {
         return this.posicaoFinal;
     }
+
     /**
      * Atualiza a posição final
      * @param posicaoFinal a nova posição final
      * */
+    @Override
     public void setPosicaoFinal(int posicaoFinal) {
 
         this.posicaoFinal = posicaoFinal;

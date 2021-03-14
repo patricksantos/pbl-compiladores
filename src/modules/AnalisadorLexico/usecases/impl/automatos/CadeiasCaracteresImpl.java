@@ -121,13 +121,7 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
         setPosicaoFinal(posicao);
         return new Token("CAD", lexema,false);
     }
-    /**
-     * Método herdado da interface.
-     * */
-    @Override
-    public void getError() {
 
-    }
     /**
      * @return a posição que o analisador léxico irá analisar, depois de sair desse automato
      * */
@@ -140,6 +134,7 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
      * Atualiza a posição final
      * @param posicaoFinal a nova posição final
      * */
+    @Override
     public void setPosicaoFinal(int posicaoFinal) {
 
         this.posicaoFinal = posicaoFinal;

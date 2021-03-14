@@ -100,13 +100,6 @@ public class OperadoresAritmeticosImpl implements IOperadoresAritmeticos {
     }
 
     /** ---- Metodos Gerais ---- **/
-    /**
-     * Método herdado da interface.
-     * */
-    @Override
-    public void getError() {
-
-    }
 
     /**
      * @return a posição que o analisador léxico irá analisar, depois de sair desse automato
@@ -120,6 +113,7 @@ public class OperadoresAritmeticosImpl implements IOperadoresAritmeticos {
      * Atualiza a posição final
      * @param posicaoFinal a nova posição final
      * */
+    @Override
     public void setPosicaoFinal(int posicaoFinal) {
         this.posicaoFinal = posicaoFinal;
     }

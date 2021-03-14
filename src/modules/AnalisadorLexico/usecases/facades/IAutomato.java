@@ -6,7 +6,7 @@ public interface IAutomato {
 
     Token getToken(String texto, int posicao);
 
-    void getError();
-
     int getPosicaoFinal();
+
+    void setPosicaoFinal(int posicaoFinal);
 }

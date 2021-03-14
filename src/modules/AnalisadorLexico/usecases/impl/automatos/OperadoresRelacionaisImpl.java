@@ -136,13 +136,9 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
         setPosicaoFinal(posicao);
         return new Token("REL",lexema, false);
     }
-    /**
-     * Método herdado da interface.
-     * */
-    @Override
-    public void getError() {
 
-    }
+
+
     /**
      * @return a posição que o analisador léxico irá analisar, depois de sair desse automato
      * */
@@ -150,10 +146,12 @@ public class OperadoresRelacionaisImpl implements IOperadoresRelacionais {
     public int getPosicaoFinal(){
         return this.posicaoFinal;
     }
+
     /**
      * Atualiza a posição final
      * @param posicaoFinal a nova posição final
      * */
+    @Override
     public void setPosicaoFinal(int posicaoFinal) {
         this.posicaoFinal = posicaoFinal;
     }

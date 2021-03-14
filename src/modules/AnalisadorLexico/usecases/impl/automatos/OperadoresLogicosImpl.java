@@ -108,13 +108,7 @@ public class OperadoresLogicosImpl implements IOperadoresLogicos {
     }
 
     /** ---- Metodos Gerais ---- **/
-    /**
-     * Método herdado da interface.
-     * */
-    @Override
-    public void getError() {
 
-    }
     /**
      * @return a posição que o analisador léxico irá analisar, depois de sair desse automato
      * */
@@ -122,10 +116,12 @@ public class OperadoresLogicosImpl implements IOperadoresLogicos {
     public int getPosicaoFinal(){
         return this.posicaoFinal;
     }
+
     /**
      * Atualiza a posição final
      * @param posicaoFinal a nova posição final
      * */
+    @Override
     public void setPosicaoFinal(int posicaoFinal) {
         this.posicaoFinal = posicaoFinal;
     }

@@ -12,11 +12,14 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
 
     HashMap<String, String> tabelaSimbolos;
 
-    public TabelaSimbolosImpl() {
+    public TabelaSimbolosImpl() { // Construtor
         this.tabelaSimbolos =  new HashMap<String, String>();
-        this.inserirPalavrasReservadas();
+        this.inserirPalavrasReservadas(); // Insere todas as palavras reservadas dentro da tabela
     }
 
+     /**
+     * @return todos os Tokens dentro da tabela
+     * */
     @Override
     public ArrayList<Token> getTokensTabela() {
         ArrayList<Token> tokens = new ArrayList<Token>();
@@ -37,11 +40,18 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
         return tokens;
     }
 
+     /**
+     * @return se o texto é uma palavra reservada
+     * */
     @Override
     public boolean isPalavraReservada(String texto) {
-        return this.tabelaSimbolos.containsKey(texto);
+        return this.tabelaSimbolos.containsKey(texto) && this.tabelaSimbolos.containsValue(texto);
     }
 
+     /**
+     * @param chave a chave do simbolo
+     * @param valor o valor do simbolo
+     * */
     @Override
     public void setSimbolo(String chave, String valor) {
 
@@ -54,6 +64,9 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
 //        return null;
     }
 
+     /**
+     * Ele insere todos as palavras reservador quando a Tabela de Simbolos for instanciada
+     * */
     private void inserirPalavrasReservadas(){
         ArrayList<String> regexPalavraReservada = new ArrayList<String>(Arrays.asList("var", "const", "typedef", "struct", "extends", "procedure", "function", "start", "return", "if", "else", "then", "while", "read", "print", "int", "real", "boolean", "true", "string", "false", "global", "local"));
 
