@@ -113,11 +113,11 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
      * @return se o lexema é uma palavra reservada ou não
      * */
     private boolean isPalavraReservada(String lexema){
-//        return lexema.matches("var") || lexema.matches("const") || lexema.matches("typedef") || lexema.matches("struct") || lexema.matches("extends") || lexema.matches("function") || lexema.matches("procedure")
-//                || lexema.matches("start") || lexema.matches("return") || lexema.matches("if") || lexema.matches("else") || lexema.matches("then") || lexema.matches("while") || lexema.matches("read") || lexema.matches("print")
-//                || lexema.matches("int") || lexema.matches("real") || lexema.matches("boolean") || lexema.matches("string") || lexema.matches("true") || lexema.matches("false") || lexema.matches("global")
-//                || lexema.matches("local");
-        return this.tabelaSimbolos.isPalavraReservada(lexema);
+        return lexema.matches("var") || lexema.matches("const") || lexema.matches("typedef") || lexema.matches("struct") || lexema.matches("extends") || lexema.matches("function") || lexema.matches("procedure")
+                || lexema.matches("start") || lexema.matches("return") || lexema.matches("if") || lexema.matches("else") || lexema.matches("then") || lexema.matches("while") || lexema.matches("read") || lexema.matches("print")
+                || lexema.matches("int") || lexema.matches("real") || lexema.matches("boolean") || lexema.matches("string") || lexema.matches("true") || lexema.matches("false") || lexema.matches("global")
+                || lexema.matches("local");
+        //return this.tabelaSimbolos.isPalavraReservada(lexema);
     }
 
     /**

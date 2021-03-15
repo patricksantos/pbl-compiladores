@@ -1,0 +1,15 @@
+/* 
+	teste06 - com erros
+*/
+
+/* oi primeiro teste ai
+
+
+const int MAX = 10, MAX2 = 50;
+	
+string Mensagem = "Hello world"; 
+
+print(Mensagem) 
+
+/*Testando as coisas 
+/

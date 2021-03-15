@@ -1,0 +1,21 @@
+/* 
+	teste09 - com erros
+*/
+
+procedure start extends banco {  // comeca aqui o programa principal 
+
+	int valor = 10.; 
+	real sal¨ario = 10.6;
+	int nome = 5.;
+	real num = .10;
+	
+	var valança;
+	
+
+	if (ida¬de >= 550. & nome == "Sergio") print("pode aposentar kkkk");
+	else if(ida¢de <= 150 | nome != "Sergio"){
+		return print("vai trabalhar");
+		salario = sal§ario; // hehehe
+	}	
+ 
+} // fim start

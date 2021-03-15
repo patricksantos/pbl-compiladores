@@ -85,24 +85,31 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
                 }else{
                     /*Caso a cadeia tenha algum caractere que não pertença as regras de sua formação, a mesma é uma
                     cadeia mal formada*/
-                    this.setPosicaoFinal(texto.length());
-                    return new Token("CMF",texto.substring(this.posicaoInicial),true);
-                    //erro = true;
+                    //this.setPosicaoFinal(texto.length());
+                    //return new Token("CMF",texto.substring(this.posicaoInicial),true);
+                    erro = true;
+                    lexema += c;
+                    posicao++;
+                    if(posicao < texto.length()) {
+                        c = texto.charAt(posicao);
+                    }
                 }
             }
             /*Verifica se a condição de quebra do while oi o fim de linha,se sim, é uma cadeia mal formada, pois o "
             não foi encontrado*/
+            lexema += c;
             if(posicao >= texto.length()){
                 this.setPosicaoFinal(texto.length());
                 return new Token("CMF",texto.substring(this.posicaoInicial),true);
             /*Caso a cadeia de caracteres esteja entre parenteses, mas algum dos caracteres da cadeia não obedece as
             regras de formação da mesma*/
-            }/*else if(erro = true){
+            }else if(erro){
+                this.setPosicaoFinal(posicao+1);
                 return new Token("CMF",lexema,true);
-            }*/
+            }
             /*condição de quebra do while foi a identificação do outro ", logo o mesmo é adicionado ao lexema, e o token
             é retornado*/
-            lexema += c;
+
             /*A posição é incrementada pois quando sair desse automato e retomar a leitura da linha, pelo analisador
             léxico, o mesmo  irá começar do primeiro caractere após o ultimo que foi lido pelo automato*/
             return estadoFinal(posicao + 1, lexema);

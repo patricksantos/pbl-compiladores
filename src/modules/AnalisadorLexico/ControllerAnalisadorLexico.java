@@ -70,7 +70,7 @@ public class ControllerAnalisadorLexico {
             for(String arquivo: nomesArquivos){
                 ArrayList<String> conteudo = this.leitorArquivo.leituraArquivo(arquivo);
                 String token = analisadorLexico.analise(conteudo.get(0), 0).info();
-                System.out.println(token);
+                //System.out.println(token);
                 this.escreverArquivo(arquivo, token);
             }
         }catch (Exception e){

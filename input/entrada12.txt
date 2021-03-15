@@ -1,0 +1,58 @@
+/* 
+	teste12 - com erros
+*/
+
+const int MaX = 10, MAx2 = 50;
+	
+string Mensagem = "";
+
+procedure start {  // comeca aqui o programa principal 
+	int contador = 0;
+	int limite = 1;
+	int intervalo = 2;	
+	contador+++;
+	limite---;
+	if(limite === contador &&& limite < 2 ||| contador > 2){
+		
+	}
+	var
+	const
+	typedef
+	struct
+	extends
+	procedure
+	function	
+	start
+	return
+	if
+	else
+	then
+	while
+	read
+	print
+	int
+	real
+	boolean
+	string
+	true
+	false
+	global
+	local
+	varconsttypedefstruct
+	+
+	-
+	*
+	/
+	++
+	--
+	==
+	!=	
+ 	<=
+	>=
+	<
+	>
+	=
+	&&
+	||
+	!
+} // fim start

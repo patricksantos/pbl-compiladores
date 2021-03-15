@@ -24,7 +24,7 @@ public class NumeroImpl implements INumero {
             return this.estadoB(texto, posicao + 1, lexema);
         }
 
-        return null; // Se não ele retorna NULL informando que não é um comentario
+        return null; // Se não ele retorna NULL informando que não é um número
     }
 
     private Token estadoB(String texto, int posicao, String lexema){
@@ -60,8 +60,10 @@ public class NumeroImpl implements INumero {
     private Token estadoC(String texto, int posicao, String lexema){
         // Se for fim de linha e não tiver um numero dps do ponto ele retona o Token e uma posição anterior ao ponto
         if( posicao >= texto.length()){
-            setPosicaoFinal(posicao - 1);
-            return new Token("NRO", lexema.replace(".", ""), false);
+           // setPosicaoFinal(posicao - 1);
+            //return new Token("NRO", lexema.replace(".", ""), false);
+            setPosicaoFinal(posicao);
+            return new Token("NRO", lexema, true);
         }
 
         String c = texto.substring(posicao, posicao + 1);
@@ -75,7 +77,7 @@ public class NumeroImpl implements INumero {
             return new Token("NRO", lexema.replace(".", ""),false);
         }
 
-        return null; // Se não ele retorna NULL informando que não é um comentario
+        return null; // Se não ele retorna NULL informando que não é um número
     }
 
     private Token estadoD(String texto, int posicao, String lexema){
@@ -101,7 +103,7 @@ public class NumeroImpl implements INumero {
             }
         }
 
-        return null; // Se não ele retorna NULL informando que não é um comentario
+        return null; // Se não ele retorna NULL informando que não é um número
     }
 
     /** ---- Metodos Gerais ---- **/

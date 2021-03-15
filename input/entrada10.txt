@@ -1,0 +1,27 @@
+/* 
+	teste10 - com erros
+*/
+
+const int MAX = 10, MAX2 = 50;
+	
+string Mensagem = "Hello world
+
+procedure start {  // comeca aqui o programa principal 
+
+	int idade; 
+	real salario;
+	string nome;
+
+	print("Digite o nome)print("Nome completo, please");
+	read(nome);
+	print("Digite a idade");
+	read(idade);
+	print("Calculando resposta)print("Tenha fé);
+	if (idade >= 150) print("pode aposentar kkkk");
+	else {
+		print("vai trabalhar");
+		salario = salario; // hehehe
+	}	
+ 
+} // fim start 
+print("pode aposentar kkkk);//opa

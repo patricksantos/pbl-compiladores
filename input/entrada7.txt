@@ -1,0 +1,17 @@
+/* 
+	teste07 - com erros
+*/
+
+struct conta{
+	int id,
+	real valor,
+}
+
+var conta usuario;
+/*faz parte da vida 
+essas coisas
+
+function calcula(int a, int b){
+	c = a + b;
+	print(c);
+}
