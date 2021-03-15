@@ -90,7 +90,7 @@ public class DelimitadorComentarioImpl implements IDelimitadorComentario {
     private String estadoB(ArrayList<String> arquivo, String texto, int linha, int posicao, String lexema){
         StringBuilder lexemaBuilder = new StringBuilder(lexema);
 
-        if( posicao + 1 >= texto.length()){ // Ele verifica se a linha é vazia
+        if( posicao >= texto.length()){ // Ele verifica se a linha é vazia
 
             if( linha + 1 >= arquivo.size() ) { // Se for o final do arquivo ele retorna o Lexema e identifica que foi um comentario mal formado
                 setPosicaoFinal(posicao);
