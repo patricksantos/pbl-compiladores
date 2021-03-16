@@ -19,7 +19,7 @@ public class EscritaArquivos implements IEscritaArquivos {
      * */
     public EscritaArquivos(ArrayList<Token> tokens){
         this.tokens = tokens;
-        diretorio = "./output";
+        diretorio = "." + File.separator + "output";
     }
 
     public EscritaArquivos(){
@@ -46,7 +46,6 @@ public class EscritaArquivos implements IEscritaArquivos {
      * */
     @Override
     public void escrita(ArrayList<Token> tokens, ArrayList<Token> erros,String nomeArquivo) throws IOException {
-        //String arquivoSaida = nomeArquivo.replace("entrada", "saida");
 
         //Cria o nome do arquivo de saida a partir do nome do arquivo de entrada.
         int auxiliar = nomeArquivo.lastIndexOf("a");
@@ -62,7 +61,10 @@ public class EscritaArquivos implements IEscritaArquivos {
         }
 
         escrever.writeChars("\n");
-
+        //Mensagem de sucesso caso não tenha nenhum erro no arquivo de entrada que foi lido
+        if(erros.size() == 0){
+            escrever.writeBytes("Análise feita com sucesso, nenhum erro foi encontrado.");
+        }
         //Caso tenha, escreve os erros no arquivo de saida
         for(Token token : erros){
             escrever.writeBytes(token.info());

@@ -21,7 +21,7 @@ public class LeitorArquivos implements ILeitorArquivo {
     private int arquivoAtual;//posição do arquivo que será lido
 
     public LeitorArquivos() {
-        String diretorioAUX = "." + File.separator + "input";
+        String diretorioAUX = "." + File.separator + "inpu";
         this.diretorio = new File(diretorioAUX);
         this.lista_arquivos = new HashMap<String, File>();
         //Salva os arquivos encontrados na pasta input

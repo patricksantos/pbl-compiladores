@@ -11,7 +11,6 @@ public class main {
         ControllerAnalisadorLexico controllerAnalisadorLexico = new ControllerAnalisadorLexico();
 
         controllerAnalisadorLexico.iniciarLeitura();
-        //controllerAnalisadorLexico.escreverToken();
 
     }
 }

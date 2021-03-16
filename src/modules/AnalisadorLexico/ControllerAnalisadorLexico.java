@@ -23,7 +23,7 @@ public class ControllerAnalisadorLexico {
 
     public ControllerAnalisadorLexico() {
         ITabelaSimbolos tabelaSimbolos = new TabelaSimbolosImpl();
-
+        //Interfaces dos automatos
         IDelimitadorComentario delimitadorComentario = new DelimitadorComentarioImpl();
         IOperadoresLogicos operadoresLogicos = new OperadoresLogicosImpl();
         IOperadoresAritmeticos operadoresAritmeticos = new OperadoresAritmeticosImpl();
@@ -37,25 +37,34 @@ public class ControllerAnalisadorLexico {
         this.analisadorLexico = new AnalisadorLexicoImpl(tabelaSimbolos, delimitadorComentario, operadoresLogicos, operadoresAritmeticos,
                 delimitadores, palavrasReservadasIdentificadores, operadoresRelacionais, cadeiasCaracteres, simbolos, numeros);
 
+        //Quando o leitorArquivo é instanciado o mesmo ler os arquivos que estão na pasta input.
         this.leitorArquivo = new LeitorArquivos();
         this.escritaArquivos = new EscritaArquivos();
     }
 
+    /**
+     * Método que inicia a leitura dos arquivos da pasta input
+     * */
     public void iniciarLeitura() throws IOException {
         this.analisarArquivos();
     }
-
+    /**
+     * Método que seleciona um arquivo para ser analisado pelo analisador léxico, e retornar os tokens encontrados.
+     * Assim que termina a analise de um arquivo ele passa para o próximo, até ler todos os arquivos.
+     * */
     private void analisarArquivos() throws IOException {
-
+        //Retorna os nomes dos araquivos da pasta input
         Set<String> nomesArquivos = leitorArquivo.getNomesArquivos();
-
-        for(String arquivo: nomesArquivos){
-            System.out.println(arquivo);
-            ArrayList<String> conteudo = this.leitorArquivo.leituraArquivo(arquivo);
-            ArrayList<Token> tokens = analisadorLexico.analiseArquivo(conteudo);
-            this.escritaArquivos.escrita(tokens,analisadorLexico.getErros(),arquivo);
+        if(nomesArquivos != null) {
+            for (String arquivo : nomesArquivos) {
+                //Retorna o conteudo do arquivo que está sendo lido atualmente.
+                ArrayList<String> conteudo = this.leitorArquivo.leituraArquivo(arquivo);
+                //Retorna os tokens identificados no arquivo.
+                ArrayList<Token> tokens = analisadorLexico.analiseArquivo(conteudo);
+                //Escreve os tokens e os erros(caso ocorram), no arquivo de saida.
+                this.escritaArquivos.escrita(tokens, analisadorLexico.getErros(), arquivo);
+            }
         }
-
     }
 
     private void escreverArquivo(String arquivo, String conteudo) throws IOException {

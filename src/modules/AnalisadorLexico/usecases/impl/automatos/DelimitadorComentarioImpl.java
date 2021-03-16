@@ -122,7 +122,9 @@ public class DelimitadorComentarioImpl implements IDelimitadorComentario {
 
             lexemaBuilder.append(c);
         }
-        // throw new RuntimeException("Error de execução");
+        /*Como ele passou por toda linha,ou seja, atingiua condição de saida do for, ainda não foi encontrado o *, por
+        isso o mesmo estado é chamado novamente, mandando como posição o tamanho da linha para informar que o mesmo foi
+        lido totalmente*/
         return estadoB(arquivo, texto, linha, texto.length(), lexemaBuilder.toString());
     }
 
