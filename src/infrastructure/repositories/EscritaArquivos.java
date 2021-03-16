@@ -51,7 +51,7 @@ public class EscritaArquivos implements IEscritaArquivos {
         int auxiliar = nomeArquivo.lastIndexOf("a");
         String arquivoSaida = "Saida" + nomeArquivo.substring(auxiliar + 1);
 
-        FileOutputStream arquivo = new FileOutputStream(this.diretorio + "/" + arquivoSaida);
+        FileOutputStream arquivo = new FileOutputStream(this.diretorio + File.separator + arquivoSaida);
         DataOutputStream escrever = new DataOutputStream(arquivo);
 
         //Escreve os tokens no arquivo de saida

@@ -28,7 +28,7 @@ public class ControllerAnalisadorLexico {
         IOperadoresLogicos operadoresLogicos = new OperadoresLogicosImpl();
         IOperadoresAritmeticos operadoresAritmeticos = new OperadoresAritmeticosImpl();
         IDelimitadores delimitadores = new DelimitadoresImpl();
-        IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores = new PalavrasReservadasIdentificadoresImpl(tabelaSimbolos);
+        IPalavrasReservadasIdentificadores palavrasReservadasIdentificadores = new PalavrasReservadasIdentificadoresImpl();
         IOperadoresRelacionais operadoresRelacionais = new OperadoresRelacionaisImpl();
         ICadeiasCaracteres cadeiasCaracteres = new CadeiasCaracteresImpl();
         ISimbolo simbolos = new SimbolosImpl();

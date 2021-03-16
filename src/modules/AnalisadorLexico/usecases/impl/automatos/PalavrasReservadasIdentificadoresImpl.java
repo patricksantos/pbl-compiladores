@@ -2,15 +2,9 @@ package modules.AnalisadorLexico.usecases.impl.automatos;
 
 import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.automatos.IPalavrasReservadasIdentificadores;
-import modules.TabelaSimbolos.usecases.facade.ITabelaSimbolos;
 
 public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservadasIdentificadores {
     private int posicaoFinal;
-    private ITabelaSimbolos tabelaSimbolos;
-
-    public PalavrasReservadasIdentificadoresImpl( ITabelaSimbolos tabelaSimbolos) {
-        this.tabelaSimbolos = tabelaSimbolos;
-    }
 
     @Override
     public Token getToken(String texto, int posicao) {
@@ -117,7 +111,6 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
                 || lexema.matches("start") || lexema.matches("return") || lexema.matches("if") || lexema.matches("else") || lexema.matches("then") || lexema.matches("while") || lexema.matches("read") || lexema.matches("print")
                 || lexema.matches("int") || lexema.matches("real") || lexema.matches("boolean") || lexema.matches("string") || lexema.matches("true") || lexema.matches("false") || lexema.matches("global")
                 || lexema.matches("local");
-        //return this.tabelaSimbolos.isPalavraReservada(lexema);
     }
 
     /**
