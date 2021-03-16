@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
+      <change afterPath="$PROJECT_DIR$/input/entrada0.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida11.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida11.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida6.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida7.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida7.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida9.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida9.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/NumeroImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/NumeroImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +89,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.main" />
@@ -99,7 +109,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -179,13 +189,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="novo DelimitadorComentario" />
@@ -194,27 +203,5 @@
     <MESSAGE value="PBL 2.1" />
     <MESSAGE value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
     <option name="LAST_COMMIT_MESSAGE" value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1615848956701">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615848956701" />
-    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1615848956701">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1615848956701" />
-    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1615848956701">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1615848956701" />
-    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1615848956701">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1615848956701" />
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1615848345512">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615848345512" />
   </component>
 </project>

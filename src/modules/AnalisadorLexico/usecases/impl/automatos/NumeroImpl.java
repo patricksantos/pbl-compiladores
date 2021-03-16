@@ -58,12 +58,10 @@ public class NumeroImpl implements INumero {
     }
 
     private Token estadoC(String texto, int posicao, String lexema){
-        // Se for fim de linha e não tiver um numero dps do ponto ele retona o Token e uma posição anterior ao ponto
+        // Se for fim de linha e não tiver um numero dps do ponto ele retona o Token e informa que é um numero mal formado
         if( posicao >= texto.length()){
-           // setPosicaoFinal(posicao - 1);
-            //return new Token("NRO", lexema.replace(".", ""), false);
             setPosicaoFinal(posicao);
-            return new Token("NRO", lexema, true);
+            return new Token("NMF", lexema, true);
         }
 
         String c = texto.substring(posicao, posicao + 1);
@@ -72,9 +70,10 @@ public class NumeroImpl implements INumero {
             lexema += c;
             return this.estadoD(texto, posicao + 1, lexema);
         }
-        else if( c.matches(".") ) { // Se vier outro ponto em sequencia ele retona o Token e a posição anterior aos pontos
-            setPosicaoFinal(posicao - 1);
-            return new Token("NRO", lexema.replace(".", ""),false);
+        else if( c.matches(".") ) { // Se vier outro ponto em sequencia ele retona o Token e informa que é um numero mal formado
+            lexema += c;
+            setPosicaoFinal(posicao + 1);
+            return new Token("NMF", lexema, true);
         }
 
         return null; // Se não ele retorna NULL informando que não é um número
