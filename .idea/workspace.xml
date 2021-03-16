@@ -3,14 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/LeitorArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/LeitorArquivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/entrada0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada11.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada12.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada13.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/entrada9.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida0.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/DelimitadorComentarioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/NumeroImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/usecases/impl/automatos/NumeroImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,25 +219,25 @@
     <option name="LAST_COMMIT_MESSAGE" value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1615898248025">
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1615908294094">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615898248025" />
-    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1615898248025">
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1615908294094" />
+    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1615908294094">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1615898248025" />
-    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1615898248025">
+    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1615908294094" />
+    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1615908294094">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1615898248025" />
-    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1615898248025">
+    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1615908294094" />
+    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1615908294094">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1615898248025" />
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1615894112656">
+    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1615908294094" />
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1615907132776">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615894112656" />
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1615907132776" />
   </component>
 </project>

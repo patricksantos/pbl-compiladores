@@ -54,7 +54,7 @@ public class NumeroImpl implements INumero {
             }
         }
 
-        return null; // Se não ele retorna NULL informando que não é um comentario
+        return null; // Se não ele retorna NULL informando que não é um número
     }
 
     private Token estadoC(String texto, int posicao, String lexema){
@@ -71,12 +71,11 @@ public class NumeroImpl implements INumero {
             return this.estadoD(texto, posicao + 1, lexema);
         }
         else if( c.matches(".") ) { // Se vier outro ponto em sequencia ele retona o Token e informa que é um numero mal formado
-            lexema += c;
-            setPosicaoFinal(posicao + 1);
+            setPosicaoFinal(posicao);
             return new Token("NMF", lexema, true);
         }
-
-        return null; // Se não ele retorna NULL informando que não é um número
+        //Caso venha algum caractere diferente de . ou número
+        return new Token("NMF", lexema, true); // Se não ele retorna NULL informando que não é um número
     }
 
     private Token estadoD(String texto, int posicao, String lexema){
