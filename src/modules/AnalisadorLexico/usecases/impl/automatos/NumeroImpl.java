@@ -4,8 +4,17 @@ import domain.entities.Token;
 import modules.AnalisadorLexico.usecases.facades.automatos.INumero;
 
 public class NumeroImpl implements INumero {
-    private int posicaoFinal;
-
+    private int posicaoFinal;/*Proxima posição da linha que o analisador léxico irá analisar, para que a classe
+    AnalisadorLéxico continue a analise de onde este automato parou.*/
+    /**
+     * Método que retona o token identificado, caso o mesmo for encontrado, os erros encontrados nesse automatos são
+     * números mal formados, como por exemplo (10.); .10 não foi considerado um erro pois é necessário começar com um
+     * número para entrar neste automato, por isso, não é responsabilidade do analisador léxico cuidar deste tipo de
+     * formação.
+     * @param texto uma linha do arquivo de entrada
+     * @param posicao a posição na linha que irá começar a leitura
+     * @return o token identificado, ou null caso o mesmo não for encontrado.
+     * */
     @Override
     public Token getToken(String texto, int posicao) {
         String lexema = ""; // Lexema que irá ser retornado

@@ -305,9 +305,11 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         Token resultadoSimbolos = this.simbolos.getToken(linha, this.posicao);
 
         if(resultadoSimbolos == null) {
-
+            /*Como o caractere analisado não pertence a nenhum padrão de token, ou do alfabeto da linguagem, o mesmo é
+            è interpretado como erro do tipo CNPA, Caractere que não pertence ao alfabeto*/
             if (this.posicao < linha.length()){
                 char auxiliar = linha.charAt(posicao);
+                //Verifica se o caractere é uma tabulação ou um espaço, caso seja, é ignorado.
                 if(auxiliar != ' ') {
                     if(auxiliar != '\t') {
                         Token tokenErro = new Token("CNPA", auxiliar + "", true);

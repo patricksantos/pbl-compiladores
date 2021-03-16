@@ -128,68 +128,6 @@ public class DelimitadorComentarioImpl implements IDelimitadorComentario {
         return estadoB(arquivo, texto, linha, texto.length(), lexemaBuilder.toString());
     }
 
-    private String estadoB1(ArrayList<String> arquivo, String texto, int linha, int posicao, String lexema){
-        StringBuilder lexemaBuilder = new StringBuilder(lexema);
-
-        if( posicao + 1 == texto.length()){
-            if( linha + 1 >= arquivo.size() )
-            {
-                setPosicaoFinal(posicao);
-                setLinhaFinal(arquivo.size() + 1);
-                this.error = true;
-
-                return lexemaBuilder.toString();
-            }
-            char c = texto.charAt(posicao);
-            lexemaBuilder.append(c);
-
-            linha = linha + 1;
-            texto = arquivo.get(linha);
-
-            while (texto.isEmpty()){
-                linha = linha + 1;
-                texto = arquivo.get(linha);
-            }
-
-            return estadoB(arquivo, texto, linha, 0, lexemaBuilder.toString());
-        }
-
-        for (int i = posicao; i < texto.length(); i++)
-        {
-            char c = texto.charAt(i);
-
-            if(c == '*') {
-                lexemaBuilder.append(c);
-                return estadoC(arquivo, texto, linha, i + 1, lexemaBuilder.toString());
-            }
-            else {
-                lexemaBuilder.append(c);
-
-                if( i + 1 >= texto.length()){
-                    linha = linha + 1;
-
-                    if( linha + 1 >= arquivo.size() )
-                    {
-                        setPosicaoFinal(posicao);
-                        setLinhaFinal(arquivo.size() + 1);
-                        this.error = true;
-
-                        return lexemaBuilder.toString();
-                    }
-
-                    texto = arquivo.get(linha);
-                    while (texto.isEmpty()){
-                        linha = linha + 1;
-                        texto = arquivo.get(linha);
-                    }
-
-                    return estadoB(arquivo, texto, linha, 0, lexemaBuilder.toString());
-                }
-            }
-        }
-        // throw new RuntimeException("Error de execução");
-        return null;
-    }
 
     private String estadoC(ArrayList<String> arquivo, String texto, int linha, int posicao, String lexema){
         char c = texto.charAt(posicao);

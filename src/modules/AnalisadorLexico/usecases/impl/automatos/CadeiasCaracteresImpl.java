@@ -85,8 +85,6 @@ public class CadeiasCaracteresImpl implements ICadeiasCaracteres {
                 }else{
                     /*Caso a cadeia tenha algum caractere que não pertença as regras de sua formação, a mesma é uma
                     cadeia mal formada*/
-                    //this.setPosicaoFinal(texto.length());
-                    //return new Token("CMF",texto.substring(this.posicaoInicial),true);
                     erro = true;
                     lexema += c;
                     posicao++;
