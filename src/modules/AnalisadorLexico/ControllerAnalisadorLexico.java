@@ -67,6 +67,16 @@ public class ControllerAnalisadorLexico {
         }
     }
 
+    public ArrayList<Token> getErros(){
+        return analisadorLexico.getErros();
+    }
+
+    public ArrayList<Token> analiseArquivo (ArrayList<String> conteudo){
+        ArrayList<Token> tokens = analisadorLexico.analiseArquivo(conteudo);
+
+        return tokens;
+    }
+
     private void escreverArquivo(String arquivo, String conteudo) throws IOException {
         escritaArquivos.escrita(arquivo, conteudo);
     }
