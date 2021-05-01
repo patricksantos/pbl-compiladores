@@ -118,8 +118,9 @@ public class ControllerAnalisadorSintatico {
             procedimentoDeclProcedure();
         }else if(token.getLexema() == "typedef"){
 
-        }else if(token.getLexema() == "var"){
-
+        }else if(token.getLexema() == "var" || token.getLexema() == "const"){
+            //proximo_token();
+            procedimentoVarDecl();
         }else if(token.getLexema() == "const"){
 
         }else if(token.getTipo() == "IDE"){
@@ -314,7 +315,8 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoDeclFunction(){
-        if(true/*Fazer uma lista com os tipos*/){
+        if(primeiroType(token)){
+            proximo_token();
             if(token.getTipo() == "IDE"){
                 proximo_token();
                 if(token.getLexema() == "("){
@@ -376,7 +378,7 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoParams(){
-        if(true/*Fazer uma lista com os tipos*/){
+        if(primeiroType(token)){
             proximo_token();
             procedimentoParam();
             if(token.getLexema() == ","){
@@ -393,6 +395,107 @@ public class ControllerAnalisadorSintatico {
         }
     }
 
+    public void procedimentoVarDecl(){
+        if(token.getLexema() == "var"){
+            proximo_token();
+            if(token.getLexema() == "{"){
+                proximo_token();
+                procedimentoTypedVariable();
+            }else{
+                System.out.println("ERRO");
+            }
+        }else if(token.getLexema() == "const"){
+            proximo_token();
+            if(token.getLexema() == "{"){
+                proximo_token();
+                procedimentoTypedConst();
+            }else{
+                System.out.println("ERRO");
+            }
+        }else{
+            System.out.println("ERRO");
+        }
+
+    }
+
+    public void procedimentoTypedVariable(){
+        if(primeiroType(token)){
+            proximo_token();
+            procedimentoVariables();
+            if(token.getLexema() == ";"){
+                proximo_token();
+                if(primeiroType(token)){
+                    procedimentoTypedVariable();
+                }
+            }else{
+                System.out.println("ERRO");
+            }
+        }else{
+            System.out.println("ERRO");
+        }
+    }
+
+    public void procedimentoVariables(){
+        if(token.getTipo() == "IDE"){
+            if(token.getLexema() == "["){
+                proximo_token();
+                procedimentoArrayUsage();
+                if(token.getLexema() == "="){
+                    proximo_token();
+                    if(token.getLexema() == "{"){
+                        proximo_token();
+                        procedimentoVarArgs();
+                        if(token.getLexema() == "}"){
+                            proximo_token();
+                        }else{
+                            System.out.println("ERRO");
+                        }
+                    }else{
+                        System.out.println("ERRO");
+                    }
+                }
+            }else if(token.getLexema() == "="){
+
+            }
+        }else{
+            System.out.println("ERRO");
+        }
+    }
+
+    public void procedimentoArrayUsage(){
+
+        if(token.getTipo() == "NRO" || token.getTipo() == "IDE" || token.getLexema() == "true" || token.getLexema() == "false"){
+            proximo_token();
+            if(token.getLexema() == "]"){
+                proximo_token();
+                if(token.getLexema() == "["){
+                    proximo_token();
+                    if(token.getTipo() == "NRO" || token.getTipo() == "IDE" || token.getLexema() == "true" || token.getLexema() == "false"){
+                        proximo_token();
+                        if(token.getLexema() == "]"){
+                            proximo_token();
+                        }
+                    }
+                }
+            }else{
+                System.out.println("ERRO");
+            }
+        }else{
+            System.out.println("ERRO");
+        }
+    }
+
+    public void procedimentoVarArgs(){
+
+    }
+    public void procedimentoVariableDeclarator(){
+
+    }
+
+    public void procedimentoTypedConst(){
+
+    }
+
     public ArrayList<String> primeiroSimpleStatement(){
         ArrayList<String> listaPrimeiro = new ArrayList<>();
         listaPrimeiro.add("read");
@@ -404,5 +507,13 @@ public class ControllerAnalisadorSintatico {
         listaPrimeiro.add("var");
         listaPrimeiro.add("const");
         return listaPrimeiro;
+    }
+
+    public boolean primeiroType(Token token){
+        if(token.getLexema() == "int" || token.getLexema() == "real" || token.getLexema() == "boolean" || token.getLexema() == "string"){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
