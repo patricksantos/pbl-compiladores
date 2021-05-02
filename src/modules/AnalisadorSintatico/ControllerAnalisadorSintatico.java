@@ -1,6 +1,7 @@
 package modules.AnalisadorSintatico;
 
 import domain.entities.Token;
+import modules.AnalisadorSintatico.usecases.ErroSintatico;
 
 import java.util.ArrayList;
 
@@ -9,50 +10,70 @@ public class ControllerAnalisadorSintatico {
     public Token token;
     public ArrayList<Token> listaTokens;
     public int indiceTokenAtual = 0;
+    public Token tokenFimArquivo;
+    public ArrayList<ErroSintatico> erros;
 
     public void iniciarLeitura(ArrayList<Token> tokens){
         this.listaTokens = tokens;
         this.token = tokens.get(this.indiceTokenAtual);
+        this.tokenFimArquivo = new Token("$","EOF",false);
+        this.listaTokens.add(tokenFimArquivo);
+        this.erros = new ArrayList<>();
+        this.init();
     }
 
     public void proximo_token(){
+        System.out.println(indiceTokenAtual);
         this.indiceTokenAtual++;
 
         if(this.indiceTokenAtual < listaTokens.size()){
             this.token = listaTokens.get(this.indiceTokenAtual);
         }else{
-            this.token = null;
+            this.listaTokens.add(tokenFimArquivo);
+            this.token = listaTokens.get(this.indiceTokenAtual);
         }
     }
 
     public void init(){
 
-        if(this.token.getLexema() == "procedure"){
+        if(this.token.getLexema().equals("procedure")){
             this.proximo_token();
 
-            if(this.token.getLexema() == "start"){
+            if(this.token.getLexema().equals("start")){
                 this.proximo_token();
 
-                if(this.token.getLexema() == "{"){
-                    this.start();
-                    if(this.token.getLexema() == "}"){
-
+                if(this.token.getLexema().equals("{")){
+                    proximo_token();
+                    if(this.token.getLexema().equals("}")){
+                        proximo_token();
                     }else{
-                        System.out.println("Erro");
+                        this.start();
+                        if(this.token.getLexema().equals("}")){
+                            proximo_token();
+                        }else{
+                            ErroSintatico erro = new ErroSintatico(token.getLinha(),"}",token.getLexema());
+                            System.out.println(erro.info());
+                        }
                     }
                 }else{
-                    System.out.println("Erro");
+                    ErroSintatico erro = new ErroSintatico(token.getLinha(),"{",token.getLexema());
+                    System.out.println(erro.info());
                 }
             }else{
-                System.out.println("Erro");
+                ErroSintatico erro = new ErroSintatico(token.getLinha(),"start",token.getLexema());
+                System.out.println(erro.info());
             }
         }else {
-            System.out.println("Erro");
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"procedure",token.getLexema());
+            System.out.println(erro.info());
         }
     }
 
     public void start(){
-        if(token != null) {
+        //Fim do arquivo
+        if(token.getLexema().equals("}")) {
+
+        }else{
             this.program();
             this.start();
         }
@@ -64,22 +85,23 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void  statement(){
-        if(token.getLexema() == "{"){
+
+        if(this.token.getLexema().equals("{")){
             proximo_token();
             statementsList();
-            if(token.getLexema() == "}"){
+            if(this.token.getLexema().equals("}")){
                 proximo_token();
             }
             else{
-                System.out.println("ERRO");
+                System.out.println("ERRO statement");
             }
-        }else if(primeiroSimpleStatement().contains(token.getLexema()) || token.getTipo() == "IDE"){
+        }else if(primeiroSimpleStatement().contains(token.getLexema()) || this.token.getTipo().equals("IDE")){
             simpleStatement();
         }
     }
 
     public void statementsList(){
-        if(token.getLexema() == "{" || primeiroSimpleStatement().contains(token.getLexema()) || token.getTipo() == "IDE"){
+        if(this.token.getLexema().equals("{") || primeiroSimpleStatement().contains(token.getLexema()) || this.token.getTipo().equals("IDE")){
             statement();
             statementsList();
         }
@@ -88,9 +110,9 @@ public class ControllerAnalisadorSintatico {
 
     public void statementList(){
         //Fazer uma forma de aceitar se só tiver { }.
-        if(token.getLexema() == "if"){
+        if(this.token.getLexema().equals("if")){
 
-        }else if(token.getLexema() == "while"){
+        }else if(this.token.getLexema().equals("while")){
 
         }else{
             simpleStatement();
@@ -99,65 +121,68 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void simpleStatement(){
-        if(token.getLexema() == "read"){
+        if(this.token.getLexema().equals("read")){
             proximo_token();
             procedimentoRead();
-        }else if(token.getLexema() == "print"){
+        }else if(this.token.getLexema().equals("print")){
             proximo_token();
             procedimentoPrint();
-        }else if(token.getLexema() == "if"){
+        }else if(this.token.getLexema().equals("if")){
+            proximo_token();
             procedimentoIf();
-        }else if(token.getLexema() == "while"){
+        }else if(this.token.getLexema().equals("while")){
             proximo_token();
             procedimentoWhile();
-        }else if(token.getLexema() == "function"){
+        }else if(token.getLexema().equals("function")){
             proximo_token();
             procedimentoDeclFunction();
-        }else if( token.getLexema() == "procedure"){
+        }else if( token.getLexema().equals("procedure")){
             proximo_token();
             procedimentoDeclProcedure();
-        }else if(token.getLexema() == "typedef"){
+        }else if(token.getLexema().equals("typedef")){
 
-        }else if(token.getLexema() == "var" || token.getLexema() == "const"){
+        }else if(token.getLexema().equals("var") || token.getLexema().equals("const")){
             //proximo_token();
             procedimentoVarDecl();
-        }else if(token.getLexema() == "const"){
+        }else if(token.getLexema().equals("const")){
 
-        }else if(token.getTipo() == "IDE"){
+        }else if(token.getTipo().equals("IDE")){
 
+        }else{
+            System.out.println("ERRO simplestatement");
         }
     }
 
     public void procedimentoIf(){
-        if(token.getLexema() == "("){
+        if(token.getLexema().equals("(")){
             proximo_token();
             procedimentoExpression();
-            if(token.getLexema() == ")"){
+            if(token.getLexema().equals(")")){
                 proximo_token();
-                if(token.getLexema() == "then"){
+                if(token.getLexema().equals("then")){
                     proximo_token();
                     statement();
-                    if(token.getLexema() == "else"){
+                    if(token.getLexema().equals("else")){
                         statement();
                     }
                 }else{
-                    System.out.println("ERRO");
+                    System.out.println("ERRO if sem then ");
                 }
             }
             else{
-                System.out.println("ERRO");
+                System.out.println("ERRO if sem )");
             }
         }else{
-            System.out.println("ERRO");
+            System.out.println("ERRO if sem (");
         }
     }
 
     public void procedimentoWhile(){
 
-        if(token.getLexema() == "("){
+        if(token.getLexema().equals("(")){
             proximo_token();
             procedimentoExpression();
-            if(token.getLexema() == ")"){
+            if(token.getLexema().equals(")")){
                 proximo_token();
                 statement();
             }
@@ -170,7 +195,11 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoExpression(){
-
+        if(token.getLexema().equals("true") || token.getLexema().equals("false")){
+            proximo_token();
+        }else{
+            System.out.println("ERRO");
+        }
     }
 
     public void procedimentoRead(){
@@ -486,13 +515,91 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoVarArgs(){
+        if(token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")
+                || token.getTipo().equals("NRO") || token.getTipo().equals("CAD")){
+            proximo_token();
+            if(token.getLexema().equals(",")){
+                procedimentoVarArgs();
+            }
+
+        }else{
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE,true,false,NRO,CAD",token.getLexema());
+            System.out.println(erro.info());
+        }
+    }
+
+    /*public void procedimentoVarArg(){
 
     }
     public void procedimentoVariableDeclarator(){
 
-    }
+    }*/
 
     public void procedimentoTypedConst(){
+        if(primeiroType(token)){
+            proximo_token();
+            procedimentoConstants();
+            if(token.getLexema().equals(";")){
+                proximo_token();
+                if(primeiroType(token)){
+                    procedimentoTypedConst();
+                }
+            }else{
+                ErroSintatico erro = new ErroSintatico(token.getLinha(),";",token.getLexema());
+                System.out.println(erro.info());
+            }
+        }else{
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"int,real,boolean,string",token.getLexema());
+            System.out.println(erro.info());
+        }
+
+    }
+
+    public void procedimentoConstants(){
+        if(token.getTipo().equals("IDE")){
+            proximo_token();
+            if(token.getLexema().equals("=")){
+                proximo_token();
+                if(token.getLexema().equals("true") || token.getLexema().equals("false")
+                        || token.getTipo().equals("NRO") || token.getTipo().equals("CAD")){
+                    proximo_token();
+                    if(token.getLexema().equals(",")){
+                        proximo_token();
+                        procedimentoConstants();
+                    }
+                }else{
+                    ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE,true,false,NRO,CAD",token.getLexema());
+                    System.out.println(erro.info());
+                }
+            }else{
+                ErroSintatico erro = new ErroSintatico(token.getLinha(),"=",token.getLexema());
+                System.out.println(erro.info());
+            }
+        }else{
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE",token.getLexema());
+            System.out.println(erro.info());
+        }
+    }
+
+    public void procedimentoStructUsage(){
+        if(token.getTipo().equals("IDE")){
+            proximo_token();
+            if(token.getLexema().equals(".")){
+                proximo_token();
+                if(token.getTipo().equals("IDE")){
+                    proximo_token();
+                }
+            }else{
+                ErroSintatico erro = new ErroSintatico(token.getLinha(),".",token.getLexema());
+                System.out.println(erro.info());
+            }
+        }else{
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE",token.getLexema());
+            System.out.println(erro.info());
+        }
+    }
+
+    public void procedimentoVariableUsage(){
 
     }
 

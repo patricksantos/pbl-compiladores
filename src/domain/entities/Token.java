@@ -70,4 +70,8 @@ public class Token {
         return this.linha + " " + this.tipo + " " + this.lexema;
     }
 
+    public String getLinha(){
+        return this.linha;
+    }
+
 }
