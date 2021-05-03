@@ -3,24 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/Entrada1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/Entrada1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada0.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada10.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada11.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada12.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada13.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/ControllerAnalisadorLexico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorLexico/ControllerAnalisadorLexico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/entities/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/entities/Token.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -232,9 +214,9 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1619985406714" />
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1619985756280">
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1620011104073">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1619985756280" />
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1620011104073" />
   </component>
 </project>

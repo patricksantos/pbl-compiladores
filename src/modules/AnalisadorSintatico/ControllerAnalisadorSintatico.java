@@ -603,6 +603,68 @@ public class ControllerAnalisadorSintatico {
 
     }
 
+    public void procedimentoStructDecl(){
+        if(token.getLexema().equals("typedef")){
+            proximo_token();
+            if(token.getLexema().equals("struct")){
+                proximo_token();
+                if(token.getLexema().equals("extends")){
+                    proximo_token();
+                    if(token.getTipo().equals("IDE")){
+                        proximo_token();
+                    }else{
+                        ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE",token.getLexema());
+                        System.out.println(erro.info());
+                    }
+                }
+                if(token.getLexema().equals("{")){
+                    proximo_token();
+                    procedimentoStructDef();
+                    if(token.getLexema().equals("}")){
+                        proximo_token();
+                        if(token.getTipo().equals("IDE")){
+                            proximo_token();
+                            if(token.getLexema().equals(";")){
+                                proximo_token();
+                            }else{
+                                ErroSintatico erro = new ErroSintatico(token.getLinha(),";",token.getLexema());
+                                System.out.println(erro.info());
+                            }
+                        }else{
+                            ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE",token.getLexema());
+                            System.out.println(erro.info());
+                        }
+                    }else{
+                        ErroSintatico erro = new ErroSintatico(token.getLinha(),"}",token.getLexema());
+                        System.out.println(erro.info());
+                    }
+                }else{
+                    ErroSintatico erro = new ErroSintatico(token.getLinha(),"{",token.getLexema());
+                    System.out.println(erro.info());
+                }
+            }else{
+                ErroSintatico erro = new ErroSintatico(token.getLinha(),"struct",token.getLexema());
+                System.out.println(erro.info());
+            }
+
+        }else{
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"typedef",token.getLexema());
+            System.out.println(erro.info());
+        }
+    }
+
+    public void procedimentoStructDef(){
+        if(token.getLexema().equals("var") || token.getLexema().equals("const")){
+            procedimentoVarDecl();
+            if(token.getLexema().equals("var") || token.getLexema().equals("const")){
+                procedimentoStructDef();
+            }
+        }else{
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"var,const",token.getLexema());
+            System.out.println(erro.info());
+        }
+    }
+
     public ArrayList<String> primeiroSimpleStatement(){
         ArrayList<String> listaPrimeiro = new ArrayList<>();
         listaPrimeiro.add("read");
