@@ -203,12 +203,12 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoRead(){
-        if(token.getLexema() == "("){
+        if(token.getLexema().equals("(")){
             proximo_token();
             expressionRead();
-            if(token.getLexema() == ")"){
+            if(token.getLexema().equals(")")){
                 proximo_token();
-                if(token.getLexema() == ";"){
+                if(token.getLexema().equals(";")){
                     proximo_token();
                 }else{
                     System.out.println("ERRO");
@@ -223,17 +223,17 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void expressionRead(){
-        if(token.getTipo() == "IDE"){
+        if(token.getTipo().equals("IDE")){
             proximo_token();
-            if(token.getLexema() == "["){
+            if(token.getLexema().equals("[")){
                 proximo_token();
                 //Array ou matriz
                 moreReadings();
-            }else if(token.getLexema() == "."){
+            }else if(token.getLexema().equals(".")){
                 proximo_token();
                 //struct
                 moreReadings();
-            }else if(token.getLexema() == ","){
+            }else if(token.getLexema().equals(",")){
                 moreReadings();
             }else{
                 System.out.println("ERRO");
@@ -244,7 +244,7 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void moreReadings(){
-        if(token.getLexema() == ","){
+        if(token.getLexema().equals(",")){
             proximo_token();
             expressionRead();
         }else if(token == null){
@@ -255,12 +255,12 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoPrint(){
-        if(token.getLexema() == "("){
+        if(token.getLexema().equals("(")){
             proximo_token();
             expressionPrint();
-            if(token.getLexema() == ")"){
+            if(token.getLexema().equals(")")){
                 proximo_token();
-                if(token.getLexema() == ";"){
+                if(token.getLexema().equals(";")){
                     proximo_token();
                 }else{
                     System.out.println("ERRO");
@@ -275,22 +275,22 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void expressionPrint(){
-        if(token.getTipo() == "IDE"){
+        if(token.getTipo().equals("IDE")){
             proximo_token();
-            if(token.getLexema() == "["){
+            if(token.getLexema().equals("[")){
                 proximo_token();
                 //Array ou matriz
                 moreExpressions();
-            }else if(token.getLexema() == "."){
+            }else if(token.getLexema().equals(".")){
                 proximo_token();
                 //struct
                 moreExpressions();
-            }else if(token.getLexema() == ","){
+            }else if(token.getLexema().equals(",")){
                 moreExpressions();
             }else{
                 System.out.println("ERRO");
             }
-        }else if(token.getTipo() == "CAD"){
+        }else if(token.getTipo().equals("CAD")){
             proximo_token();
             moreExpressions();
         }else{
@@ -299,7 +299,7 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void moreExpressions(){
-        if(token.getLexema() == ","){
+        if(token.getLexema().equals(",")){
             proximo_token();
             expressionPrint();
         }else if(token == null){
@@ -310,12 +310,12 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoDeclProcedure(){
-        if(token.getTipo() == "IDE"){
+        if(token.getTipo().equals("IDE")){
             proximo_token();
-            if(token.getLexema() == "("){
+            if(token.getLexema().equals("(")){
                 proximo_token();
                 procedimentoParams();
-                if(token.getLexema() == ")"){
+                if(token.getLexema().equals(")")){
                     proximo_token();
                     procedimentoBlockProc();
                 }else{
@@ -330,10 +330,10 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoBlockProc(){
-        if(token.getLexema() == "{"){
+        if(token.getLexema().equals("{")){
             proximo_token();
             statementsList();
-            if(token.getLexema() == "}"){
+            if(token.getLexema().equals("}")){
                 proximo_token();
             }else{
                 System.out.println("ERRO");
@@ -346,12 +346,12 @@ public class ControllerAnalisadorSintatico {
     public void procedimentoDeclFunction(){
         if(primeiroType(token)){
             proximo_token();
-            if(token.getTipo() == "IDE"){
+            if(token.getTipo().equals("IDE")){
                 proximo_token();
-                if(token.getLexema() == "("){
+                if(token.getLexema().equals("(")){
                     proximo_token();
                     procedimentoParams();
-                    if(token.getLexema() == ")"){
+                    if(token.getLexema().equals(")")){
                         proximo_token();
                         procedimentoBlockFunc();
                     }else{
@@ -369,11 +369,11 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoBlockFunc(){
-        if(token.getLexema() == "{"){
+        if(token.getLexema().equals("{")){
             proximo_token();
             statementsList();
             procedimentoReturn();
-            if(token.getLexema() == "}"){
+            if(token.getLexema().equals("}")){
                 proximo_token();
             }else{
                 System.out.println("ERRO");
@@ -385,20 +385,20 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoReturn(){
         
-        if(token.getLexema() == "return"){
+        if(token.getLexema().equals("return")){
             proximo_token();
-            if(token.getTipo() == "IDE"){
+            if(token.getTipo().equals("IDE")){
                 proximo_token();
-            }else if(token.getTipo() == "CAD"){
+            }else if(token.getTipo().equals("CAD")){
                 proximo_token();
-            }else if(token.getTipo() == "NRO"){
+            }else if(token.getTipo().equals("NRO")){
                 proximo_token();
             }else if(true/*chamada de função*/){
                proximo_token();
-            }else if(token.getLexema() != ";"){
+            }else if(!token.getLexema().equals(";")){
                 System.out.println("ERRO");
             }
-            if(token.getLexema() == ";"){
+            if(token.getLexema().equals(";")){
                 proximo_token();
             }
         }else{
@@ -410,14 +410,14 @@ public class ControllerAnalisadorSintatico {
         if(primeiroType(token)){
             proximo_token();
             procedimentoParam();
-            if(token.getLexema() == ","){
+            if(token.getLexema().equals(",")){
                 procedimentoParams();
             }
         }
     }
 
     public void procedimentoParam(){
-        if(token.getTipo() == "IDE"){
+        if(token.getTipo().equals("IDE")){
             proximo_token();
         }else{
             System.out.println("ERRO");
@@ -425,17 +425,17 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoVarDecl(){
-        if(token.getLexema() == "var"){
+        if(token.getLexema().equals("var")){
             proximo_token();
-            if(token.getLexema() == "{"){
+            if(token.getLexema().equals("{")){
                 proximo_token();
                 procedimentoTypedVariable();
             }else{
                 System.out.println("ERRO");
             }
-        }else if(token.getLexema() == "const"){
+        }else if(token.getLexema().equals("const")){
             proximo_token();
-            if(token.getLexema() == "{"){
+            if(token.getLexema().equals("{")){
                 proximo_token();
                 procedimentoTypedConst();
             }else{
@@ -451,7 +451,7 @@ public class ControllerAnalisadorSintatico {
         if(primeiroType(token)){
             proximo_token();
             procedimentoVariables();
-            if(token.getLexema() == ";"){
+            if(token.getLexema().equals(";")){
                 proximo_token();
                 if(primeiroType(token)){
                     procedimentoTypedVariable();
@@ -465,16 +465,16 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoVariables(){
-        if(token.getTipo() == "IDE"){
-            if(token.getLexema() == "["){
+        if(token.getTipo().equals("IDE")){
+            if(token.getLexema().equals("[")){
                 proximo_token();
                 procedimentoArrayUsage();
-                if(token.getLexema() == "="){
+                if(token.getLexema().equals("=")){
                     proximo_token();
-                    if(token.getLexema() == "{"){
+                    if(token.getLexema().equals("{")){
                         proximo_token();
                         procedimentoVarArgs();
-                        if(token.getLexema() == "}"){
+                        if(token.getLexema().equals("}")){
                             proximo_token();
                         }else{
                             System.out.println("ERRO");
@@ -483,7 +483,7 @@ public class ControllerAnalisadorSintatico {
                         System.out.println("ERRO");
                     }
                 }
-            }else if(token.getLexema() == "="){
+            }else if(token.getLexema().equals("=")){
 
             }
         }else{
@@ -493,15 +493,15 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoArrayUsage(){
 
-        if(token.getTipo() == "NRO" || token.getTipo() == "IDE" || token.getLexema() == "true" || token.getLexema() == "false"){
+        if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
             proximo_token();
-            if(token.getLexema() == "]"){
+            if(token.getLexema().equals("]")){
                 proximo_token();
-                if(token.getLexema() == "["){
+                if(token.getLexema().equals("[")){
                     proximo_token();
-                    if(token.getTipo() == "NRO" || token.getTipo() == "IDE" || token.getLexema() == "true" || token.getLexema() == "false"){
+                    if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
                         proximo_token();
-                        if(token.getLexema() == "]"){
+                        if(token.getLexema().equals("]")){
                             proximo_token();
                         }
                     }
