@@ -140,7 +140,7 @@ public class ControllerAnalisadorSintatico {
             proximo_token();
             procedimentoDeclProcedure();
         }else if(token.getLexema().equals("typedef")){
-
+            procedimentoStructDecl();
         }else if(token.getLexema().equals("var") || token.getLexema().equals("const")){
             //proximo_token();
             procedimentoVarDecl();
@@ -513,6 +513,17 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoVariables(){
         if(token.getTipo().equals("IDE")){
+            procedimentoVariableDeclarator();
+            if(token.getLexema().equals(",")){
+                procedimentoVariables();
+            }
+        }else{
+            System.out.println("ERRO");
+        }
+    }
+
+    public void procedimentoVariableDeclarator(){
+        if(token.getTipo().equals("IDE")){
             proximo_token();
             if(token.getLexema().equals("[")){
                 proximo_token();
@@ -532,7 +543,31 @@ public class ControllerAnalisadorSintatico {
                     }
                 }
             }else if(token.getLexema().equals("=")){
-
+                proximo_token();
+                if(token.getTipo().equals("IDE")){
+                    Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
+                    if(tokenAux.getLexema().equals(".")){
+                        procedimentoStructUsage();
+                    }else if(tokenAux.getLexema().equals("(")){
+                        procedimentoCallFunc();
+                    }else if(tokenAux.getLexema().equals("local") || tokenAux.getLexema().equals("global")){
+                        proximo_token();
+                        proximo_token();
+                        if(token.getLexema().equals(".")){
+                            proximo_token();
+                            if(token.getTipo().equals("IDE")){
+                                proximo_token();
+                            }else{
+                                System.out.println("ERRO");
+                            }
+                        }else{
+                            System.out.println("ERRO");
+                        }
+                    }
+                }else if(true){
+                    //Terminar
+                    procedimentoVariableInit();
+                }
             }
         }else{
             System.out.println("ERRO");
@@ -579,9 +614,7 @@ public class ControllerAnalisadorSintatico {
     /*public void procedimentoVarArg(){
 
     }
-    public void procedimentoVariableDeclarator(){
-
-    }*/
+    */
 
     public void procedimentoTypedConst(){
         if(primeiroType(token)){
@@ -648,6 +681,7 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoVariableUsage(){
+
         if(token.getTipo().equals("IDE")){
             Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
             if(tokenAux.getLexema().equals(".")){
@@ -721,6 +755,11 @@ public class ControllerAnalisadorSintatico {
                         }
                     }else if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
                         proximo_token();
+                        if(token.getLexema().equals(";")){
+                            proximo_token();
+                        }else{
+                            System.out.println("ERRO");
+                        }
                     }else if(token.getLexema().equals("{")){
                         proximo_token();
                         procedimentoVarArgs();
@@ -730,13 +769,186 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }
+                    }else{
+                        System.out.println("ERRO");
                     }
+                }else{
+                    System.out.println("ERRO");
                 }
             }else if(tokenAux.getLexema().equals("=")){
+                    proximo_token();
+                    proximo_token();
+                    if(true){
+                        //VariableInit
+                        //Colocar ; no final
+                    }else if(token.getTipo().equals("IDE")){
+                        tokenAux = listaTokens.get(indiceTokenAtual + 1);
+                        if(tokenAux.getLexema().equals(".")){
+                            procedimentoStructUsage();
+                            if(token.getLexema().equals(";")){
+                                proximo_token();
+                            }else{
+                                System.out.println("ERRO");
+                            }
+                        }else if(tokenAux.getLexema().equals("(")){
+                            procedimentoCallFunc();
+                            if(token.getLexema().equals(";")){
+                                proximo_token();
+                            }else{
+                                System.out.println("ERRO");
+                            }
+                        }else{
+                            System.out.println("ERRO");
+                        }
 
+                    }else if(token.getLexema().equals("local") || token.getLexema().equals("global")){
+                        proximo_token();
+                        if(token.getLexema().equals(".")){
+                            proximo_token();
+                            if(token.getTipo().equals("IDE")){
+                                proximo_token();
+                                if(token.getLexema().equals(";")){
+                                    proximo_token();
+                                }else{
+                                    System.out.println("ERRO");
+                                }
+                            }else{
+                                System.out.println("ERRO");
+                            }
+                        }else{
+                            System.out.println("ERRO");
+                        }
+                    }else{
+                        System.out.println("ERRO");
+                    }
             }
         }
 
+    }
+
+    public void procedimentoVariableScope(){
+        Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
+        if(token.getLexema().equals("local") || token.getLexema().equals("global")){
+            //Começo VariableScope
+            proximo_token();
+            if(token.getLexema().equals(".")){
+                proximo_token();
+                if(token.getTipo().equals("IDE")){
+                    tokenAux = listaTokens.get(indiceTokenAtual + 1);
+                    if(tokenAux.getLexema().equals("=")){
+                        proximo_token();
+                        proximo_token();
+                        if(token.getTipo().equals("IDE")){
+                            tokenAux = listaTokens.get(indiceTokenAtual + 1);
+                            if(tokenAux.getLexema().equals(";")){
+                                proximo_token();
+                                proximo_token();
+                            }else if(tokenAux.getLexema().equals(".")){
+                                procedimentoStructUsage();
+                            }else if(tokenAux.getLexema().equals("[")){
+                                proximo_token();
+                                proximo_token();
+                                procedimentoArrayUsage();
+                            }else if(tokenAux.getLexema().equals("local") || tokenAux.getLexema().equals("global")){
+                                proximo_token();
+                                proximo_token();
+                                if(token.getLexema().equals(".")){
+                                    proximo_token();
+                                    if(token.getTipo().equals("IDE")){
+                                        proximo_token();
+                                        if(token.getLexema().equals("[")){
+                                            procedimentoArrayUsage();
+                                            if(token.getLexema().equals(";")){
+                                                proximo_token();
+                                            }else{
+                                                System.out.println("ERRO");
+                                            }
+                                        }else if(token.getLexema().equals(";")){
+                                            proximo_token();
+                                        }else{
+                                            System.out.println("ERRO");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }else if(tokenAux.getLexema().equals("[")){
+                        proximo_token();
+                        proximo_token();
+                        procedimentoArrayUsage();
+                        if(token.getLexema().equals("=")){
+                            proximo_token();
+                            if(token.getLexema().equals("local") || token.getLexema().equals("global")){
+                                if(token.getLexema().equals(".")){
+                                    proximo_token();
+                                    if(token.getTipo().equals("IDE")){
+                                        proximo_token();
+                                        if(token.getLexema().equals(";")){
+                                            proximo_token();
+                                        }else{
+                                            System.out.println("ERRO");
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }else if(tokenAux.getLexema().equals(".")){//chamada de variableUsage em VariableScoope
+                        procedimentoVariableUsage();
+                    }
+                }
+
+            }
+        }else if(token.getTipo().equals("IDE")){
+
+            tokenAux = listaTokens.get(indiceTokenAtual + 1);
+            if(tokenAux.getLexema().equals("[")){
+                proximo_token();
+                proximo_token();
+                procedimentoArrayUsage();
+                if(token.getLexema().equals("=")){
+                    proximo_token();
+                    if(token.getLexema().equals("local") || token.getLexema().equals("global")){
+                        proximo_token();
+                        if(token.getLexema().equals(".")) {
+                            proximo_token();
+                            if (token.getTipo().equals("IDE")) {
+                                proximo_token();
+                                if (token.getLexema().equals(";")) {
+                                    proximo_token();
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    System.out.println("ERRO");
+                }
+
+            }else if(tokenAux.getLexema().equals(".")){
+                procedimentoStructUsage();
+                if(token.getLexema().equals("=")){
+                    proximo_token();
+                    if(token.getLexema().equals("local") || token.getLexema().equals("global")){
+                        proximo_token();
+                        if(token.getLexema().equals(".")) {
+                            proximo_token();
+                            if (token.getTipo().equals("IDE")) {
+                                proximo_token();
+                                if (token.getLexema().equals(";")) {
+                                    proximo_token();
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    System.out.println("ERRO");
+                }
+            }else{
+                System.out.println("ERRO");
+            }
+        }
     }
 
     public void procedimentoStructDecl(){
