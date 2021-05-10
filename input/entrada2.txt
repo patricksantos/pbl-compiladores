@@ -1,0 +1,10 @@
+procedure start {  // comeca aqui o programa principal 
+function boolean teste(int teste){
+   return;
+}
+
+procedure teste(){
+
+}
+
+} // fim start
