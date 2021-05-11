@@ -80,11 +80,10 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void program(){
-
         this.statement();
     }
 
-    public void  statement(){
+    public void statement(){
 
         if(this.token.getLexema().equals("{")){
             proximo_token();
@@ -178,7 +177,6 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoWhile(){
-
         if(token.getLexema().equals("(")){
             proximo_token();
             procedimentoExpression();
@@ -194,10 +192,105 @@ public class ControllerAnalisadorSintatico {
         }
     }
 
+//    <Literal> ::= true
+//            | false
+//            | DecimalLiteral
+//            | RealLiteral
+//            | StringLiteral
+//
+//            <Primary> ::= Identifier
+//           | <Literal>
+//
+//    DecimalLiteral = {Digit}+
+//    RealLiteral = {Digit}+'.'{Digit}+
+//    StringLiteral = '"' ( {String Chars} | '\' {Printable} )* '"'
+
     public void procedimentoExpression(){
-        if(token.getLexema().equals("true") || token.getLexema().equals("false")){
+        OrExpression();
+    }
+
+    public void OrExpression(){
+        AndExpression();
+        if(token.getLexema().equals("||") && token.getTipo().equals("LOG")){
             proximo_token();
+            OrExpression();
+        }
+    }
+
+    public void AndExpression(){
+        EqualityExpression();
+        if(token.getLexema().equals("&&") && token.getTipo().equals("LOG")){
+            proximo_token();
+            AndExpression();
+        }
+    }
+
+    public void EqualityExpression(){
+        CompareExpression();
+        if(token.getLexema().equals("==") || token.getLexema().equals("!=") && token.getTipo().equals("REL")){
+            proximo_token();
+            EqualityExpression();
+        }
+    }
+
+    public void CompareExpression(){
+        AddExpression();
+        if(token.getLexema().equals("<") || token.getLexema().equals(">") || token.getLexema().equals("<=") || token.getLexema().equals(">=")){
+            proximo_token();
+            CompareExpression();
+        }
+    }
+
+    public void AddExpression(){
+        MultiplicationExpression();
+        if(token.getLexema().equals("+") || token.getLexema().equals("-")){
+            proximo_token();
+            AddExpression();
+        }
+    }
+
+    public void MultiplicationExpression(){
+        UnaryExpression();
+        if(token.getLexema().equals("*") || token.getLexema().equals("/")){
+            proximo_token();
+            MultiplicationExpression();
+        }
+    }
+
+    public void UnaryExpression(){
+        if(token.getLexema().equals("!")){
+            proximo_token();
+            UnaryExpression();
         }else{
+            ObjectExpression();
+        }
+    }
+
+    public void ObjectExpression(){
+        if(token.getLexema().equals("true") || token.getLexema().equals("false")){
+            MethodExpression();
+            //! <PrimaryArrayCreationExpression> ::= <>!Empty
+        }else{
+            System.out.println("ERRO");
+        }
+    }
+    public void MethodExpression(){
+        PrimaryExpression();
+    }
+
+    public void PrimaryExpression(){
+        if(token.getLexema().equals("true") || token.getLexema().equals("false") ||
+                token.getTipo().equals("NRO") || token.getTipo().equals("CAD"))
+        {
+            proximo_token();
+        }else if(token.getLexema().equals("(")){
+            proximo_token();
+            procedimentoExpression();
+            if(token.getLexema().equals(")")){
+                proximo_token();
+            }
+        }
+        else{
             System.out.println("ERRO");
         }
     }
