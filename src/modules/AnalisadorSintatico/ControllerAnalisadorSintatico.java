@@ -165,14 +165,17 @@ public class ControllerAnalisadorSintatico {
                         statement();
                     }
                 }else{
-                    System.out.println("ERRO if sem then ");
+                    ErroSintatico erro = new ErroSintatico(token.getLinha(),"then",token.getLexema());
+                    System.out.println(erro.info());
                 }
             }
             else{
-                System.out.println("ERRO if sem )");
+                ErroSintatico erro = new ErroSintatico(token.getLinha(),")",token.getLexema());
+                System.out.println(erro.info());
             }
         }else{
-            System.out.println("ERRO if sem (");
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"(",token.getLexema());
+            System.out.println(erro.info());
         }
     }
 
@@ -185,10 +188,12 @@ public class ControllerAnalisadorSintatico {
                 statement();
             }
             else{
-                System.out.println("ERRO");
+                ErroSintatico erro = new ErroSintatico(token.getLinha(),")",token.getLexema());
+                System.out.println(erro.info());
             }
         }else{
-            System.out.println("ERRO");
+            ErroSintatico erro = new ErroSintatico(token.getLinha(),"(",token.getLexema());
+            System.out.println(erro.info());
         }
     }
 
@@ -340,9 +345,9 @@ public class ControllerAnalisadorSintatico {
         if(token.getLexema().equals(",")){
             proximo_token();
             expressionRead();
-        }else if(token == null){
+        }/*else if(token == null){
             //referente ao <> da gramatica
-        }else{
+        }*/else{
             System.out.println("ERRO");
         }
     }
