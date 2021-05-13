@@ -1,5 +1,8 @@
 package domain.entities;
 
+import domain.error.IError;
+import modules.AnalisadorSintatico.usecases.ErroSintatico;
+
 /**
  * Classe que representa um token
  * */
@@ -7,17 +10,18 @@ public class Token {
     private String tipo; //Tipo de token identificado
     private String lexema; //lexema do token
     private String linha; // Número da linha onde ocorreu o token
-    private boolean erro; // Indica se é um token de erro
+    private boolean isError; // Indica se é um token de erro
+    private IError error; // Indica se é um token de erro
 
     /**
      * @param tipo tipo do token que foi identificado
      * @param lexema lexema do token ou id ta tabela de símbolo se for um token identificador
-     * @param erro identifica se é um token de erro
+     * @param isError identifica se é um token de erro
      * */
-    public Token(String tipo, String lexema, boolean erro){
+    public Token(String tipo, String lexema, boolean isError){
         this.lexema = lexema;
         this.tipo = tipo;
-        this.erro = erro;
+        this.isError = isError;
     }
 
     /**
@@ -50,17 +54,21 @@ public class Token {
 
     }
     /**
-     * @param erro indica se o token é de erro ou não
+     * @param error indica se o token é de erro ou não
      * */
-    public void setErro(boolean erro){
-        this.erro = erro;
+    public void setError(IError error){
+        this.error = error;
+    }
+
+    public IError getError() {
+        return this.error;
     }
 
     /**
      * @return true caso seja um token de erro, e false caso o contrario.
      * */
-    public boolean getError(){
-        return this.erro;
+    public boolean isError(){
+        return this.isError;
     }
 
     /**

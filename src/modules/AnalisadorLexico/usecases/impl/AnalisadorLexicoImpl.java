@@ -104,7 +104,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
                     setLinhaAtual(delimitadorComentario.getLinhaFinal());
                     setPosicao(delimitadorComentario.getPosicaoFinal());
                     //Caso exista algum comentário mal formado, um erro é adicionado a lista de erros.
-                    if(resultadoDelimitadorComentario.getError()){
+                    if(resultadoDelimitadorComentario.isError()){
                         resultadoDelimitadorComentario.setLinha(l);
                         this.erros.add(resultadoDelimitadorComentario);
                         break;
@@ -147,7 +147,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
             //Adiciona no token o número da linha que o token estava no arquivo de entrada.
             resultadoOperadoresLogicos.setLinha(this.linhaAtual);
 
-            if(resultadoOperadoresLogicos.getError()){
+            if(resultadoOperadoresLogicos.isError()){
                 this.erros.add(resultadoOperadoresLogicos);
             }else {
                 this.tokens.add(resultadoOperadoresLogicos);
@@ -171,7 +171,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         else{
             setPosicao(operadoresAritmeticos.getPosicaoFinal());
             resultadoOperadoresAritmeticos.setLinha(this.linhaAtual);
-            if(resultadoOperadoresAritmeticos.getError()){
+            if(resultadoOperadoresAritmeticos.isError()){
                 this.erros.add(resultadoOperadoresAritmeticos);
             }else{
                 this.tokens.add(resultadoOperadoresAritmeticos);
@@ -193,7 +193,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         else{
             setPosicao(delimitadores.getPosicaoFinal());
             resultadoDelimitadores.setLinha(this.linhaAtual);
-            if(resultadoDelimitadores.getError()){
+            if(resultadoDelimitadores.isError()){
                 this.erros.add(resultadoDelimitadores);
             }else{
                 this.tokens.add(resultadoDelimitadores);
@@ -216,7 +216,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         else{
             setPosicao(operadoresRelacionais.getPosicaoFinal());
             resultadoOperadoresRelacionais.setLinha(this.linhaAtual);
-            if(resultadoOperadoresRelacionais.getError()){
+            if(resultadoOperadoresRelacionais.isError()){
                 this.erros.add(resultadoOperadoresRelacionais);
             }else{
                 this.tokens.add(resultadoOperadoresRelacionais);
@@ -239,7 +239,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         else{
             setPosicao(cadeiasCaracteres.getPosicaoFinal());
             resultadoCadeiasCaracteres.setLinha(this.linhaAtual);
-            if(resultadoCadeiasCaracteres.getError()){
+            if(resultadoCadeiasCaracteres.isError()){
                 this.erros.add(resultadoCadeiasCaracteres);
             }else{
                 this.tokens.add(resultadoCadeiasCaracteres);
@@ -262,7 +262,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         else{
             setPosicao(palavrasReservadasIdentificadores.getPosicaoFinal());
             resultadoPalavrasReservadasIdentificadores.setLinha(this.linhaAtual);
-            if(resultadoPalavrasReservadasIdentificadores.getError()){
+            if(resultadoPalavrasReservadasIdentificadores.isError()){
                 this.erros.add(resultadoPalavrasReservadasIdentificadores);
             }else{
                 this.tokens.add(resultadoPalavrasReservadasIdentificadores);
@@ -287,7 +287,7 @@ public class AnalisadorLexicoImpl implements IAnalisadorLexico {
         else{
             setPosicao(numeros.getPosicaoFinal());
             resultadoNumeros.setLinha(this.linhaAtual);
-            if(resultadoNumeros.getError()){
+            if(resultadoNumeros.isError()){
                 this.erros.add(resultadoNumeros);
             }else{
                 this.tokens.add(resultadoNumeros);

@@ -1,8 +1,7 @@
 package domain.error;
 
-import java.io.IOException;
-
-public class IError extends IOException {
+public interface IError  {
+    public String info();
 }
 
 

@@ -9,6 +9,7 @@ public class ControllerAnalisadorSintatico {
 
     public Token token;
     public ArrayList<Token> listaTokens;
+    public ArrayList<Token> listaTokensAuxilixar;
     public int indiceTokenAtual = 0;
     public Token tokenFimArquivo;
     public ArrayList<ErroSintatico> erros;
@@ -28,9 +29,11 @@ public class ControllerAnalisadorSintatico {
 
         if(this.indiceTokenAtual < listaTokens.size()){
             this.token = listaTokens.get(this.indiceTokenAtual);
+            listaTokensAuxilixar.add(token);
         }else{
             this.listaTokens.add(tokenFimArquivo);
             this.token = listaTokens.get(this.indiceTokenAtual);
+            listaTokensAuxilixar.add(this.token);
         }
     }
 
@@ -51,21 +54,33 @@ public class ControllerAnalisadorSintatico {
                         if(this.token.getLexema().equals("}")){
                             proximo_token();
                         }else{
-                            ErroSintatico erro = new ErroSintatico(token.getLinha(),"}",token.getLexema());
-                            System.out.println(erro.info());
+                            ErroSintatico error = new ErroSintatico(token.getLinha(),"}",token.getLexema());
+                            Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+                            token.setError(error);
+                            listaTokensAuxilixar.add(token);
+                            System.out.println(error.info());
                         }
                     }
                 }else{
-                    ErroSintatico erro = new ErroSintatico(token.getLinha(),"{",token.getLexema());
-                    System.out.println(erro.info());
+                    ErroSintatico error = new ErroSintatico(token.getLinha(),"{",token.getLexema());
+                    Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+                    token.setError(error);
+                    listaTokensAuxilixar.add(token);
+                    System.out.println(error.info());
                 }
             }else{
-                ErroSintatico erro = new ErroSintatico(token.getLinha(),"start",token.getLexema());
-                System.out.println(erro.info());
+                ErroSintatico error = new ErroSintatico(token.getLinha(),"start",token.getLexema());
+                Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+                token.setError(error);
+                listaTokensAuxilixar.add(token);
+                System.out.println(error.info());
             }
         }else {
-            ErroSintatico erro = new ErroSintatico(token.getLinha(),"procedure",token.getLexema());
-            System.out.println(erro.info());
+            ErroSintatico error = new ErroSintatico(token.getLinha(),"procedure",token.getLexema());
+            Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+            token.setError(error);
+            listaTokensAuxilixar.add(token);
+            System.out.println(error.info());
         }
     }
 

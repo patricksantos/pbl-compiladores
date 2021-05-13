@@ -1,6 +1,6 @@
 package domain.error;
 
-public class Erro extends IError {
+public class Erro implements IError {
 
     private String tipo;
     private String lexema;
@@ -11,5 +11,8 @@ public class Erro extends IError {
         this.tipo = tipo;
     }
 
-
+    @Override
+    public String info() {
+        return null;
+    }
 }
