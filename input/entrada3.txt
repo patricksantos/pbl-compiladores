@@ -1,0 +1,8 @@
+procedure start {  // comeca aqui o programa principal 
+
+typedef struct {
+    var { int teste, teste; real roberto; }
+    const {int constante = 10;}
+} identificador;
+
+} // fim start
