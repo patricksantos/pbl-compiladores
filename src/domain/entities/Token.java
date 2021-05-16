@@ -12,6 +12,7 @@ public class Token {
     private String linha; // Número da linha onde ocorreu o token
     private boolean isError; // Indica se é um token de erro
     private IError error; // Indica se é um token de erro
+    private boolean erroSintatico;
 
     /**
      * @param tipo tipo do token que foi identificado
@@ -22,6 +23,7 @@ public class Token {
         this.lexema = lexema;
         this.tipo = tipo;
         this.isError = isError;
+        this.erroSintatico = false;
     }
 
     /**
@@ -71,11 +73,19 @@ public class Token {
         return this.isError;
     }
 
+    public void setErroSintatico(boolean erroSin){
+        this.erroSintatico = erroSin;
+    }
+
     /**
      * @return a forma que o token será escrito no arquivo
      * */
     public String info(){
-        return this.linha + " " + this.tipo + " " + this.lexema;
+        if(erroSintatico){
+            return this.error.info();
+        }else {
+            return this.linha + " " + this.tipo + " " + this.lexema;
+        }
     }
 
     public String getLinha(){

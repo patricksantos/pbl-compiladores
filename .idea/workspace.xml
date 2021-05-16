@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/entrada4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domain/entities/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/entities/Token.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,20 +43,20 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores" />
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src\modules\AnalisadorLexico\usecases\impl" />
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores\input" />
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores" />
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores\output" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="modules.AnalisadorLexico.usecases.impl.automatos" />
       <recent name="modules.AnalisadorLexico.repositories.impl" />
       <recent name="modules.AnalisadorLexico.entities.entities" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores\input" />
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores" />
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores\output" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores" />
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src\modules\AnalisadorLexico\usecases\impl" />
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src" />
     </key>
   </component>
   <component name="RunManager" selected="Application.main">
@@ -209,6 +207,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="476" y="249" width="526" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1621132089826">
+      <screen x="0" y="0" width="1360" height="728" />
+    </state>
+    <state x="476" y="249" width="526" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1360.728@0.0.1360.728" timestamp="1621132089826" />
     <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1621123414696">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
@@ -225,9 +227,9 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1621123414696" />
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1621105911438">
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1621131449614">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1621105911438" />
+    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1621131449614" />
   </component>
 </project>
