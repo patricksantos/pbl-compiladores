@@ -62,33 +62,6 @@ public class ControllerAnalisadorSintatico {
         this.controleErro = true;
     }
 
-    public void error(List<Token> symbSyncronization) {
-        Token lookahead = listaTokens.get(this.indiceTokenAtual + 1);
-        //procura os tokens de sincronização para poder continuar a verificação
-        while(true) {
-            if(token.getTipo().equals("IDE")) {
-                if(symbSyncronization.contains( new Token("IDE"," ", true)))break;
-            }
-            if(token.getTipo().equals("NRO")) { // lookahead.tag == Tag.NRO
-                if(symbSyncronization.contains(new Token("NRO"," ",  true)))break;
-            }
-            if(token.getTipo().equals("CAD")){
-                if(symbSyncronization.contains(new Token( "CAD"," ", true)))break;
-            }
-            if(symbSyncronization.contains(lookahead)) {
-                //achar o token com base somente na sua tag
-                int aux  = symbSyncronization.indexOf(lookahead);
-                if(symbSyncronization.get(aux).equals(" "))break;
-                    //achar o token com base somente na sua tag e lexeme
-                else {
-                    if(lookahead.getLexema().equals(symbSyncronization.get(aux).getLexema()))break;
-                }
-            }
-            proximo_token();
-            lookahead = listaTokens.get(this.indiceTokenAtual + 1);
-        }
-    }
-
     public void init(){
 
         if(this.token.getLexema().equals("procedure")){

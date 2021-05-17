@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +43,11 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores" />
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src\modules\AnalisadorLexico\usecases\impl" />
+      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores\input" />
       <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\pbl-compiladores" />
@@ -51,11 +57,6 @@
       <recent name="modules.AnalisadorLexico.usecases.impl.automatos" />
       <recent name="modules.AnalisadorLexico.repositories.impl" />
       <recent name="modules.AnalisadorLexico.entities.entities" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores" />
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src\modules\AnalisadorLexico\usecases\impl" />
-      <recent name="C:\Users\luizj\Desktop\Faculdade\PBL\java\pbl-compiladores\src" />
     </key>
   </component>
   <component name="RunManager" selected="Application.main">
