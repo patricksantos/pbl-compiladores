@@ -148,7 +148,7 @@ public class ControllerAnalisadorSintatico {
         }else if(primeiroSimpleStatement().contains(token.getLexema()) || this.token.getTipo().equals("IDE")){
             simpleStatement();
         }else{
-            this.configurarErro(token,"{,IDE,");
+            this.configurarErro(token,"{,IDE,procedure,function,if,while,read,print,typedef,var,const,local,global");
             proximo_token();
         }
     }

@@ -1,7 +1,7 @@
 procedure start {  // comeca aqui o programa principal 
 if(algo == false) then {
    teste = 10;
-}else if(algo == true)then {
+}else if(algo == true) then {
    teste = 5+4;
 }else{
    teste = 2;

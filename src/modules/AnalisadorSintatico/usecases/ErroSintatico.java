@@ -29,6 +29,6 @@ public class ErroSintatico implements IError {
 
     @Override
     public String info(){
-        return this.getLinhaSintatico() + " " + this.getLexemaObtido() + " Esperava " + this.getLexemaEsperado();
+        return  this.getLinhaSintatico() + " Erro Sintatico: recebeu " + this.getLexemaObtido() + " e esperava " + this.getLexemaEsperado();
     }
 }
