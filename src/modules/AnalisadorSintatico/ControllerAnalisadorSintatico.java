@@ -25,9 +25,9 @@ public class ControllerAnalisadorSintatico {
         this.listaTokens.add(tokenFimArquivo);
         this.erros = new ArrayList<>();
         this.controleErro = false;
-        for(Token aux: listaTokens){
+        /*for(Token aux: listaTokens){
             System.out.println(aux.info());
-        }
+        }*/
         this.init();
 
         return this.listaTokensAuxilixar;
@@ -703,6 +703,8 @@ public class ControllerAnalisadorSintatico {
                 proximo_token();
             }else if(token.getTipo().equals("NRO")){
                 proximo_token();
+            }else if(token.getLexema().equals("true") || token.getLexema().equals("false")){
+                proximo_token();
             }else if(!token.getLexema().equals(";")){
                 this.configurarErro(token,";,IDE,CAD,NRO");
                 //ErroSintatico erro = new ErroSintatico(token.getLinha(),";",token.getLexema());
@@ -725,6 +727,7 @@ public class ControllerAnalisadorSintatico {
             proximo_token();
             procedimentoParam();
             if(token.getLexema().equals(",")){
+                proximo_token();
                 procedimentoParams();
             }
         }else if(token.getLexema().equals(")")){
@@ -771,9 +774,10 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoArgs(){
-        if(token.getTipo().equals("NRO") || token.getTipo().equals("NRO") || token.getLexema().equals("true") || token.getLexema().equals("false")){
+        if(token.getTipo().equals("IDE") || token.getTipo().equals("NRO") || token.getLexema().equals("true") || token.getLexema().equals("false")){
             procedimentoArg();
             if(token.getLexema().equals(",")){
+                proximo_token();
                 procedimentoArgs();
             }
         }
@@ -1380,7 +1384,7 @@ public class ControllerAnalisadorSintatico {
                             }
                         }else if(primeiroOperadores(tokenAux)){
                             procedimentoVariableInit();
-                            if(token.getTipo().equals(";")){
+                            if(token.getLexema().equals(";")){
                                 proximo_token();
                             }else{
                                 this.configurarErro(token,";");

@@ -1,0 +1,38 @@
+procedure start{
+// Atribuição a variável de array
+a[1] = b;
+
+// Atribuição a variável de matriz
+a[2][1] = 4;
+
+// Atribuição a variável de array por uma variável de struct
+a[1] = Pessoa.idade;
+
+// Atribuição a variável de matriz por uma variável de struct
+b[0][1] = Pessoa.cpf;
+
+// Atribuição a variável de struct por uma variável de array
+Pessoa.a = a[0];
+
+// Atribuição a variável de struct por uma variável de matriz
+Pessoa.nome = b[0][2];
+
+a[0] = b[0];
+a[1] = c[0][2];
+
+c[0][1] = c[1][0];
+c[0][1] = d[7];
+
+a = local.c;
+c[0] = local.a; 
+Pessoa.a = local.h; 
+
+local.a = c[0];
+global.b = Pessoa.a;
+
+const {
+    int a = 1;
+    string b = "d";
+}
+
+}

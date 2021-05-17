@@ -1,0 +1,45 @@
+procedure start {
+
+// Unica declaração unica linha
+var { int a; }
+
+// Multipla atribuições unica linha
+var { int a=2, b=3, c=a; }
+
+// Multiplas declarações unica linha
+var { int a; string b; real c; } 
+
+// Multiplas declaração multi linha
+const { 
+    int a = 1; 
+    string b = "casa"; 
+    real c = 2.7; 
+} 
+
+// Multiplas declarações e atribuições mista multi linha
+var { 
+    int a, b, c;
+    string h = "asd", d="casaa";
+    real b, n=1.2;
+    boolean t = false, y;
+}
+
+// Declaração recebendo uma outra variável
+var { int a = b; }
+
+// Declaração recebendo retorno de função sem parâmetros 
+var { int a = fun(); }
+
+// Declaração recebendo retorno de função com parâmetros
+var { int a = fun (1, b, 3); }
+
+// Declarações recebendo mais de uma variavel com mais de uma função
+var { 
+    int a = fun (1, b, 3);
+    string b = fun("oi'"), c = novaFun ();
+}
+
+// Declaração recebendo variavel de uma struct
+var { int a = Pessoa.idade; }
+
+}
