@@ -13,7 +13,7 @@ public class EscritaArquivos implements IEscritaArquivos {
 
     private ArrayList<Token> tokens;//Lista de tokens que irão ser escritos no arquivo de saida
     private String diretorio; //diretorio onde irá ficar os arquivos de saida
-
+    private boolean erroSintatico;
     /**
      * @param tokens uma lista de tokens que foram identificados em 1 arquivo
      * */
@@ -56,13 +56,16 @@ public class EscritaArquivos implements IEscritaArquivos {
 
         //Escreve os tokens no arquivo de saida
         for(Token token : tokens){
+            if(token.getErroSintatico()){
+                this.erroSintatico = true;
+            }
             escrever.writeBytes(token.info());
             escrever.writeChars("\n");
         }
 
         escrever.writeChars("\n");
         //Mensagem de sucesso caso não tenha nenhum erro no arquivo de entrada que foi lido
-        if(erros.size() == 0){
+        if(erros.size() == 0 || (!erroSintatico)){
             escrever.writeBytes("Análise feita com sucesso, nenhum erro foi encontrado.");
         }
         //Caso tenha, escreve os erros no arquivo de saida

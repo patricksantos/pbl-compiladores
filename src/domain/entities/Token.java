@@ -77,6 +77,10 @@ public class Token {
         this.erroSintatico = erroSin;
     }
 
+    public boolean getErroSintatico(){
+        return this.erroSintatico;
+    }
+
     /**
      * @return a forma que o token será escrito no arquivo
      * */

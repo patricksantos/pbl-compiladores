@@ -774,7 +774,7 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoArgs(){
-        if(token.getTipo().equals("IDE") || token.getTipo().equals("NRO") || token.getLexema().equals("true") || token.getLexema().equals("false")){
+        if(token.getTipo().equals("IDE") || token.getTipo().equals("NRO") || token.getLexema().equals("true") || token.getLexema().equals("false") || token.getTipo().equals("CAD")){
             procedimentoArg();
             if(token.getLexema().equals(",")){
                 proximo_token();
@@ -947,9 +947,12 @@ public class ControllerAnalisadorSintatico {
                         procedimentoCallFunc();
                     }else if(primeiroOperadores(tokenAux)){
                         procedimentoVariableInit();
+                    }else if(tokenAux.getLexema().equals(";")){
+                        proximo_token();
+                        //proximo_token();
                     }else{
                         proximo_token();
-                        this.configurarErro(token,"(,&&,||,/,*,-,--,+,++,>,>=,<,<=,==,!,!=,=,.");
+                        this.configurarErro(token,"(,&&,||,/,*,-,--,+,++,>,>=,<,<=,==,!,!=,=,.,");
                         //ErroSintatico erro = new ErroSintatico(token.getLinha(),"(,.,&,|,/,*,-,+,>,<,=,!",token.getLexema());
                         //System.out.println(erro.info());
                         proximo_token();
@@ -1026,6 +1029,7 @@ public class ControllerAnalisadorSintatico {
                 || token.getTipo().equals("NRO") || token.getTipo().equals("CAD")){
             proximo_token();
             if(token.getLexema().equals(",")){
+                proximo_token();
                 procedimentoVarArgs();
             }
 
@@ -1177,9 +1181,12 @@ public class ControllerAnalisadorSintatico {
                                 //System.out.println(erro.info());
                                 proximo_token();
                             }
+                        }else if(tokenAux.getLexema().equals(";")){
+                            proximo_token();
+                            proximo_token();
                         }else{
                             proximo_token();
-                            this.configurarErro(token,"(,&&,||,/,*,-,--,+,++,>,>=,<,<=,==,!,!=,=,.");
+                            this.configurarErro(token,"(,&&,||,/,*,-,--,+,++,>,>=,<,<=,==,!,!=,=,.,;");
                             //ErroSintatico erro = new ErroSintatico(token.getLinha(),"(,.,&,|,/,*,-,+,>,<,=,!",token.getLexema());
                             //System.out.println(erro.info());
                             proximo_token();
@@ -1266,6 +1273,9 @@ public class ControllerAnalisadorSintatico {
                                 //System.out.println(erro.info());
                                 proximo_token();
                             }
+                        }else if(tokenAux.getLexema().equals(";")){
+                            proximo_token();
+                            proximo_token();
                         }else{
                             proximo_token();
                             this.configurarErro(token,".,[");
@@ -1556,6 +1566,9 @@ public class ControllerAnalisadorSintatico {
 
                     }else if(tokenAux.getLexema().equals(".") || tokenAux.getLexema().equals("[")){//chamada de variableUsage em VariableScoope
                         procedimentoVariableUsage();
+                    }else if(tokenAux.getLexema().equals(";")){
+                        proximo_token();
+                        proximo_token();
                     }else{
                         proximo_token();
                         this.configurarErro(token,"=,[,.");

@@ -1,0 +1,22 @@
+procedure start {
+// Declaração de array com atribuição
+var { int a[2] = {2, 3}; }
+
+// Declaração de multiplos arrays de mesmo tipo com atribuição
+var { int a[2] = {2, 3}, b[3] = {1, 2, 3}; }
+
+// Declaração de multiplos arrays com atribuição
+var { 
+    int a[2] = {2, 3}, b[3] = {1, 2, 3};
+    string c[2] = {"oi", "tchau"};
+}
+
+// Declaração de array sem atribuição
+var { int a[8]; }
+
+// Declaração de multiplos arrays sem atribuição
+var { 
+    int a[2], b[3];
+    string c[2];
+}
+}
