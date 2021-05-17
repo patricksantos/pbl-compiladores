@@ -1,5 +1,5 @@
 procedure start {  // comeca aqui o programa principal 
-function boolean teste(int teste){
+function boolean teste(int teste1){
    return;
 }
 

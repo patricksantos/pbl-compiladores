@@ -1,10 +1,14 @@
 procedure start {  // comeca aqui o programa principal 
-if(true) then {
-
+if(algo == false) then {
+   teste = 10;
+}else if(algo == true) {
+   teste = 5+4;
+}else{
+   teste = 2;
 }
 
-while(false){
-
+while(isto < aquilo){
+   figo[0] = 7;
 }
 
 } // fim start
