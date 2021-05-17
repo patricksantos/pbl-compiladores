@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pbl-compiladores/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Saida4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/entities/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/entities/Token.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,17 +59,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.main">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AnalisadorLexicoImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="modules.AnalisadorLexico.usecases.impl.AnalisadorLexicoImpl" />
       <module name="pbl-compiladores" />
@@ -114,7 +96,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -142,6 +124,7 @@
       <workItem from="1615733313321" duration="5790000" />
       <workItem from="1615935099458" duration="267000" />
       <workItem from="1620871321362" duration="2079000" />
+      <workItem from="1621277199765" duration="2434000" />
     </task>
     <task id="LOCAL-00001" summary="novo DelimitadorComentario">
       <created>1614743589555</created>
@@ -196,13 +179,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="novo DelimitadorComentario" />
@@ -211,31 +193,5 @@
     <MESSAGE value="PBL 2.1" />
     <MESSAGE value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
     <option name="LAST_COMMIT_MESSAGE" value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="476" y="249" width="526" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1621132089826">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state x="476" y="249" width="526" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1360.728@0.0.1360.728" timestamp="1621132089826" />
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1621276540582">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1621276540582" />
-    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1621276540581">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1621276540581" />
-    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1621276540581">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1621276540581" />
-    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1621276540582">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1621276540582" />
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1621272698537">
-      <screen x="0" y="0" width="1360" height="728" />
-    </state>
-    <state x="376" y="188" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1621272698537" />
   </component>
 </project>
