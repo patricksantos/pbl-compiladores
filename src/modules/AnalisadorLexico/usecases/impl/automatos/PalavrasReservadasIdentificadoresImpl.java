@@ -93,7 +93,8 @@ public class PalavrasReservadasIdentificadoresImpl implements IPalavrasReservada
                 }
             }
             else {
-                setPosicaoFinal(i + 1);
+                //setPosicaoFinal(i + 1);
+                setPosicaoFinal(i);
                 return new Token("IDE", lexema, false);
             }
         }
