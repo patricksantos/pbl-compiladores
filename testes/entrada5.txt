@@ -1,3 +1,0 @@
-procedure start {  // comeca aqui o programa principal 
- local.teste1 = 10;
-} // fim start

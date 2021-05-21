@@ -20,8 +20,12 @@ public class ControllerAnalisadorSintatico {
         this.indiceTokenAtual = 0;
         this.listaTokens = tokens;
         this.listaTokensAuxilixar = new ArrayList<>();
-        this.token = tokens.get(this.indiceTokenAtual);
         this.tokenFimArquivo = new Token("$","EOF",false);
+        if(tokens.size() != 0){
+            this.token = tokens.get(this.indiceTokenAtual);
+        }else{
+            this.token = tokenFimArquivo;
+        }
         this.tokenFimArquivo.setLinha(00);
         this.listaTokens.add(tokenFimArquivo);
         this.erros = new ArrayList<>();
@@ -61,7 +65,78 @@ public class ControllerAnalisadorSintatico {
         System.out.println(error.info());
         this.controleErro = true;
     }
+    /*public void init(){
+        if(token.getLexema().equals("function") || token.getLexema().equals("procedure") || token.getTipo().equals("var")
+                || token.getLexema().equals("const") || token.getLexema().equals("typedef") || token.getLexema().equals("local")
+                || token.getLexema().equals("global")){
 
+            if(token.getLexema().equals("procedure") ){
+                Token tokenAux = listaTokens.get(this.indiceTokenAtual+1);
+                if(tokenAux.getLexema().equals("start")){
+                   // if(this.token.getLexema().equals("procedure")){
+                        this.proximo_token();
+                        if(this.token.getLexema().equals("start")){
+                            this.proximo_token();
+
+                            if(this.token.getLexema().equals("{")){
+                                proximo_token();
+                                if(this.token.getLexema().equals("}")){
+                                    proximo_token();
+                                }else{
+                                    this.start();
+                                    if(this.token.getLexema().equals("}")){
+                                        proximo_token();
+                                    }else{
+                                        this.configurarErro(token,"}");
+                                        //ErroSintatico error = new ErroSintatico(token.getLinha(),"}",token.getLexema());
+                                        //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+                                        //token.setError(error);
+                                        //listaTokensAuxilixar.add(token);
+                                        //System.out.println(error.info());
+                                        proximo_token();
+                                    }
+                                }
+                            }else{
+                                this.configurarErro(token,"{");
+                                //ErroSintatico error = new ErroSintatico(token.getLinha(),"{",token.getLexema());
+                                //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+                                //token.setError(error);
+                                //listaTokensAuxilixar.add(token);
+                                //System.out.println(error.info());
+                                proximo_token();
+                            }
+                        }else{
+                            this.configurarErro(token,"start");
+                            //ErroSintatico error = new ErroSintatico(token.getLinha(),"start",token.getLexema());
+                            //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+                            //token.setError(error);
+                            //listaTokensAuxilixar.add(token);
+                            //System.out.println(error.info());
+                            proximo_token();
+                        }
+                    }else{
+                        proximo_token();
+                        procedimentoDeclProcedure();
+                        init();
+                    }
+                    //else {
+                        //this.configurarErro(token,"procedure");
+                        //ErroSintatico error = new ErroSintatico(token.getLinha(),"procedure",token.getLexema());
+                        //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
+                        //token.setError(error);
+                        //listaTokensAuxilixar.add(token);
+                        //System.out.println(error.info());
+                        //proximo_token();
+                    //}
+                //}
+                }else{
+                    simpleStatement();
+                    init();
+                }
+            }
+
+
+    }*/
     public void init(){
 
         if(this.token.getLexema().equals("procedure")){
@@ -590,6 +665,10 @@ public class ControllerAnalisadorSintatico {
                 procedimentoParams();
                 if(token.getLexema().equals(")")){
                     proximo_token();
+                    /**
+                        --procurar identificador na tabela de simbolos,indicar que ele foi declarado e que é um
+                        procedimento, e colocar sues argumentos.
+                     */
                     procedimentoBlockProc();
                 }else{
                     this.configurarErro(token,")");
@@ -640,6 +719,10 @@ public class ControllerAnalisadorSintatico {
                     proximo_token();
                     procedimentoParams();
                     if(token.getLexema().equals(")")){
+                        /**
+                        --procurar identificador na tabela de simbolos,indicar que ele foi declarado e que é uma
+                        função, colocar a quantidade de parametros e os seus tipos e o tipo do retorno.
+                        */
                         proximo_token();
                         procedimentoBlockFunc();
                     }else{
@@ -760,6 +843,9 @@ public class ControllerAnalisadorSintatico {
                 procedimentoArgs();
                 if(token.getLexema().equals(")")){
                     proximo_token();
+                    /* Confere se o identificador é uma função/procedimento, se já foi declarado e se os parametros
+                       estão corretos.
+                    * */
                 }else{
                     this.configurarErro(token,")");
                     proximo_token();
@@ -1005,6 +1091,10 @@ public class ControllerAnalisadorSintatico {
                     if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
                         proximo_token();
                         if(token.getLexema().equals("]")){
+                            /**
+                             * Verificar se é uma matriz, se já foi declarado e se o elemento que está representando o indice está
+                             * correto.
+                             * */
                             proximo_token();
                         }else{
                             this.configurarErro(token,"]");
@@ -1015,6 +1105,10 @@ public class ControllerAnalisadorSintatico {
                         proximo_token();
                     }
                 }
+                /**
+                 * Verificar se é um array, se já foi declarado e se o elemento que está representando o indice está
+                 * correto. Colocar uma forma que se entrou em matriz, não verificar essas condições.
+                * */
             }else{
                 this.configurarErro(token,"]");
                 proximo_token();
@@ -1109,6 +1203,10 @@ public class ControllerAnalisadorSintatico {
             if(token.getLexema().equals(".")){
                 proximo_token();
                 if(token.getTipo().equals("IDE")){
+                    /**
+                     * Verificar se é uma struct, se já foi declarado e se o elemento que o mesmo está acessando faz
+                     * parte da struct.
+                     * */
                     proximo_token();
                 }else{
                     this.configurarErro(token,"IDE");
@@ -1607,6 +1705,9 @@ public class ControllerAnalisadorSintatico {
                     proximo_token();
                     if(token.getTipo().equals("IDE")){
                         proximo_token();
+                        /**
+                         * verifica se o identificador é uma struct, e adicona ela como pai dessa struct
+                         * */
                     }else{
                         this.configurarErro(token,"IDE");
                         //ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE",token.getLexema());
@@ -1622,6 +1723,10 @@ public class ControllerAnalisadorSintatico {
                         if(token.getTipo().equals("IDE")){
                             proximo_token();
                             if(token.getLexema().equals(";")){
+                                /**
+                                 * coloca que o identificador é uma struct, e adicona os seus atributos e indica que
+                                 * já foi declarado.
+                                 * */
                                 proximo_token();
                             }else{
                                 this.configurarErro(token,";");

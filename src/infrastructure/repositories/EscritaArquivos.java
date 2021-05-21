@@ -50,7 +50,7 @@ public class EscritaArquivos implements IEscritaArquivos {
         //Cria o nome do arquivo de saida a partir do nome do arquivo de entrada.
         int auxiliar = nomeArquivo.lastIndexOf("a");
         String arquivoSaida = "Saida" + nomeArquivo.substring(auxiliar + 1);
-
+        this.erroSintatico = false;
         FileOutputStream arquivo = new FileOutputStream(this.diretorio + File.separator + arquivoSaida);
         DataOutputStream escrever = new DataOutputStream(arquivo);
 
@@ -65,7 +65,7 @@ public class EscritaArquivos implements IEscritaArquivos {
 
         escrever.writeChars("\n");
         //Mensagem de sucesso caso não tenha nenhum erro no arquivo de entrada que foi lido
-        if(erros.size() == 0 || (!erroSintatico)){
+        if(erros.size() == 0 && (!erroSintatico)){
             escrever.writeBytes("Análise feita com sucesso, nenhum erro foi encontrado.");
         }
         //Caso tenha, escreve os erros no arquivo de saida
