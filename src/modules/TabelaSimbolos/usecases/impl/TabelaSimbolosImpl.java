@@ -10,7 +10,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
 
     //HashMap<String, String> tabelaSimbolos;
     HashMap<Integer, IIdentificador> tabelaSimbolos;
-
+    int a = 1;
     public TabelaSimbolosImpl() { // Construtor
         //this.tabelaSimbolos =  new HashMap<String, String>();
         this.tabelaSimbolos =  new HashMap<Integer, IIdentificador>();
@@ -41,7 +41,6 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
     }*/
     public ArrayList<Token> getTokensTabela() {
         ArrayList<Token> tokens = new ArrayList<Token>();
-
         for(Map.Entry<Integer, IIdentificador> map : this.tabelaSimbolos.entrySet()){
             if( this.isPalavraReservada(map.getValue().getToken().getLexema()) )
             {
@@ -118,4 +117,31 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
         }*/
 
     }
+
+    public boolean adicionarSimbolo(int id, IIdentificador identificador){
+
+        if(this.tabelaSimbolos.containsKey(id)){
+            return false;
+        }else{
+            this.tabelaSimbolos.put(id,identificador);
+            return true;
+        }
+    }
+
+    public IIdentificador getSimbolo(Token token){
+        IIdentificador aux = null;
+
+        for(IIdentificador simbolo: this.tabelaSimbolos.values()){
+            if(simbolo instanceof VariaveisImpl){
+                if(simbolo.getToken() == token){
+                    aux = simbolo;
+                }
+            }
+        }
+
+        return aux;
+    }
+
+    public void a(){}
+
 }

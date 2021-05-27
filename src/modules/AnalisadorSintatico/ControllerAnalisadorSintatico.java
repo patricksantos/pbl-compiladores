@@ -2,6 +2,12 @@ package modules.AnalisadorSintatico;
 
 import domain.entities.Token;
 import modules.AnalisadorSintatico.usecases.ErroSintatico;
+import modules.TabelaSimbolos.usecases.facade.IIdentificador;
+import modules.TabelaSimbolos.usecases.facade.IProcedimento;
+import modules.TabelaSimbolos.usecases.facade.ITabelaSimbolos;
+import modules.TabelaSimbolos.usecases.facade.IVariaveis;
+import modules.TabelaSimbolos.usecases.impl.ProcedimentoImpl;
+import modules.TabelaSimbolos.usecases.impl.TabelaSimbolosImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +21,13 @@ public class ControllerAnalisadorSintatico {
     public Token tokenFimArquivo;
     public ArrayList<ErroSintatico> erros;
     public boolean controleErro;
+    public ITabelaSimbolos tabelaDeSimbolos;
 
     public ArrayList<Token> iniciarLeitura(ArrayList<Token> tokens){
         this.indiceTokenAtual = 0;
         this.listaTokens = tokens;
         this.listaTokensAuxilixar = new ArrayList<>();
+        this.tabelaDeSimbolos = new TabelaSimbolosImpl();
         this.tokenFimArquivo = new Token("$","EOF",false);
         if(tokens.size() != 0){
             this.token = tokens.get(this.indiceTokenAtual);
@@ -658,7 +666,9 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoDeclProcedure(){
+        Token auxSemantico;
         if(token.getTipo().equals("IDE")){
+            auxSemantico = token;
             proximo_token();
             if(token.getLexema().equals("(")){
                 proximo_token();
@@ -669,6 +679,8 @@ public class ControllerAnalisadorSintatico {
                         --procurar identificador na tabela de simbolos,indicar que ele foi declarado e que é um
                         procedimento, e colocar sues argumentos.
                      */
+                    IProcedimento procedimento = new ProcedimentoImpl();
+
                     procedimentoBlockProc();
                 }else{
                     this.configurarErro(token,")");
@@ -1083,12 +1095,18 @@ public class ControllerAnalisadorSintatico {
     public void procedimentoArrayUsage(){
 
         if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
+            verificarIndice(token);
             proximo_token();
             if(token.getLexema().equals("]")){
                 proximo_token();
                 if(token.getLexema().equals("[")){
                     proximo_token();
                     if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
+                        if(verificarIndice(token)){
+                            /**Sem erro**/
+                        }else{
+                            System.out.println(token.getLinha() + " Tipo incompatível no indice do vetor/matriz.");
+                        }
                         proximo_token();
                         if(token.getLexema().equals("]")){
                             /**
@@ -1817,4 +1835,50 @@ public class ControllerAnalisadorSintatico {
             return false;
         }
     }
+
+    /************************************************* Analisador Semantico ***************************************************************/
+
+    public boolean verificarIndice(Token token){
+        int controle = 0;
+        if(token.getTipo().equals("IDE")){
+            /** Buscar na tabela o tipo do identificador **/
+            if(verificarDeclaracao(token)){
+                IVariaveis aux = (IVariaveis) this.tabelaDeSimbolos.getSimbolo(token);
+                if(aux.getTipoVariavel().equals("inteiro")){
+
+                }else{
+                    System.out.println(token.getLinha() + " Tipo de indice inválido");
+                }
+            }else{
+
+            }
+        }else if(token.getTipo().equals("NRO")){
+            /** Criar no token um atributo para verificar se é inteiro**/
+        }
+
+        if(controle == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean verificarDeclaracao(Token token){
+        String tipoAux = " ";
+        int controle = 0;
+        IIdentificador aux = this.tabelaDeSimbolos.getSimbolo(token);
+        if(aux == null){
+            System.out.println(token.getLinha() + tipoAux + "não declarado(a)");
+            controle = 1;
+        }else{
+            controle = 0;
+        }
+
+        if(controle == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

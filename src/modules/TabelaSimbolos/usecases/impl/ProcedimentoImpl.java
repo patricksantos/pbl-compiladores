@@ -4,12 +4,16 @@ import modules.TabelaSimbolos.usecases.facade.IProcedimento;
 
 import java.util.ArrayList;
 
-public class procedimentoImpl extends IdentificadorImpl implements IProcedimento {
+public class ProcedimentoImpl extends IdentificadorImpl implements IProcedimento {
     private int quantidadeParametros;
     private ArrayList<Integer> tiposParametros;
     private IdentificadorImpl identificador;
 
-    public procedimentoImpl(IdentificadorImpl identificador){
+    public ProcedimentoImpl(IdentificadorImpl identificador){
+        this.identificador = identificador;
+    }
+
+    public ProcedimentoImpl(){
         this.identificador = identificador;
     }
 

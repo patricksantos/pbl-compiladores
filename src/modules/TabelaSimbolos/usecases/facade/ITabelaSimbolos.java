@@ -14,4 +14,8 @@ public interface ITabelaSimbolos {
    // void setSimbolo(String chave, String valor);
 
     void setSimbolo(int chave, IIdentificador valor);
+
+    boolean adicionarSimbolo(int id, IIdentificador identificador);
+
+    IIdentificador getSimbolo(Token token);
 }
