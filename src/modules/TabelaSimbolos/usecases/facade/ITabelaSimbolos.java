@@ -9,7 +9,9 @@ public interface ITabelaSimbolos {
 
     ArrayList<Token> getTokensTabela();
 
-    boolean isPalavraReservada(String texto);
+    boolean isPalavraReservada(String lexema);
 
-    void setSimbolo(String chave, String valor);
+   // void setSimbolo(String chave, String valor);
+
+    void setSimbolo(int chave, IIdentificador valor);
 }
