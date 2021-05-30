@@ -73,79 +73,63 @@ public class ControllerAnalisadorSintatico {
         System.out.println(error.info());
         this.controleErro = true;
     }
-    /*public void init(){
+    public void init(){
         if(token.getLexema().equals("function") || token.getLexema().equals("procedure") || token.getTipo().equals("var")
-                || token.getLexema().equals("const") || token.getLexema().equals("typedef") || token.getLexema().equals("local")
-                || token.getLexema().equals("global")){
+                || token.getLexema().equals("const") || token.getLexema().equals("typedef") /*|| token.getLexema().equals("local")
+                || token.getLexema().equals("global")*/){
 
             if(token.getLexema().equals("procedure") ){
                 Token tokenAux = listaTokens.get(this.indiceTokenAtual+1);
                 if(tokenAux.getLexema().equals("start")){
-                   // if(this.token.getLexema().equals("procedure")){
+                    this.proximo_token();
+                    if(this.token.getLexema().equals("start")){
                         this.proximo_token();
-                        if(this.token.getLexema().equals("start")){
-                            this.proximo_token();
 
-                            if(this.token.getLexema().equals("{")){
+                        if(this.token.getLexema().equals("{")){
+                            proximo_token();
+                            if(this.token.getLexema().equals("}")){
                                 proximo_token();
+                            }else{
+                                this.start();
                                 if(this.token.getLexema().equals("}")){
                                     proximo_token();
                                 }else{
-                                    this.start();
-                                    if(this.token.getLexema().equals("}")){
-                                        proximo_token();
-                                    }else{
-                                        this.configurarErro(token,"}");
-                                        //ErroSintatico error = new ErroSintatico(token.getLinha(),"}",token.getLexema());
-                                        //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
-                                        //token.setError(error);
-                                        //listaTokensAuxilixar.add(token);
-                                        //System.out.println(error.info());
-                                        proximo_token();
-                                    }
+                                    this.configurarErro(token,"}");
+                                    proximo_token();
                                 }
-                            }else{
-                                this.configurarErro(token,"{");
-                                //ErroSintatico error = new ErroSintatico(token.getLinha(),"{",token.getLexema());
-                                //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
-                                //token.setError(error);
-                                //listaTokensAuxilixar.add(token);
-                                //System.out.println(error.info());
-                                proximo_token();
                             }
                         }else{
-                            this.configurarErro(token,"start");
-                            //ErroSintatico error = new ErroSintatico(token.getLinha(),"start",token.getLexema());
-                            //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
-                            //token.setError(error);
-                            //listaTokensAuxilixar.add(token);
-                            //System.out.println(error.info());
+                            this.configurarErro(token,"{");
                             proximo_token();
                         }
                     }else{
+                        this.configurarErro(token,"start");
                         proximo_token();
-                        procedimentoDeclProcedure();
-                        init();
                     }
-                    //else {
-                        //this.configurarErro(token,"procedure");
-                        //ErroSintatico error = new ErroSintatico(token.getLinha(),"procedure",token.getLexema());
-                        //Token token = new Token(this.token.getTipo(), this.token.getLexema(),true);
-                        //token.setError(error);
-                        //listaTokensAuxilixar.add(token);
-                        //System.out.println(error.info());
-                        //proximo_token();
-                    //}
-                //}
                 }else{
-                    simpleStatement();
+                    proximo_token();
+                    procedimentoDeclProcedure();
                     init();
                 }
+            }else{
+                simpleStatement();
+                init();
             }
+        }
+    }
 
+    public void start(){
+        //Fim do arquivo token.getLexema().equals("}")
+        //Token tokenAux = this.listaTokens.get(this.indiceTokenAtual+1); tokenAux.getTipo().equals("EOF")
+        //System.out.println("indice atual: " + indiceTokenAtual + " Tamanho: " + listaTokens.size());
+        if(indiceTokenAtual == (listaTokens.size()-2)) {
 
-    }*/
-    public void init(){
+        }else{
+            this.program();
+            this.start();
+        }
+    }
+    /*public void init(){
 
         if(this.token.getLexema().equals("procedure")){
             this.proximo_token();
@@ -210,7 +194,7 @@ public class ControllerAnalisadorSintatico {
             this.program();
             this.start();
         }
-    }
+    }*/
 
     public void program(){
         this.statement();
@@ -913,8 +897,10 @@ public class ControllerAnalisadorSintatico {
                         //System.out.println(error.info());
                         proximo_token();
                     }
+                }else if(token.getLexema().equals("}")){
+                   proximo_token();
                 }else{
-                    this.configurarErro(token,"int,real,string,boolean");
+                    this.configurarErro(token,"int,real,string,boolean,}");
                     //ErroSintatico error = new ErroSintatico(token.getLinha(),"int,real,string,boolean",token.getLexema());
                     //System.out.println(error.info());
                     proximo_token();
@@ -1095,18 +1081,14 @@ public class ControllerAnalisadorSintatico {
     public void procedimentoArrayUsage(){
 
         if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
-            verificarIndice(token);
+            //verificarIndice(token,"variavel");
             proximo_token();
             if(token.getLexema().equals("]")){
                 proximo_token();
                 if(token.getLexema().equals("[")){
                     proximo_token();
                     if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
-                        if(verificarIndice(token)){
-                            /**Sem erro**/
-                        }else{
-                            System.out.println(token.getLinha() + " Tipo incompatível no indice do vetor/matriz.");
-                        }
+                        //verificarIndice(token,"variavel");
                         proximo_token();
                         if(token.getLexema().equals("]")){
                             /**
@@ -1838,35 +1820,39 @@ public class ControllerAnalisadorSintatico {
 
     /************************************************* Analisador Semantico ***************************************************************/
 
-    public boolean verificarIndice(Token token){
+    public void verificarIndice(Token token,String tipo){
         int controle = 0;
         if(token.getTipo().equals("IDE")){
             /** Buscar na tabela o tipo do identificador **/
-            if(verificarDeclaracao(token)){
-                IVariaveis aux = (IVariaveis) this.tabelaDeSimbolos.getSimbolo(token);
+            if(verificarDeclaracao(token,tipo)){
+                IVariaveis aux = (IVariaveis) this.tabelaDeSimbolos.getSimbolo(token,tipo);
                 if(aux.getTipoVariavel().equals("inteiro")){
 
                 }else{
                     System.out.println(token.getLinha() + " Tipo de indice inválido");
                 }
-            }else{
-
             }
         }else if(token.getTipo().equals("NRO")){
             /** Criar no token um atributo para verificar se é inteiro**/
-        }
+            if(token.getLexema().contains(".")){
+                System.out.println(token.getLinha() + " Tipo de indice inválido");
+            }else{
 
+            }
+        }
+        /*
         if(controle == 0){
             return true;
         }else{
             return false;
         }
+        */
     }
 
-    public boolean verificarDeclaracao(Token token){
+    public boolean verificarDeclaracao(Token token, String tipo){
         String tipoAux = " ";
         int controle = 0;
-        IIdentificador aux = this.tabelaDeSimbolos.getSimbolo(token);
+        IIdentificador aux = this.tabelaDeSimbolos.getSimbolo(token, tipo);
         if(aux == null){
             System.out.println(token.getLinha() + tipoAux + "não declarado(a)");
             controle = 1;
@@ -1878,6 +1864,18 @@ public class ControllerAnalisadorSintatico {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public void verificarTipoVariavel(Token token ,String modeloVariavel){
+
+        if(verificarDeclaracao(token,"variavel")){
+            IVariaveis aux = (IVariaveis) this.tabelaDeSimbolos.getSimbolo(token,"variavel");
+            if(aux.getModeloVariavel().equals(modeloVariavel)){
+
+            }else{
+                System.out.println("Erro Semântivo: " + token.getLinha() + "variável utilizada não é: " + modeloVariavel);
+            }
         }
     }
 

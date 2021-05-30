@@ -8,6 +8,10 @@ public interface IVariaveis {
 
     public void setTipoVariavel(String tipoVariavel);
 
+    public String getModeloVariavel();
+
+    public void setModeloVariavel(String modeloVariavel);
+
     public String getStructPai();
 
     public void setStructPai(String structPai);

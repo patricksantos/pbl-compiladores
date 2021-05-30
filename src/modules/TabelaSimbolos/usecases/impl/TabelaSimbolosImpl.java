@@ -8,11 +8,11 @@ import java.util.*;
 
 public class TabelaSimbolosImpl implements ITabelaSimbolos {
 
-    //HashMap<String, String> tabelaSimbolos;
+    HashMap<String, String> tabelaSimbolos1;
     HashMap<Integer, IIdentificador> tabelaSimbolos;
     int a = 1;
     public TabelaSimbolosImpl() { // Construtor
-        //this.tabelaSimbolos =  new HashMap<String, String>();
+        this.tabelaSimbolos1 =  new HashMap<String, String>();
         this.tabelaSimbolos =  new HashMap<Integer, IIdentificador>();
         this.inserirPalavrasReservadas(); // Insere todas as palavras reservadas dentro da tabela
     }
@@ -84,16 +84,16 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
      * @param valor o valor do simbolo
      * */
     @Override
-    /*public void setSimbolo(String chave, String valor) {
+    public void setSimbolo(String chave, String valor) {
 
-        this.tabelaSimbolos.put(chave, valor);
+        this.tabelaSimbolos1.put(chave, valor);
 
 //        if( this.tabelaSimbolos.containsKey(chave) ){
 //            return this.tabelaSimbolos.keySet(chave);
 //        }
 //
 //        return null;
-    }*/
+    }
     public void setSimbolo(int chave, IIdentificador valor) {
 
         this.tabelaSimbolos.put(chave, valor);
@@ -128,20 +128,43 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
         }
     }
 
-    public IIdentificador getSimbolo(Token token){
+    public IIdentificador getSimbolo(Token token,String tipo){
         IIdentificador aux = null;
-
         for(IIdentificador simbolo: this.tabelaSimbolos.values()){
-            if(simbolo instanceof VariaveisImpl){
-                if(simbolo.getToken() == token){
-                    aux = simbolo;
-                }
+            switch (tipo){
+                case "variavel":
+                    if(simbolo instanceof VariaveisImpl){
+                        if(simbolo.getToken() == token){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
+                case "prodecimento":
+                    if(simbolo instanceof ProcedimentoImpl){
+                        if(simbolo.getToken() == token){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
+                case "função":
+                    if(simbolo instanceof FuncaoImpl){
+                        if(simbolo.getToken() == token){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
+                case "Constante":
+                    if(simbolo instanceof ConstanteImpl){
+                        if(simbolo.getToken() == token){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
             }
         }
 
         return aux;
     }
 
-    public void a(){}
 
 }

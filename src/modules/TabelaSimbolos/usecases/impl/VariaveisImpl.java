@@ -13,6 +13,7 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
    private int maxIndice2;   //Se for matriz
    private int indiceAtual;  //Se for array
    private int indiceAtual2; //Se for matriz
+   private String conteudo; // se for uma variavel normal
    private IdentificadorImpl identificador;
 
     public VariaveisImpl(IdentificadorImpl identificador){
@@ -25,6 +26,14 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
 
     public void setTipoVariavel(String tipoVariavel) {
         this.tipoVariavel = tipoVariavel;
+    }
+
+    public String getModeloVariavel() {
+        return this.modeloVariavel;
+    }
+
+    public void setModeloVariavel(String modeloVariavel) {
+        this.modeloVariavel = tipoVariavel;
     }
 
     public String getStructPai() {
