@@ -31,4 +31,10 @@ public class IdentificadorImpl implements IIdentificador {
     public int getEscopo(){
         return this.escopo;
     }
+
+    public void configurarIdentificador(int id, Token token, int escopo){
+        setId(id);
+        setToken(token);
+        setEscopo(escopo);
+    }
 }

@@ -1,6 +1,7 @@
 package modules.TabelaSimbolos.usecases.facade;
 
 import domain.entities.Token;
+import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -13,11 +14,11 @@ public interface ITabelaSimbolos {
 
    // void setSimbolo(String chave, String valor);
 
-    void setSimbolo(int chave, IIdentificador valor);
+    void setSimbolo(int chave, IdentificadorImpl valor);
 
     void setSimbolo(String chave, String valor);
 
-    boolean adicionarSimbolo(int id, IIdentificador identificador);
+    boolean adicionarSimbolo(int id, IdentificadorImpl identificador);
 
     IIdentificador getSimbolo(Token token, String tipo);
 }

@@ -40,4 +40,5 @@ public class ProcedimentoImpl extends IdentificadorImpl implements IProcedimento
     public void setIdentificador(IdentificadorImpl identificador){
         this.identificador = identificador;
     }
+
 }

@@ -10,4 +10,5 @@ public interface IIdentificador {
     Token getToken();
     void setEscopo(int escopo);
     int getEscopo();
+    void configurarIdentificador(int id, Token token, int escopo);
 }

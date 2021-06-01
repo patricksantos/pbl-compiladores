@@ -9,11 +9,11 @@ import java.util.*;
 public class TabelaSimbolosImpl implements ITabelaSimbolos {
 
     HashMap<String, String> tabelaSimbolos1;
-    HashMap<Integer, IIdentificador> tabelaSimbolos;
+    HashMap<Integer, IdentificadorImpl> tabelaSimbolos;
     int a = 1;
     public TabelaSimbolosImpl() { // Construtor
         this.tabelaSimbolos1 =  new HashMap<String, String>();
-        this.tabelaSimbolos =  new HashMap<Integer, IIdentificador>();
+        this.tabelaSimbolos =  new HashMap<Integer, IdentificadorImpl>();
         this.inserirPalavrasReservadas(); // Insere todas as palavras reservadas dentro da tabela
     }
 
@@ -41,7 +41,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
     }*/
     public ArrayList<Token> getTokensTabela() {
         ArrayList<Token> tokens = new ArrayList<Token>();
-        for(Map.Entry<Integer, IIdentificador> map : this.tabelaSimbolos.entrySet()){
+        for(Map.Entry<Integer, IdentificadorImpl> map : this.tabelaSimbolos.entrySet()){
             if( this.isPalavraReservada(map.getValue().getToken().getLexema()) )
             {
                 Token token = new Token("PRE", map.getValue().getToken().getLexema(),false);
@@ -66,7 +66,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
     }*/
 
     public boolean isPalavraReservada(String lexema) {
-        Collection<IIdentificador> aux = tabelaSimbolos.values();
+        Collection<IdentificadorImpl> aux = tabelaSimbolos.values();
         boolean controle = false;
         for(IIdentificador identificador: aux){
             if(identificador.getToken().getLexema().equals(lexema)){
@@ -94,7 +94,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
 //
 //        return null;
     }
-    public void setSimbolo(int chave, IIdentificador valor) {
+    public void setSimbolo(int chave, IdentificadorImpl valor) {
 
         this.tabelaSimbolos.put(chave, valor);
     }
@@ -118,7 +118,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
 
     }
 
-    public boolean adicionarSimbolo(int id, IIdentificador identificador){
+    public boolean adicionarSimbolo(int id, IdentificadorImpl identificador){
 
         if(this.tabelaSimbolos.containsKey(id)){
             return false;

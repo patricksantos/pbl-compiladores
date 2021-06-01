@@ -6,6 +6,8 @@ import modules.TabelaSimbolos.usecases.facade.IIdentificador;
 import modules.TabelaSimbolos.usecases.facade.IProcedimento;
 import modules.TabelaSimbolos.usecases.facade.ITabelaSimbolos;
 import modules.TabelaSimbolos.usecases.facade.IVariaveis;
+import modules.TabelaSimbolos.usecases.impl.FuncaoImpl;
+import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 import modules.TabelaSimbolos.usecases.impl.ProcedimentoImpl;
 import modules.TabelaSimbolos.usecases.impl.TabelaSimbolosImpl;
 
@@ -650,38 +652,37 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoDeclProcedure(){
-        Token auxSemantico;
+
         if(token.getTipo().equals("IDE")){
-            auxSemantico = token;
+            /**Adiciona o identificador na tabela de simbolos**/
+            Token identificadorAux = token;
+            if(tabelaDeSimbolos.getSimbolo(token,"procedimento") == null) {
+                ProcedimentoImpl procedimento = new ProcedimentoImpl();
+                IdentificadorImpl identificador = new IdentificadorImpl();
+                identificador.configurarIdentificador(this.tabelaDeSimbolos.getTokensTabela().size(),token,1);
+                procedimento.setIdentificador(identificador);
+
+                tabelaDeSimbolos.adicionarSimbolo(0, procedimento);
+            }else{
+                System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() + " Já existe um procedimento com o nome " + token.getLexema());
+            }
             proximo_token();
             if(token.getLexema().equals("(")){
                 proximo_token();
-                procedimentoParams();
+                procedimentoParams(identificadorAux);
                 if(token.getLexema().equals(")")){
                     proximo_token();
-                    /**
-                        --procurar identificador na tabela de simbolos,indicar que ele foi declarado e que é um
-                        procedimento, e colocar sues argumentos.
-                     */
-                    IProcedimento procedimento = new ProcedimentoImpl();
-
                     procedimentoBlockProc();
                 }else{
                     this.configurarErro(token,")");
-                    //ErroSintatico erro = new ErroSintatico(token.getLinha(),")",token.getLexema());
-                    //System.out.println(erro.info());
                     proximo_token();
                 }
             }else{
                 this.configurarErro(token,"(");
-                //ErroSintatico erro = new ErroSintatico(token.getLinha(),"(",token.getLexema());
-                //System.out.println(erro.info());
                 proximo_token();
             }
         }else{
             this.configurarErro(token,"IDE");
-            //ErroSintatico erro = new ErroSintatico(token.getLinha(),"IDE",token.getLexema());
-            //System.out.println(erro.info());
             proximo_token();
         }
     }
@@ -694,26 +695,35 @@ public class ControllerAnalisadorSintatico {
                 proximo_token();
             }else{
                 this.configurarErro(token,"}");
-                //ErroSintatico erro = new ErroSintatico(token.getLinha(),"}",token.getLexema());
-                //System.out.println(erro.info());
                 proximo_token();
             }
         }else{
             this.configurarErro(token,"{");
-            //ErroSintatico erro = new ErroSintatico(token.getLinha(),"{",token.getLexema());
-            //System.out.println(erro.info());
             proximo_token();
         }
     }
 
     public void procedimentoDeclFunction(){
+        Token tipoAux;
         if(primeiroType(token)){
+            tipoAux = token;
             proximo_token();
             if(token.getTipo().equals("IDE")){
+                Token identificadorAux = token;
+                /**Adiciona o identificador na tabela de simbolos**/
+                if(tabelaDeSimbolos.getSimbolo(token,"funcao") == null) {
+                    IdentificadorImpl identificador = new IdentificadorImpl();
+                    identificador.configurarIdentificador(this.tabelaDeSimbolos.getTokensTabela().size(),token,1);
+                    FuncaoImpl funcao = new FuncaoImpl(identificador);
+                    funcao.setTipoRetorno(tipoAux.getLexema());
+                    tabelaDeSimbolos.adicionarSimbolo(0, funcao);
+                }else{
+                    System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() + " Já existe uma função com o nome " + token.getLexema());
+                }
                 proximo_token();
                 if(token.getLexema().equals("(")){
                     proximo_token();
-                    procedimentoParams();
+                    procedimentoParams(identificadorAux);
                     if(token.getLexema().equals(")")){
                         /**
                         --procurar identificador na tabela de simbolos,indicar que ele foi declarado e que é uma
@@ -769,7 +779,9 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoReturn(){
-        
+        /**
+         * Verificar se o retorno é igual ao que foi declarado na função.
+         * **/
         if(token.getLexema().equals("return")){
             proximo_token();
             if(token.getTipo().equals("IDE")){
@@ -802,13 +814,13 @@ public class ControllerAnalisadorSintatico {
         }
     }
 
-    public void procedimentoParams(){
+    public void procedimentoParams(Token tokenIdentificador){
         if(primeiroType(token)){
             proximo_token();
             procedimentoParam();
             if(token.getLexema().equals(",")){
                 proximo_token();
-                procedimentoParams();
+                procedimentoParams(tokenIdentificador);
             }
         }else if(token.getLexema().equals(")")){
 
@@ -832,10 +844,12 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoCallFunc(){
+        /**verificar se já foi declarada**/
         if(token.getTipo().equals("IDE")){
             proximo_token();
             if(token.getLexema().equals("(")){
                 proximo_token();
+                /**Verificar se a quantidade de parametros está correto**/
                 procedimentoArgs();
                 if(token.getLexema().equals(")")){
                     proximo_token();
