@@ -8,6 +8,12 @@ public class IdentificadorImpl implements IIdentificador {
     private Token token;
     private int escopo;
 
+    public IdentificadorImpl(int id, Token token, int escopo){
+        this.id = id;
+        this.token = token;
+        this.escopo = escopo;
+    }
+
     public void setId(int id){
         this.id = id;
     }

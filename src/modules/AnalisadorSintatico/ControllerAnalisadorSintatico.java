@@ -2,10 +2,7 @@ package modules.AnalisadorSintatico;
 
 import domain.entities.Token;
 import modules.AnalisadorSintatico.usecases.ErroSintatico;
-import modules.TabelaSimbolos.usecases.facade.IIdentificador;
-import modules.TabelaSimbolos.usecases.facade.IProcedimento;
-import modules.TabelaSimbolos.usecases.facade.ITabelaSimbolos;
-import modules.TabelaSimbolos.usecases.facade.IVariaveis;
+import modules.TabelaSimbolos.usecases.facade.*;
 import modules.TabelaSimbolos.usecases.impl.FuncaoImpl;
 import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 import modules.TabelaSimbolos.usecases.impl.ProcedimentoImpl;
@@ -15,8 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerAnalisadorSintatico {
-
+    /**Variáveis auxiliares**/
     public Token token;
+    public int quantidadeParametrosAux;
+    public ArrayList<String> tiposParametros;
+    public Token ideAux;
+    public String tipoRetorno;
+
     public ArrayList<Token> listaTokens;
     public ArrayList<Token> listaTokensAuxilixar;
     public int indiceTokenAtual = 0;
@@ -27,8 +29,10 @@ public class ControllerAnalisadorSintatico {
 
     public ArrayList<Token> iniciarLeitura(ArrayList<Token> tokens){
         this.indiceTokenAtual = 0;
+        this.quantidadeParametrosAux = 0;
         this.listaTokens = tokens;
         this.listaTokensAuxilixar = new ArrayList<>();
+        this.tiposParametros = new ArrayList<>();
         this.tabelaDeSimbolos = new TabelaSimbolosImpl();
         this.tokenFimArquivo = new Token("$","EOF",false);
         if(tokens.size() != 0){
@@ -44,7 +48,7 @@ public class ControllerAnalisadorSintatico {
             System.out.println(aux.info());
         }*/
         this.init();
-
+        System.out.println("Tamanho tabela: " + this.tabelaDeSimbolos.numeroSimbolos());
         return this.listaTokensAuxilixar;
     }
 
@@ -653,23 +657,27 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoDeclProcedure(){
 
+        Token identificadorAux;
         if(token.getTipo().equals("IDE")){
-            /**Adiciona o identificador na tabela de simbolos**/
-            Token identificadorAux = token;
-            if(tabelaDeSimbolos.getSimbolo(token,"procedimento") == null) {
-                ProcedimentoImpl procedimento = new ProcedimentoImpl();
-                IdentificadorImpl identificador = new IdentificadorImpl();
-                identificador.configurarIdentificador(this.tabelaDeSimbolos.getTokensTabela().size(),token,1);
-                procedimento.setIdentificador(identificador);
-
-                tabelaDeSimbolos.adicionarSimbolo(0, procedimento);
-            }else{
-                System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() + " Já existe um procedimento com o nome " + token.getLexema());
-            }
+            identificadorAux = token;
             proximo_token();
             if(token.getLexema().equals("(")){
                 proximo_token();
-                procedimentoParams(identificadorAux);
+                procedimentoParams();
+                /**Adiciona o identificador na tabela de simbolos**/
+                if(!verificarDuplicidade(identificadorAux,"procedimento",this.quantidadeParametrosAux,this.tiposParametros)) {
+                    ProcedimentoImpl procedimento = new ProcedimentoImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,1);
+                    procedimento.setQuantidadeParametros(this.quantidadeParametrosAux);
+                    procedimento.setTiposParametros(this.tiposParametros);
+
+                    /*IdentificadorImpl identificador = new IdentificadorImpl();
+                    identificador.configurarIdentificador(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,1);
+                    procedimento.setIdentificador(identificador);*/
+
+                    tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, procedimento);
+                }else{
+                    System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe um procedimento com o nome " + identificadorAux.getLexema());
+                }
                 if(token.getLexema().equals(")")){
                     proximo_token();
                     procedimentoBlockProc();
@@ -685,6 +693,8 @@ public class ControllerAnalisadorSintatico {
             this.configurarErro(token,"IDE");
             proximo_token();
         }
+        this.quantidadeParametrosAux = 0;
+        this.tiposParametros.clear();
     }
 
     public void procedimentoBlockProc(){
@@ -704,26 +714,30 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoDeclFunction(){
-        Token tipoAux;
+        Token identificadorAux;
         if(primeiroType(token)){
-            tipoAux = token;
+            this.tipoRetorno = token.getLexema();
             proximo_token();
             if(token.getTipo().equals("IDE")){
-                Token identificadorAux = token;
-                /**Adiciona o identificador na tabela de simbolos**/
-                if(tabelaDeSimbolos.getSimbolo(token,"funcao") == null) {
-                    IdentificadorImpl identificador = new IdentificadorImpl();
-                    identificador.configurarIdentificador(this.tabelaDeSimbolos.getTokensTabela().size(),token,1);
-                    FuncaoImpl funcao = new FuncaoImpl(identificador);
-                    funcao.setTipoRetorno(tipoAux.getLexema());
-                    tabelaDeSimbolos.adicionarSimbolo(0, funcao);
-                }else{
-                    System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() + " Já existe uma função com o nome " + token.getLexema());
-                }
+                identificadorAux = token;
                 proximo_token();
                 if(token.getLexema().equals("(")){
                     proximo_token();
-                    procedimentoParams(identificadorAux);
+                    procedimentoParams();
+                    /**Adiciona o identificador na tabela de simbolos**/
+                    if(!verificarDuplicidade(identificadorAux,"função",this.quantidadeParametrosAux,this.tiposParametros)) {
+                        FuncaoImpl funcao = new FuncaoImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,1);
+                        funcao.setQuantidadeParametros(this.quantidadeParametrosAux);
+                        funcao.setTiposParametros(this.tiposParametros);
+                        funcao.setTipoRetorno(this.tipoRetorno);
+                    /*IdentificadorImpl identificador = new IdentificadorImpl();
+                    identificador.configurarIdentificador(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,1);
+                    procedimento.setIdentificador(identificador);*/
+
+                        tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, funcao);
+                    }else{
+                        System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma função com o nome " + identificadorAux.getLexema());
+                    }
                     if(token.getLexema().equals(")")){
                         /**
                         --procurar identificador na tabela de simbolos,indicar que ele foi declarado e que é uma
@@ -814,13 +828,15 @@ public class ControllerAnalisadorSintatico {
         }
     }
 
-    public void procedimentoParams(Token tokenIdentificador){
+    public void procedimentoParams(){
+        this.quantidadeParametrosAux++;
         if(primeiroType(token)){
+            this.tiposParametros.add(token.getLexema());
             proximo_token();
             procedimentoParam();
             if(token.getLexema().equals(",")){
                 proximo_token();
-                procedimentoParams(tokenIdentificador);
+                procedimentoParams();
             }
         }else if(token.getLexema().equals(")")){
 
@@ -1889,6 +1905,55 @@ public class ControllerAnalisadorSintatico {
 
             }else{
                 System.out.println("Erro Semântivo: " + token.getLinha() + "variável utilizada não é: " + modeloVariavel);
+            }
+        }
+    }
+
+    public boolean verificarDuplicidade(Token token,String tipo ,int quantidadeParametros, ArrayList<String> tipos){
+        int controle = 0;
+        if(tipo.equals("procedimento")){
+            IIdentificador aux = this.tabelaDeSimbolos.getSimboloL(token,"procedimento");
+            if(aux != null){
+                IProcedimento auxProc = (IProcedimento)aux;
+                if(auxProc.getQuantidadeParametros() == quantidadeParametros){
+                    for(int i = 0; i < quantidadeParametros; i++){
+                        if(!auxProc.getTiposParametros().get(i).equals(tipos.get(i))){
+                            controle = 1;
+                            break;
+                        }
+                    }
+                    if(controle == 1){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            IIdentificador aux = this.tabelaDeSimbolos.getSimboloL(token,"funcao");
+            if(aux != null){
+                IFuncao auxFun = (IFuncao) aux;
+                if(auxFun.getQuantidadeParametros() == quantidadeParametros){
+                    for(int i = 0; i < quantidadeParametros; i++){
+                        if(!auxFun.getTiposParametros().get(i).equals(tipos.get(i))){
+                            controle = 1;
+                            break;
+                        }
+                    }
+                    if(controle == 1){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
             }
         }
     }

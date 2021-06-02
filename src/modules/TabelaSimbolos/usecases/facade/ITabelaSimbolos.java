@@ -21,4 +21,8 @@ public interface ITabelaSimbolos {
     boolean adicionarSimbolo(int id, IdentificadorImpl identificador);
 
     IIdentificador getSimbolo(Token token, String tipo);
+
+    IIdentificador getSimboloL(Token token, String tipo);
+
+    int numeroSimbolos();
 }

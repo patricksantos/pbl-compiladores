@@ -14,9 +14,9 @@ public interface IFuncao {
 
     public void setQuantidadeParametros(int quantidadeParametros);
 
-    public ArrayList<Integer> getTiposParametros();
+    public ArrayList<String> getTiposParametros();
 
-    public void setTiposParametros(ArrayList<Integer> tiposParametros);
+    public void setTiposParametros(ArrayList<String> tiposParametros);
 
     public IdentificadorImpl getIdentificador();
 

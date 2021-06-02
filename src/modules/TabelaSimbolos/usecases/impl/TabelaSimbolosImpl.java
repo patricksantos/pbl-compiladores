@@ -14,7 +14,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
     public TabelaSimbolosImpl() { // Construtor
         this.tabelaSimbolos1 =  new HashMap<String, String>();
         this.tabelaSimbolos =  new HashMap<Integer, IdentificadorImpl>();
-        this.inserirPalavrasReservadas(); // Insere todas as palavras reservadas dentro da tabela
+        //this.inserirPalavrasReservadas(); // Insere todas as palavras reservadas dentro da tabela
     }
 
      /**
@@ -106,9 +106,9 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
         int controle = -1;
         for(String reservada: regexPalavraReservada){
             Token token = new Token("",reservada,false);
-            IdentificadorImpl identificador = new IdentificadorImpl();
-            identificador.setToken(token);
-            identificador.setId(controle);
+            IdentificadorImpl identificador = new IdentificadorImpl(controle,token,1);
+            /*identificador.setToken(token);
+            identificador.setId(controle);*/
             this.tabelaSimbolos.put(controle, identificador);
             controle--;
         }
@@ -129,6 +129,9 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
     }
 
     public IIdentificador getSimbolo(Token token,String tipo){
+        if(this.tabelaSimbolos.isEmpty()){
+            return null;
+        }
         IIdentificador aux = null;
         for(IIdentificador simbolo: this.tabelaSimbolos.values()){
             switch (tipo){
@@ -164,6 +167,51 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
         }
 
         return aux;
+    }
+
+    public IIdentificador getSimboloL(Token token,String tipo){
+        if(this.tabelaSimbolos.isEmpty()){
+            return null;
+        }
+        IIdentificador aux = null;
+        for(IIdentificador simbolo: this.tabelaSimbolos.values()){
+            switch (tipo){
+                case "variavel":
+                    if(simbolo instanceof VariaveisImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
+                case "procedimento":
+                    if(simbolo instanceof ProcedimentoImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
+                case "função":
+                    if(simbolo instanceof FuncaoImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
+                case "Constante":
+                    if(simbolo instanceof ConstanteImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux = simbolo;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return aux;
+    }
+
+    public int numeroSimbolos(){
+        return this.tabelaSimbolos.size();
     }
 
 

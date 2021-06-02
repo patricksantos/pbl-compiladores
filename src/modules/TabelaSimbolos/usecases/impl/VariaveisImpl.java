@@ -1,5 +1,6 @@
 package modules.TabelaSimbolos.usecases.impl;
 
+import domain.entities.Token;
 import modules.TabelaSimbolos.usecases.facade.IVariaveis;
 
 import java.util.ArrayList;
@@ -16,8 +17,12 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
    private String conteudo; // se for uma variavel normal
    private IdentificadorImpl identificador;
 
-    public VariaveisImpl(IdentificadorImpl identificador){
+    /*public VariaveisImpl(IdentificadorImpl identificador){
         this.identificador = identificador;
+    }*/
+
+    public VariaveisImpl(int id, Token token, int escopo){
+        super(id,token,escopo);
     }
 
     public String getTipoVariavel() {
