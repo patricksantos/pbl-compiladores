@@ -18,6 +18,8 @@ public class ControllerAnalisadorSintatico {
     public ArrayList<String> tiposParametros;
     public Token ideAux;
     public String tipoRetorno;
+    public ArrayList<Token> argumentosAux;
+    public ArrayList<Token> argumentosFuncAux;
 
     public ArrayList<Token> listaTokens;
     public ArrayList<Token> listaTokensAuxilixar;
@@ -275,7 +277,7 @@ public class ControllerAnalisadorSintatico {
         }else if(token.getTipo().equals("IDE")){
             Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
             if(tokenAux.getLexema().equals("(")){
-                procedimentoCallFunc();
+                procedimentoCallFunc("0");
                 if(token.getLexema().equals(";")){
                     proximo_token();
                 }else{
@@ -665,7 +667,7 @@ public class ControllerAnalisadorSintatico {
                 proximo_token();
                 procedimentoParams();
                 /**Adiciona o identificador na tabela de simbolos**/
-                if(!verificarDuplicidade(identificadorAux,"procedimento",this.quantidadeParametrosAux,this.tiposParametros)) {
+                if(!verificarDuplicidade(identificadorAux,"procedimento",this.quantidadeParametrosAux,this.tiposParametros,this.tipoRetorno)) {
                     ProcedimentoImpl procedimento = new ProcedimentoImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,1);
                     procedimento.setQuantidadeParametros(this.quantidadeParametrosAux);
                     procedimento.setTiposParametros(this.tiposParametros);
@@ -725,7 +727,7 @@ public class ControllerAnalisadorSintatico {
                     proximo_token();
                     procedimentoParams();
                     /**Adiciona o identificador na tabela de simbolos**/
-                    if(!verificarDuplicidade(identificadorAux,"função",this.quantidadeParametrosAux,this.tiposParametros)) {
+                    if(!verificarDuplicidade(identificadorAux,"função",this.quantidadeParametrosAux,this.tiposParametros,this.tipoRetorno)) {
                         FuncaoImpl funcao = new FuncaoImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,1);
                         funcao.setQuantidadeParametros(this.quantidadeParametrosAux);
                         funcao.setTiposParametros(this.tiposParametros);
@@ -769,6 +771,8 @@ public class ControllerAnalisadorSintatico {
             //System.out.println(erro.info());
             proximo_token();
         }
+        this.quantidadeParametrosAux = 0;
+        this.tiposParametros.clear();
     }
 
     public void procedimentoBlockFunc(){
@@ -801,7 +805,7 @@ public class ControllerAnalisadorSintatico {
             if(token.getTipo().equals("IDE")){
                 Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
                 if(tokenAux.getLexema().equals("(")){
-                    procedimentoCallFunc();
+                    procedimentoCallFunc("função");
                 }else{
                     proximo_token();
                 }
@@ -859,14 +863,17 @@ public class ControllerAnalisadorSintatico {
         }
     }
 
-    public void procedimentoCallFunc(){
+    public void procedimentoCallFunc(String tipo){
         /**verificar se já foi declarada**/
         if(token.getTipo().equals("IDE")){
+            Token identificadorAux = token;
             proximo_token();
             if(token.getLexema().equals("(")){
                 proximo_token();
                 /**Verificar se a quantidade de parametros está correto**/
                 procedimentoArgs();
+                verificarProcFun(identificadorAux,tipo);
+                verificarArgumentos(identificadorAux,this.argumentosAux,this.argumentosFuncAux);
                 if(token.getLexema().equals(")")){
                     proximo_token();
                     /* Confere se o identificador é uma função/procedimento, se já foi declarado e se os parametros
@@ -900,11 +907,14 @@ public class ControllerAnalisadorSintatico {
         if(token.getTipo().equals("IDE")){
             Token tokenAux = listaTokens.get(indiceTokenAtual+1);
             if(tokenAux.getLexema().equals("(")){
-                procedimentoCallFunc();
+                argumentosFuncAux.add(token);
+                procedimentoCallFunc("função");
             }else{
+                argumentosAux.add(token);
                 proximo_token();
             }
         }else if(token.getTipo().equals("NRO") || token.getLexema().equals("true") || token.getLexema().equals("false") || token.getTipo().equals("CAD")){
+            argumentosAux.add(token);
             proximo_token();
         }else{
             this.configurarErro(token,"IDE,NRO,true,false,CAD");
@@ -1059,7 +1069,7 @@ public class ControllerAnalisadorSintatico {
                     if(tokenAux.getLexema().equals(".")){
                         procedimentoStructUsage();
                     }else if(tokenAux.getLexema().equals("(")){
-                        procedimentoCallFunc();
+                        procedimentoCallFunc("função");
                     }else if(primeiroOperadores(tokenAux)){
                         procedimentoVariableInit();
                     }else if(tokenAux.getLexema().equals(";")){
@@ -1291,7 +1301,7 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }else if(tokenAux.getLexema().equals("(")){
-                            procedimentoCallFunc();
+                            procedimentoCallFunc("função");
                             if(token.getLexema().equals(";")){
                                 proximo_token();
                             }else{
@@ -1512,7 +1522,7 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }else if(tokenAux.getLexema().equals("(")){
-                            procedimentoCallFunc();
+                            procedimentoCallFunc("função");
                             if(token.getLexema().equals(";")){
                                 proximo_token();
                             }else{
@@ -1630,7 +1640,7 @@ public class ControllerAnalisadorSintatico {
                                     proximo_token();
                                 }
                             }else if(tokenAux.getLexema().equals("(")){
-                                procedimentoCallFunc();
+                                procedimentoCallFunc("função");
                             }else if(primeiroOperadores(tokenAux)){
                                 procedimentoVariableInit();
                                 if(token.getLexema().equals(";")){
@@ -1909,7 +1919,7 @@ public class ControllerAnalisadorSintatico {
         }
     }
 
-    public boolean verificarDuplicidade(Token token,String tipo ,int quantidadeParametros, ArrayList<String> tipos){
+    public boolean verificarDuplicidade(Token token,String tipo, int quantidadeParametros, ArrayList<String> tipos, String retorno){
         int controle = 0;
         if(tipo.equals("procedimento")){
             IIdentificador aux = this.tabelaDeSimbolos.getSimboloL(token,"procedimento");
@@ -1934,20 +1944,25 @@ public class ControllerAnalisadorSintatico {
                 return false;
             }
         }else{
-            IIdentificador aux = this.tabelaDeSimbolos.getSimboloL(token,"funcao");
+            IIdentificador aux = this.tabelaDeSimbolos.getSimboloL(token,"função");
             if(aux != null){
                 IFuncao auxFun = (IFuncao) aux;
+                //System.out.println("Quant parametros: "+auxFun.get+"--------"+quantidadeParametros);
                 if(auxFun.getQuantidadeParametros() == quantidadeParametros){
-                    for(int i = 0; i < quantidadeParametros; i++){
-                        if(!auxFun.getTiposParametros().get(i).equals(tipos.get(i))){
-                            controle = 1;
-                            break;
+                    if(auxFun.getTipoRetorno().equals(retorno)) {
+                        for (int i = 0; i < quantidadeParametros; i++) {
+                            if (!auxFun.getTiposParametros().get(i).equals(tipos.get(i))) {
+                                controle = 1;
+                                break;
+                            }
                         }
-                    }
-                    if(controle == 1){
-                        return false;
+                        if (controle == 1) {
+                            return false;
+                        } else {
+                            return true;
+                        }
                     }else{
-                        return true;
+                        return false;
                     }
                 }else{
                     return false;
@@ -1956,6 +1971,14 @@ public class ControllerAnalisadorSintatico {
                 return false;
             }
         }
+    }
+
+    public void verificarArgumentos(Token identificador, ArrayList<Token> argumentos, ArrayList<Token> argumentosFunc){
+
+    }
+
+    public void verificarProcFun(Token identificador, String tipo){
+        /**Se chegar 0 no parametro tipo, significa que tanto faz o tipo**/
     }
 
 }

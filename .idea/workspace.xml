@@ -6,15 +6,7 @@
       <change beforePath="$PROJECT_DIR$/input/teste semantico.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/teste semantico.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/Saidantico.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saidantico.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/IFuncao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/IFuncao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/IProcedimento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/IProcedimento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/ITabelaSimbolos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/ITabelaSimbolos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/ConstanteImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/ConstanteImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/FuncaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/FuncaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/IdentificadorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/IdentificadorImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/ProcedimentoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/ProcedimentoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/TabelaSimbolosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/TabelaSimbolosImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/VariaveisImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/VariaveisImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,25 +203,25 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="485" y="48" key="#com.intellij.ide.util.MemberChooser/0.0.1360.728@0.0.1360.728" timestamp="1621883642771" />
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1622610080232">
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom" timestamp="1622724177643">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1622610080232" />
-    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1622610080232">
+    <state width="1317" height="177" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1622724177643" />
+    <state width="1317" height="177" key="GridCell.Tab.0.center" timestamp="1622724177643">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1622610080232" />
-    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1622610080232">
+    <state width="1317" height="177" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1622724177643" />
+    <state width="1317" height="177" key="GridCell.Tab.0.left" timestamp="1622724177643">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1622610080232" />
-    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1622610080232">
+    <state width="1317" height="177" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1622724177643" />
+    <state width="1317" height="177" key="GridCell.Tab.0.right" timestamp="1622724177643">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1622610080232" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1622598132405">
+    <state width="1317" height="177" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1622724177643" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1622717724415">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1622598132405" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1622717724415" />
   </component>
 </project>

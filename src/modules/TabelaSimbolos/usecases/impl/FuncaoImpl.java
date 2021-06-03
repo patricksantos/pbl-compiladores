@@ -17,6 +17,7 @@ public class FuncaoImpl extends IdentificadorImpl implements IFuncao {
 
     public FuncaoImpl(int id, Token token, int escopo){
         super(id,token,escopo);
+        this.tiposParametros = new ArrayList<>();
     }
 
     public String getTipoRetorno(){
@@ -40,7 +41,9 @@ public class FuncaoImpl extends IdentificadorImpl implements IFuncao {
     }
 
     public void setTiposParametros(ArrayList<String> tiposParametros){
-        this.tiposParametros = tiposParametros;
+        for(String tipo: tiposParametros){
+            this.tiposParametros.add(tipo);
+        }
     }
 
     public IdentificadorImpl getIdentificador(){
