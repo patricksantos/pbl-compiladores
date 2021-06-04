@@ -24,5 +24,7 @@ public interface ITabelaSimbolos {
 
     IIdentificador getSimboloL(Token token, String tipo);
 
+    public ArrayList<IIdentificador> getSimbolos(Token token,String tipo);
+
     int numeroSimbolos();
 }

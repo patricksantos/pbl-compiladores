@@ -1,24 +1,24 @@
 
-function real somar (real x, real y) {
+/*function real somar (real x, real y) {
 	var { real result; }
 			
 	return result;
-}
-
-function int somar (real x, real y) {
-	var { real result; }
-			
-	return result;
-}	
-
-/*procedure imprimir (string msg, int a) {
- 	result = x + y + a;  // erro01: tipos incompativeis
 }*/
 
-/*procedure imprimir (string msg, int a) {
+/*function int somar (real x, real y) {
+	var { real result; }
+			
+	return result;
+}*/	
+
+procedure imprimir (string msg, int a) {
+ 	result = x + y + a;  // erro01: tipos incompativeis
+}
+
+/*procedure imprimir (int msg, int a) {
  	result = x + y + a;  // erro01: tipos incompativeis
 }*/
 
 procedure start { 
-	var { }	
+	imprimir(h,j,t);	
 }

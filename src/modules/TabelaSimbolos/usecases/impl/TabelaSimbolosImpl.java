@@ -142,7 +142,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
                         }
                     }
                     break;
-                case "prodecimento":
+                case "procedimento":
                     if(simbolo instanceof ProcedimentoImpl){
                         if(simbolo.getToken() == token){
                             aux = simbolo;
@@ -160,6 +160,48 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
                     if(simbolo instanceof ConstanteImpl){
                         if(simbolo.getToken() == token){
                             aux = simbolo;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return aux;
+    }
+
+    public ArrayList<IIdentificador> getSimbolos(Token token,String tipo){
+
+        /*if(this.tabelaSimbolos.isEmpty()){
+            return null;
+        }*/
+        ArrayList<IIdentificador> aux = new ArrayList<>();
+        for(IIdentificador simbolo: this.tabelaSimbolos.values()){
+            switch (tipo){
+                case "variavel":
+                    if(simbolo instanceof VariaveisImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux.add(simbolo);
+                        }
+                    }
+                    break;
+                case "procedimento":
+                    if(simbolo instanceof ProcedimentoImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux.add(simbolo);
+                        }
+                    }
+                    break;
+                case "função":
+                    if(simbolo instanceof FuncaoImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux.add(simbolo);
+                        }
+                    }
+                    break;
+                case "Constante":
+                    if(simbolo instanceof ConstanteImpl){
+                        if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            aux.add(simbolo);
                         }
                     }
                     break;
