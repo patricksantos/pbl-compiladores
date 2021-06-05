@@ -3,10 +3,7 @@ package modules.AnalisadorSintatico;
 import domain.entities.Token;
 import modules.AnalisadorSintatico.usecases.ErroSintatico;
 import modules.TabelaSimbolos.usecases.facade.*;
-import modules.TabelaSimbolos.usecases.impl.FuncaoImpl;
-import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
-import modules.TabelaSimbolos.usecases.impl.ProcedimentoImpl;
-import modules.TabelaSimbolos.usecases.impl.TabelaSimbolosImpl;
+import modules.TabelaSimbolos.usecases.impl.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,7 @@ public class ControllerAnalisadorSintatico {
     public String tipoRetorno;
     public ArrayList<Token> argumentosAux;
     public ArrayList<Token> argumentosFuncAux;
+    public String tipoConstante;
 
     public ArrayList<Token> listaTokens;
     public ArrayList<Token> listaTokensAuxilixar;
@@ -1190,6 +1188,7 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoTypedConst(){
         if(primeiroType(token)){
+            tipoConstante = token.getLexema();
             proximo_token();
             procedimentoConstants();
             if(token.getLexema().equals(";")){
@@ -1214,11 +1213,27 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoConstants(){
         if(token.getTipo().equals("IDE")){
+            Token identificadorAux = token;
             proximo_token();
             if(token.getLexema().equals("=")){
                 proximo_token();
                 if(token.getLexema().equals("true") || token.getLexema().equals("false")
                         || token.getTipo().equals("NRO") || token.getTipo().equals("CAD")){
+                    if(compatibilidadeTipos(this.tipoConstante,token)){
+                        int controle = verificarConst(identificadorAux);
+                        if(controle == 0){
+                            ConstanteImpl constante = new ConstanteImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,1);
+                            constante.setTipoConstante(this.tipoConstante);
+                            tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, constante);
+                        }else if(controle == -1){
+                            System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma constante com o nome " + identificadorAux.getLexema());
+                        }else{
+                            System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma variável com o nome " + identificadorAux.getLexema());
+                        }
+                    }else{
+                        System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Valor atribuido a constante " + identificadorAux.getLexema() +
+                                " não é um compativel com o tipo declarado na constante");
+                    }
                     proximo_token();
                     if(token.getLexema().equals(",")){
                         proximo_token();
@@ -2057,6 +2072,44 @@ public class ControllerAnalisadorSintatico {
             return false;
         }else{
             return true;
+        }
+    }
+
+    public int verificarConst(Token identificador){
+
+        IIdentificador aux = null;
+        int controle = -1;
+        aux = this.tabelaDeSimbolos.getSimboloL(identificador,"constante");
+        if(aux == null){
+            controle = 0;
+            aux = this.tabelaDeSimbolos.getSimboloL(identificador,"variavel");
+            if(aux != null){
+                controle = 1;
+            }
+        }
+
+        return controle;
+    }
+
+    public boolean compatibilidadeTipos(String tipo, Token atribuicao){
+        if(tipo.equals("int") && atribuicao.getTipo().equals("NRO")){
+            if(atribuicao.getLexema().contains(".")){
+                return false;
+            }else{
+                return true;
+            }
+        }else if(tipo.equals("real") && atribuicao.getTipo().equals("NRO")){
+            if(atribuicao.getLexema().contains(".")){
+                return true;
+            }else{
+                return false;
+            }
+        }else if(tipo.equals("string") && atribuicao.getTipo().equals("CAD")){
+            return true;
+        }else if((tipo.equals("boolean") && atribuicao.getLexema().equals("true")) || (tipo.equals("boolean") && atribuicao.getLexema().equals("false"))){
+            return true;
+        }else{
+            return false;
         }
     }
 

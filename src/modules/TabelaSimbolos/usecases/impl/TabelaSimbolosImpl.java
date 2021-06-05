@@ -239,7 +239,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
                         }
                     }
                     break;
-                case "Constante":
+                case "constante":
                     if(simbolo instanceof ConstanteImpl){
                         if(simbolo.getToken().getLexema().equals(token.getLexema())){
                             aux = simbolo;
