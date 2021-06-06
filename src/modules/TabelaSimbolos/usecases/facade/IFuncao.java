@@ -4,7 +4,7 @@ import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 
 import java.util.ArrayList;
 
-public interface IFuncao {
+public interface IFuncao extends IIdentificador{
 
     public String getTipoRetorno();
 

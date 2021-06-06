@@ -20,7 +20,10 @@ procedure imprimir (string msg, int a) {
  	result = x + y + a;  // erro01: tipos incompativeis
 }*/
 
-procedure start { 
-	imprimir(h,j);
+procedure start {
+	h = "10";
+	j = 10;
+	t = true; 
+	//imprimir(h,j);
 	//imprimir("a",2);	
 }

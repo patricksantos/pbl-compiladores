@@ -2,7 +2,10 @@ package modules.TabelaSimbolos.usecases.facade;
 
 import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 
-public interface IVariaveis {
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public interface IVariaveis extends IIdentificador{
 
     public String getTipoVariavel();
 
@@ -35,4 +38,12 @@ public interface IVariaveis {
     public IdentificadorImpl getIdentificador();
 
     public void setIdentificador(IdentificadorImpl identificador);
+
+    public ArrayList<String> getTiposAtributosStruct();
+
+    public void adicionarAtributosStruct(String lexema);
+
+    public void adcionarTiposAtributosStruct(String tipo);
+
+    public ArrayList<String> getAtributosStruct();
 }

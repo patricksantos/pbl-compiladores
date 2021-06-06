@@ -26,6 +26,7 @@ public class ControllerAnalisadorSintatico {
     public ArrayList<ErroSintatico> erros;
     public boolean controleErro;
     public ITabelaSimbolos tabelaDeSimbolos;
+    public int escopo = -1;
 
     public ArrayList<Token> iniciarLeitura(ArrayList<Token> tokens){
         this.indiceTokenAtual = 0;
@@ -56,6 +57,9 @@ public class ControllerAnalisadorSintatico {
         var1.setTipoVariavel("string");
         var2.setTipoVariavel("int");
         var3.setTipoVariavel("boolean");
+        var1.setModeloVariavel("variavel");
+        var2.setModeloVariavel("variavel");
+        var3.setModeloVariavel("variavel");
 
         tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var1);
         tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var2);
@@ -1304,6 +1308,7 @@ public class ControllerAnalisadorSintatico {
     public void procedimentoVariableUsage(){
 
         if(token.getTipo().equals("IDE")){
+            Token identificadorAux = token;
             Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
             if(tokenAux.getLexema().equals(".")){
                 procedimentoStructUsage();
@@ -1537,6 +1542,7 @@ public class ControllerAnalisadorSintatico {
                     proximo_token();
                     if(token.getLexema().equals("true") || token.getLexema().equals("false") || token.getTipo().equals("NRO")
                             || token.getTipo().equals("CAD") || token.getLexema().equals("(") || token.getLexema().equals("!")){
+                        verificarAtribuicao(identificadorAux,token,"0","0");
                         procedimentoVariableInit();
                         if(token.getLexema().equals(";")){
                             proximo_token();
@@ -1949,7 +1955,7 @@ public class ControllerAnalisadorSintatico {
             if(aux.getModeloVariavel().equals(modeloVariavel)){
 
             }else{
-                System.out.println("Erro Semântivo: " + token.getLinha() + "variável utilizada não é: " + modeloVariavel);
+                System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + "variável utilizada não é: " + modeloVariavel);
             }
         }
     }
@@ -2025,7 +2031,7 @@ public class ControllerAnalisadorSintatico {
                     auxiliar.add(((IVariaveis)aux3).getTipoVariavel());
                 }else{
                     controleAux = 1;
-                    System.out.println("Erro Semântivo: "+ " Linha" + token.getLinha() + " a variavel " + token.getLexema() + " não foi declarada");
+                    System.out.println("Erro Semântico: "+ " Linha" + token.getLinha() + " a variavel " + token.getLexema() + " não foi declarada");
                 }
             }else if(token.getTipo().equals("NRO")){
                 if(token.getLexema().contains(".")){
@@ -2099,9 +2105,9 @@ public class ControllerAnalisadorSintatico {
             }
 
             if(controleTam == 0){
-                System.out.println("Erro Semântivo: " + identificador.getLinha() + " Número de argumentos incorreto");
+                System.out.println("Erro Semântico: "+ "Linha: " + identificador.getLinha() + " Número de argumentos incorreto");
             }else if(controle == 2){
-                System.out.println("Erro Semântivo: " + identificador.getLinha() + " Tipo de argumento incorreto: algum dos argumentos da chamada de função está com o tipo incorreto");
+                System.out.println("Erro Semântico: "+ "Linha: " + identificador.getLinha() + " Tipo de argumento incorreto: algum dos argumentos da chamada de função está com o tipo incorreto");
             }
         }
     }
@@ -2160,9 +2166,112 @@ public class ControllerAnalisadorSintatico {
             return true;
         }else if((tipo.equals("boolean") && atribuicao.getLexema().equals("true")) || (tipo.equals("boolean") && atribuicao.getLexema().equals("false"))){
             return true;
+        }else if(tipo.equals(atribuicao.getLexema())){/*Para variaveis com tipos compostos(Struct)*/
+            return true;
         }else{
             return false;
         }
     }
 
+    public void verificarAtribuicao(Token identificador, Token identificadorAtribuido, String valorAtribuido1, String valorAtribuido2){
+
+        /**Lembrar dos tipos compostos*/
+
+        IVariaveis variavelAux = filtrarVariaveis(identificador,"variavel");
+        IVariaveis variavelAux2;
+        IConstante constanteAux;
+        Token valorDireito = null;
+        String valorEsquerdo = "";
+        boolean resultado = false;
+        int indice = -1;
+        int tipo = -1;
+
+        if(variavelAux == null){
+            System.out.println("Erro Semântico: " + "Linha: " + identificador.getLinha() + " A variável " + identificador.getLexema() +" não foi declarada");
+        }else {
+            //Configurando o valor da variavel do lado esquerdo;
+            if(variavelAux.getModeloVariavel().equals("struct")){
+                if(!valorAtribuido1.equals("0")){
+                    for(int i = 0; i < variavelAux.getAtributosStruct().size();i++){
+                        if(variavelAux.getAtributosStruct().get(i).equals(valorAtribuido1)){
+                            indice = i;
+                        }
+                    }
+                    valorEsquerdo = variavelAux.getTiposAtributosStruct().get(indice);
+                }
+            }else{
+                valorEsquerdo = variavelAux.getTipoVariavel();
+            }
+        }
+
+        //Configurando o valor da variavel do lado direito;
+        if (identificadorAtribuido.getTipo().equals("IDE")) {
+            IIdentificador identificadorLadoD = this.tabelaDeSimbolos.getSimboloL(identificadorAtribuido,"constante");
+            if(identificadorLadoD == null){// Sem constantes com esse nome.
+                identificadorLadoD = filtrarVariaveis(identificadorAtribuido,"variavel");
+            }
+
+            if(identificadorLadoD == null){
+                System.out.println("Erro Semântico: " + "Linha: " + identificadorAtribuido.getLinha() + " A variável/constante " + identificadorAtribuido.getLexema() +" não foi declarada");
+            }else{
+                if(identificadorLadoD instanceof IVariaveis){
+                    variavelAux2 = (IVariaveis) identificadorLadoD;
+                    if(variavelAux2.getModeloVariavel().equals("struct")){
+                        if(!valorAtribuido2.equals("0")){
+                            for(int i = 0; i < variavelAux2.getAtributosStruct().size();i++){
+                                if(variavelAux2.getAtributosStruct().get(i).equals(valorAtribuido2)){
+                                    indice = i;
+                                }
+                            }
+                            Token tokenAux = new Token("-",variavelAux2.getTiposAtributosStruct().get(indice),false);
+                            valorDireito = tokenAux;
+                        }
+                    }else{
+                        Token tokenAux = new Token("-",variavelAux2.getTipoVariavel(),false);
+                        valorDireito = tokenAux;
+                    }
+                }else if(identificadorLadoD instanceof IConstante){
+                    constanteAux = (IConstante) identificadorLadoD;
+                    Token tokenAux = new Token("-",constanteAux.getTipoConstante(),false);
+                    valorDireito = tokenAux;
+                }
+            }
+        } else {
+            valorDireito = identificadorAtribuido;
+        }
+        //variavelAux.getTipoVariavel()
+        if (!compatibilidadeTipos(valorEsquerdo, valorDireito)) {
+            System.out.println("Erro Semântico: " + "Linha: " + identificador.getLinha() + " Está sendo atribuído um tipo incorreto na variavel " + identificador.getLexema());
+        }
+    }
+
+    public IVariaveis filtrarVariaveis(Token identificador, String tipo){
+        ArrayList<IIdentificador> variaveis = this.tabelaDeSimbolos.getSimbolos(identificador,tipo);
+        int controleGlobal = 0;
+        IVariaveis variavelAux = null;
+
+        for(IIdentificador variavel: variaveis){
+            variavelAux = (IVariaveis)variavel;
+            if(variavelAux.getEscopo() == 1){
+                controleGlobal = 1;
+                break;
+            }
+        }
+
+        if(controleGlobal == 0){
+            for(IIdentificador variavel: variaveis){
+                variavelAux = (IVariaveis)variavel;
+                if(variavelAux.getIdentificador().getEscopo() == -1){
+                    controleGlobal = 2;
+                    break;
+                }
+            }
+        }
+        if(controleGlobal == 0){
+            return null;
+        }else{
+            return variavelAux;
+        }
+
+    }
 }

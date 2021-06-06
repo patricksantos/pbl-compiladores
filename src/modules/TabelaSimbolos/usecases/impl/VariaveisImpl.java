@@ -4,6 +4,7 @@ import domain.entities.Token;
 import modules.TabelaSimbolos.usecases.facade.IVariaveis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
 
@@ -16,6 +17,8 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
    private int indiceAtual2; //Se for matriz
    private String conteudo; // se for uma variavel normal
    private IdentificadorImpl identificador;
+   private ArrayList<String> tiposAtributosStruct;
+   private ArrayList<String> atributosStruct;
 
     /*public VariaveisImpl(IdentificadorImpl identificador){
         this.identificador = identificador;
@@ -23,6 +26,8 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
 
     public VariaveisImpl(int id, Token token, int escopo){
         super(id,token,escopo);
+        this.tiposAtributosStruct = new ArrayList<>();
+        this.atributosStruct = new ArrayList<>();
     }
 
     public String getTipoVariavel() {
@@ -88,4 +93,21 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
     public void setIdentificador(IdentificadorImpl identificador) {
         this.identificador = identificador;
     }
+
+    public ArrayList<String> getTiposAtributosStruct() {
+        return this.tiposAtributosStruct;
+    }
+
+    public ArrayList<String> getAtributosStruct() {
+        return this.atributosStruct;
+    }
+
+    public void adicionarAtributosStruct(String lexema){
+        this.atributosStruct.add(lexema);
+    }
+
+    public void adcionarTiposAtributosStruct(String tipo){
+        this.tiposAtributosStruct.add(tipo);
+    }
+
 }

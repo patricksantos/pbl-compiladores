@@ -4,7 +4,7 @@ import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 
 import java.util.ArrayList;
 
-public interface IProcedimento {
+public interface IProcedimento extends IIdentificador{
 
     public int getQuantidadeParametros();
 
