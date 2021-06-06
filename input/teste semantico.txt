@@ -1,4 +1,4 @@
-const { int a = 1,t = 2.5; string b = "casa"; real c = 2.7; boolean d = true;} 
+//const { int a = 1,t = 2.5; string b = "casa"; real c = 2.7; boolean d = true;} 
 
 /*function real somar (real x, real y) {
 	var { real result; }
@@ -12,14 +12,15 @@ const { int a = 1,t = 2.5; string b = "casa"; real c = 2.7; boolean d = true;}
 	return result;
 }*/	
 
-/*procedure imprimir (string msg, int a) {
+procedure imprimir (string msg, int a) {
  	result = x + y + a;  // erro01: tipos incompativeis
-}*/
+}
 
 /*procedure imprimir (int msg, int a) {
  	result = x + y + a;  // erro01: tipos incompativeis
 }*/
 
 procedure start { 
-	//imprimir(h,j,t);	
+	imprimir(h,j);
+	//imprimir("a",2);	
 }

@@ -45,9 +45,22 @@ public class ControllerAnalisadorSintatico {
         this.listaTokens.add(tokenFimArquivo);
         this.erros = new ArrayList<>();
         this.controleErro = false;
-        /*for(Token aux: listaTokens){
-            System.out.println(aux.info());
-        }*/
+
+        //Teste
+        Token t1 = new Token("IDE","h",false);
+        Token t2 = new Token("IDE","j",false);
+        Token t3 = new Token("IDE","t",false);
+        VariaveisImpl var1 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t1,1);
+        VariaveisImpl var2 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t2,1);
+        VariaveisImpl var3 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t3,1);
+        var1.setTipoVariavel("string");
+        var2.setTipoVariavel("int");
+        var3.setTipoVariavel("boolean");
+
+        tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var1);
+        tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var2);
+        tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var3);
+
         this.init();
         System.out.println("Tamanho tabela: " + this.tabelaDeSimbolos.numeroSimbolos());
         return this.listaTokensAuxilixar;
@@ -1999,58 +2012,97 @@ public class ControllerAnalisadorSintatico {
 
         int controle = 0;
         int controleTam = 0;
+        int controleAux = 0;
+        ArrayList<String> auxiliar = new ArrayList<>();
         ArrayList<IIdentificador> aux = this.tabelaDeSimbolos.getSimbolos(identificador,"procedimento");
         ArrayList<IIdentificador> aux2 = this.tabelaDeSimbolos.getSimbolos(identificador,"função");
-        if(tipo.equals("0")){
-            if(aux.size() == 0){
-                tipo = "função";
+        IIdentificador aux3;
+
+        for(Token token: argumentos){
+            if(token.getTipo().equals("IDE")){
+                aux3 = this.tabelaDeSimbolos.getSimboloL(token,"variavel");
+                if(aux3 != null){
+                    auxiliar.add(((IVariaveis)aux3).getTipoVariavel());
+                }else{
+                    controleAux = 1;
+                    System.out.println("Erro Semântivo: "+ " Linha" + token.getLinha() + " a variavel " + token.getLexema() + " não foi declarada");
+                }
+            }else if(token.getTipo().equals("NRO")){
+                if(token.getLexema().contains(".")){
+                    auxiliar.add("real");
+                }else{
+                    auxiliar.add("int");
+                }
+            }else if(token.getTipo().equals("CAD")){
+                auxiliar.add("string");
+            }else if(token.getLexema().equals("true")){
+                auxiliar.add("boolean");
             }else{
-                tipo = "procedimento";
+                auxiliar.add("boolean");
             }
         }
 
-        if(tipo.equals("procedimento")){
-            //ArrayList<IIdentificador> aux = this.tabelaDeSimbolos.getSimbolos(identificador,"procedimento");
-            for(IIdentificador auxI:aux){
-                IProcedimento auxProc = (IProcedimento)auxI;
-                if(auxProc.getQuantidadeParametros() == argumentos.size()){
-                    controle = 0;
-                    for (int i = 0; i < argumentos.size(); i++) {
-                        if (auxProc.getTiposParametros().get(i).equals(argumentos.get(i))) {
-                            controle = 1;
-                            break;
-                        }else{
-                            controle = 2;
-                            break;
-                        }
-                    }
-                    controleTam = 1;
-                }
+        /*for(Token token: argumentos){
+            aux3 = this.tabelaDeSimbolos.getSimboloL(token,"variavel");
+            if(aux3 != null){
+                auxiliar.add(((IVariaveis)aux3));
+            }else{
+                System.out.println("Erro Semântivo: " + identificador.getLinha() + "Um dos argumentos utilizados não foi declarado");
             }
-        }else if(tipo.equals("função")){
-            //ArrayList<IIdentificador> aux = this.tabelaDeSimbolos.getSimbolos(identificador,"função");
-            for(IIdentificador auxI:aux2){
-                IFuncao auxProc = (IFuncao) auxI;
-                if(auxProc.getQuantidadeParametros() == argumentos.size()){
-                    controle = 0;
-                    for (int i = 0; i < argumentos.size(); i++) {
-                        if (auxProc.getTiposParametros().get(i).equals(argumentos.get(i))) {
-                            controle = 1;
-                            break;
-                        }else{
-                            controle = 2;
-                            break;
-                        }
-                    }
-                    controleTam = 1;
-                }
-            }
-        }
+        }*/
 
-        if(controleTam == 0){
-            System.out.println("Erro Semântivo: " + identificador.getLinha() + " Número de argumentos incorreto");
-        }else if(controle == 2){
-            System.out.println("Erro Semântivo: " + identificador.getLinha() + " Tipo de argumento incorreto: algum dos argumentos da chamada de função está com o tipo incorreto");
+        if(controleAux == 0){
+            if(tipo.equals("0")){
+                if(aux.size() == 0){
+                    tipo = "função";
+                }else{
+                    tipo = "procedimento";
+                }
+            }
+
+            if(tipo.equals("procedimento")){
+
+                for(IIdentificador auxI:aux){
+                    IProcedimento auxProc = (IProcedimento)auxI;
+                    if(auxProc.getQuantidadeParametros() == argumentos.size()){
+                        controle = 0;
+                        for (int i = 0; i < argumentos.size(); i++) {
+                            if (auxProc.getTiposParametros().get(i).equals(auxiliar.get(i))) {
+                                controle = 1;
+                                break;
+                            }else{
+                                controle = 2;
+                                break;
+                            }
+                        }
+                        controleTam = 1;
+                    }
+                }
+            }else if(tipo.equals("função")){
+
+                for(IIdentificador auxI:aux2){
+                    IFuncao auxProc = (IFuncao) auxI;
+                    if(auxProc.getQuantidadeParametros() == argumentos.size()){
+                        controle = 0;
+                        for (int i = 0; i < argumentos.size(); i++) {
+                            if (auxProc.getTiposParametros().get(i).equals(auxiliar.get(i))) {
+                                controle = 1;
+                                break;
+                            }else{
+                                controle = 2;
+                                break;
+                            }
+                        }
+                        controleTam = 1;
+                    }
+                }
+            }
+
+            if(controleTam == 0){
+                System.out.println("Erro Semântivo: " + identificador.getLinha() + " Número de argumentos incorreto");
+            }else if(controle == 2){
+                System.out.println("Erro Semântivo: " + identificador.getLinha() + " Tipo de argumento incorreto: algum dos argumentos da chamada de função está com o tipo incorreto");
+            }
         }
     }
 
