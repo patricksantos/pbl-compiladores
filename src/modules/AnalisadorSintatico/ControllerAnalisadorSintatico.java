@@ -915,13 +915,16 @@ public class ControllerAnalisadorSintatico {
                         }else if(this.variavelReceptorTipo.equals("variavel")){
                             System.out.println(this.variavelReceptor.getLexema());
                             IIdentificador temp3 = filtrarVariaveis(this.variavelReceptor,"variavel");
-                            //if(temp3 != null) {
+                            if(temp3 != null) {
                                 IVariaveis temp4 = (IVariaveis) temp3;
                                 if (!temp2.getTipoRetorno().equals(temp4.getTipoVariavel())) {
                                     System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() +
                                             " O tipo de retorno da função não é compatível");
                                 }
-                            //}
+                            }else{
+                                System.out.println("Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() +
+                                        " A variável não foi declarada");
+                            }
                         }
 
                     }
