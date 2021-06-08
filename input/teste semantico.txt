@@ -6,11 +6,17 @@
 	return result;
 }*/
 
-/*function int somar (real x, real y) {
+function boolean isso (int x, int y) {
 	var { real result; }
 			
-	return result;
-}*/	
+	return "a";
+}
+
+function int somar (int x, int y) {
+	var { real result; }
+			
+	return isso(1,2);
+}	
 
 procedure imprimir (string msg, int a) {
  	result = x + y + a;  // erro01: tipos incompativeis
@@ -21,9 +27,9 @@ procedure imprimir (string msg, int a) {
 }*/
 
 procedure start {
-	h = "10";
-	j = 10;
-	t = true; 
+	//h = "10";
+	//j = somar(1,2);
+	//t = true; 
 	//imprimir(h,j);
-	//imprimir("a",2);	
+	//imprimir("a",10);	
 }
