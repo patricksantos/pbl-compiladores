@@ -46,4 +46,8 @@ public interface IVariaveis extends IIdentificador{
     public void adcionarTiposAtributosStruct(String tipo);
 
     public ArrayList<String> getAtributosStruct();
+
+    public void setInicializado(boolean status);
+
+    public boolean getInicializado();
 }

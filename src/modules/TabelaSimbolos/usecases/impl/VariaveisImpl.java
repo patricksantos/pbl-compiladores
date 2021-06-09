@@ -10,6 +10,7 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
 
    private String tipoVariavel;
    private String modeloVariavel;
+   private boolean inicializado;
    private String StructPai; //Se for struct
    private int maxIndice;    //Se for array
    private int maxIndice2;   //Se for matriz
@@ -28,6 +29,7 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
         super(id,token,escopo);
         this.tiposAtributosStruct = new ArrayList<>();
         this.atributosStruct = new ArrayList<>();
+        this.inicializado = false;
     }
 
     public String getTipoVariavel() {
@@ -108,6 +110,14 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
 
     public void adcionarTiposAtributosStruct(String tipo){
         this.tiposAtributosStruct.add(tipo);
+    }
+
+    public void setInicializado(boolean status){
+        this.inicializado = status;
+    }
+
+    public boolean getInicializado(){
+        return this.inicializado;
     }
 
 }
