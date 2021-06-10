@@ -1125,7 +1125,7 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoTypedVariable(){
         if(primeiroType(token)){
-            proximo_token();
+            proximo_token(); // pulando o tipo
             procedimentoVariables();
             if(token.getLexema().equals(";")){
                 proximo_token();
@@ -1148,11 +1148,35 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoVariables(){
         if(token.getTipo().equals("IDE")){
+//            procedimentoVariableDeclarator();
+//            if(token.getLexema().equals(",")){
+//                proximo_token();
+//                procedimentoVariables();
+//            }
+            Token identificadorAux = token;
             procedimentoVariableDeclarator();
+            proximo_token();
+            if(compatibilidadeTipos(this.tipoConstante, token)){ // Verifica se isso ta certo Moisas
+                int controle = verificarVar(identificadorAux);
+                if(controle == 0){
+                    VariaveisImpl variavel = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,-1);
+                    variavel.setTipoVariavel(this.tipoConstante);
+                    tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, variavel);
+                }else if(controle == -1){
+                    System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma variável com o nome " + identificadorAux.getLexema());
+                }else{
+                    System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma constante com o nome " + identificadorAux.getLexema());
+                }
+            }else{
+                System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Valor atribuido a variavel " + identificadorAux.getLexema() +
+                        " não é um compativel com o tipo declarado na variavel");
+            }
+            proximo_token();
             if(token.getLexema().equals(",")){
                 proximo_token();
                 procedimentoVariables();
             }
+
         }else{
             this.configurarErro(token,"IDE");
             //ErroSintatico error = new ErroSintatico(token.getLinha(),"IDE",token.getLexema());
@@ -2349,13 +2373,27 @@ public class ControllerAnalisadorSintatico {
     }
 
     public int verificarConst(Token identificador){
-
         IIdentificador aux = null;
         int controle = -1;
         aux = this.tabelaDeSimbolos.getSimboloL(identificador,"constante");
         if(aux == null){
             controle = 0;
             aux = this.tabelaDeSimbolos.getSimboloL(identificador,"variavel");
+            if(aux != null){
+                controle = 1;
+            }
+        }
+
+        return controle;
+    }
+
+    public int verificarVar(Token identificador){
+        IIdentificador aux = null;
+        int controle = -1;
+        aux = this.tabelaDeSimbolos.getSimboloL(identificador,"variavel");
+        if(aux == null){
+            controle = 0;
+            aux = this.tabelaDeSimbolos.getSimboloL(identificador,"constante");
             if(aux != null){
                 controle = 1;
             }
