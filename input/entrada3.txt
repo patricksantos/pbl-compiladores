@@ -1,0 +1,11 @@
+//Declaração de constantes
+//ERRO em t,m
+const { int a = 1,t = 2.5; string b = "casa"; real c = 2.7;string m = 5; boolean d = true, s = false;} 	
+
+procedure imprimir (string msg, int a) {
+ 	//result = x + y + a;  // erro01: tipos incompativeis
+}
+
+procedure start {
+	imprimir(b,a);
+}

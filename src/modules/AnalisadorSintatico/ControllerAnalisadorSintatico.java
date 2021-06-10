@@ -55,19 +55,29 @@ public class ControllerAnalisadorSintatico {
         Token t1 = new Token("IDE","h",false);
         Token t2 = new Token("IDE","j",false);
         Token t3 = new Token("IDE","t",false);
-        VariaveisImpl var1 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t1,1);
-        VariaveisImpl var2 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t2,1);
-        VariaveisImpl var3 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t3,1);
+        Token t4 = new Token("IDE","k",false);
+        VariaveisImpl var1 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t1,-1);
+        VariaveisImpl var2 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t2,-1);
+        VariaveisImpl var3 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t3,-1);
+        VariaveisImpl var4 = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,t4,-1);
         var1.setTipoVariavel("string");
         var2.setTipoVariavel("int");
         var3.setTipoVariavel("boolean");
+        var4.setTipoVariavel("real");
         var1.setModeloVariavel("variavel");
         var2.setModeloVariavel("variavel");
         var3.setModeloVariavel("variavel");
+        var4.setModeloVariavel("variavel");
+
+        var1.setInicializado(true);
+        var2.setInicializado(true);
+        var3.setInicializado(true);
+        var4.setInicializado(true);
 
         tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var1);
         tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var2);
         tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var3);
+        tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, var4);
 
         this.init();
         System.out.println("Tamanho tabela: " + this.tabelaDeSimbolos.numeroSimbolos());
@@ -350,6 +360,7 @@ public class ControllerAnalisadorSintatico {
                 if(!controleExpressãoBooleana){
                     System.out.println("Erro Semântico: "+ " Linha" + this.variavelReceptor.getLinha() + " a expressão deve resultar em um tipo booleano");
                 }
+                this.controleExpressãoBooleana = false;
                 if(token.getLexema().equals(")")){
                     proximo_token();
                     if(token.getLexema().equals("then")){
@@ -396,6 +407,7 @@ public class ControllerAnalisadorSintatico {
                 if(!controleExpressãoBooleana){
                     System.out.println("Erro Semântico: "+ " Linha" + this.variavelReceptor.getLinha() + " a expressão deve resultar em um tipo booleano");
                 }
+                this.controleExpressãoBooleana = false;
                 if(token.getLexema().equals(")")){
                     proximo_token();
                     if(token.getLexema().equals("{")) {
@@ -447,6 +459,7 @@ public class ControllerAnalisadorSintatico {
     public void OrExpression(String tipo){
         AndExpression(tipo);
         if(token.getLexema().equals("||") && token.getTipo().equals("LOG")){
+            this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean") && (!tipo.equals("erro"))){
                 System.out.println("Erro Semântico: "+ " Linha" + this.token.getLinha() + " o operador " + this.token.getLexema() + "só pode ser utilizado em tipos booleanos");
             }
@@ -458,6 +471,7 @@ public class ControllerAnalisadorSintatico {
     public void AndExpression(String tipo){
         EqualityExpression(tipo);
         if(token.getLexema().equals("&&") && token.getTipo().equals("LOG")){
+            this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean") && (!tipo.equals("erro"))){
                 System.out.println("Erro Semântico: "+ " Linha" + this.token.getLinha() + " o operador " + this.token.getLexema() + "só pode ser utilizado em tipos booleanos");
             }
@@ -469,6 +483,7 @@ public class ControllerAnalisadorSintatico {
     public void EqualityExpression(String tipo){
         CompareExpression(tipo);
         if(token.getLexema().equals("==") || token.getLexema().equals("!=") && token.getTipo().equals("REL")){
+            this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean") && (!tipo.equals("erro"))){
                 System.out.println("Erro Semântico: "+ " Linha" + this.token.getLinha() + " o operador " + this.token.getLexema() + "só pode ser utilizado em tipos booleanos");
             }
@@ -480,6 +495,7 @@ public class ControllerAnalisadorSintatico {
     public void CompareExpression(String tipo){
         AddExpression(tipo);
         if(token.getLexema().equals("<") || token.getLexema().equals(">") || token.getLexema().equals("<=") || token.getLexema().equals(">=")){
+            this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean")&& (!tipo.equals("erro"))){
                 System.out.println("Erro Semântico: "+ " Linha" + this.token.getLinha() + " o operador " + this.token.getLexema() + "só pode ser utilizado em tipos booleanos");
             }
@@ -586,12 +602,14 @@ public class ControllerAnalisadorSintatico {
         }else{
             tipo = ((IVariaveis)aux).getTipoVariavel();
         }
+        procedimentoExpression(tipo);
+
         if(tipo.equals("boolean")){
             if(!controleExpressãoBooleana){
                 System.out.println("Erro Semântico: "+ " Linha" + this.variavelReceptor.getLinha() + " a expressão deve resultar em um tipo booleano");
             }
         }
-        procedimentoExpression(tipo);
+        this.controleExpressãoBooleana = false;
     }
 
     public void procedimentoRead(){
@@ -1147,19 +1165,25 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoVariables(){
+        int escopoAux;
         if(token.getTipo().equals("IDE")){
-//            procedimentoVariableDeclarator();
-//            if(token.getLexema().equals(",")){
-//                proximo_token();
-//                procedimentoVariables();
-//            }
+            /*procedimentoVariableDeclarator();
+            if(token.getLexema().equals(",")){
+                proximo_token();
+                procedimentoVariables();
+            }*/
             Token identificadorAux = token;
             procedimentoVariableDeclarator();
-            proximo_token();
+            //proximo_token();
             if(compatibilidadeTipos(this.tipoConstante, token)){ // Verifica se isso ta certo Moisas
                 int controle = verificarVar(identificadorAux);
                 if(controle == 0){
-                    VariaveisImpl variavel = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,-1);
+                    if(escopoGlobal){
+                        escopoAux = -1;
+                    }else{
+                        escopoAux = this.escopo;
+                    }
+                    VariaveisImpl variavel = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,escopoAux);
                     variavel.setTipoVariavel(this.tipoConstante);
                     tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, variavel);
                 }else if(controle == -1){
@@ -2149,7 +2173,9 @@ public class ControllerAnalisadorSintatico {
             //IIdentificador aux = this.tabelaDeSimbolos.getSimboloL(token,"procedimento");
             ArrayList<IIdentificador> aux = this.tabelaDeSimbolos.getSimbolos(token,"procedimento");
             if(aux != null) {
+
                 for (IIdentificador aux1:aux) {
+                    controle = 0;
                     //IProcedimento auxProc = (IProcedimento) aux;
                     IProcedimento auxProc = (IProcedimento) aux1;
                     if (auxProc.getQuantidadeParametros() == quantidadeParametros) {
@@ -2181,6 +2207,7 @@ public class ControllerAnalisadorSintatico {
             ArrayList<IIdentificador> aux = this.tabelaDeSimbolos.getSimbolos(token,"função");
             if(aux != null){
                 for(IIdentificador aux1:aux){
+                    controle = 0;
                     IFuncao auxFun = (IFuncao) aux1;
                     //System.out.println("Quant parametros: "+auxFun.get+"--------"+quantidadeParametros);
                     if(auxFun.getQuantidadeParametros() == quantidadeParametros){
@@ -2330,7 +2357,6 @@ public class ControllerAnalisadorSintatico {
                         controleTam = 1;
                     }
                     if(controle == 1){
-                        System.out.println("bb");
                         procFun = auxProc;
                         break;
                     }
@@ -2514,7 +2540,7 @@ public class ControllerAnalisadorSintatico {
         if(controleGlobal == 0){
             for(IIdentificador variavel: variaveis){
                 variavelAux = (IVariaveis)variavel;
-                if(variavelAux.getIdentificador().getEscopo() == -1){
+                if(variavelAux.getEscopo() == -1){
                     controleGlobal = 2;
                     break;
                 }
