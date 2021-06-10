@@ -577,7 +577,7 @@ public class ControllerAnalisadorSintatico {
                     resultado = compatibilidadeTipos(tipo,token);
                 }
                 if(!resultado){
-                    System.out.println("Erro Semântico: "+ " Linha" + this.token.getLinha() + " o token " + this.token.getLexema() + " é de um tipo compatível");
+                    System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o token " + this.token.getLexema() + " é de um tipo incompatível");
                 }
             }
             proximo_token();
@@ -1167,12 +1167,12 @@ public class ControllerAnalisadorSintatico {
     public void procedimentoVariables(){
         int escopoAux;
         if(token.getTipo().equals("IDE")){
-            /*procedimentoVariableDeclarator();
+            procedimentoVariableDeclarator();
             if(token.getLexema().equals(",")){
                 proximo_token();
                 procedimentoVariables();
-            }*/
-            Token identificadorAux = token;
+            }
+            /*Token identificadorAux = token;
             procedimentoVariableDeclarator();
             //proximo_token();
             if(compatibilidadeTipos(this.tipoConstante, token)){ // Verifica se isso ta certo Moisas
@@ -1199,7 +1199,7 @@ public class ControllerAnalisadorSintatico {
             if(token.getLexema().equals(",")){
                 proximo_token();
                 procedimentoVariables();
-            }
+            }*/
 
         }else{
             this.configurarErro(token,"IDE");

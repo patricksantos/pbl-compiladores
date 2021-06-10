@@ -1,0 +1,15 @@
+//Verificando tipagem em expressões.
+procedure start {
+	h = "10";
+	//ERRO
+	h = h - j + t;
+
+	j = 5 + 4 - 9;
+	j = j - 5;
+	//ERRO
+	j = 5 + true - 9;
+
+	t = 5 > 4;
+	//ERRO
+	t = true + false; 	
+}
