@@ -180,6 +180,7 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
                 case "variavel":
                     if(simbolo instanceof VariaveisImpl){
                         if(simbolo.getToken().getLexema().equals(token.getLexema())){
+                            System.out.println("aa");
                             aux.add(simbolo);
                         }
                     }

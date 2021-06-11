@@ -1,0 +1,18 @@
+//Escopos diferentes e variaveis não inicializadas.
+//var {int t = 5;}
+procedure imprimir (string msg, int a) {
+ 	//var {boolean t = false;}
+}
+
+/*procedure imprimir (int msg, int a) {
+ 	//var {real t = 5.1;}
+}*/
+
+procedure start {
+	// Tirar um setinicializado das variaveis que eu adicionei.
+	//var {int s;}
+	//h = "10";
+	//t = true; 
+	imprimir(h,5);
+	imprimir(h,o);	
+}

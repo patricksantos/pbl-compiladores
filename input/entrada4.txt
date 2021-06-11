@@ -1,8 +1,11 @@
 //Verificando tipagem em expressões.
+const {real pi = 3.14;int lol = 1;}
 procedure start {
 	h = "10";
+	k = pi + 2.2;
 	//ERRO
 	h = h - j + t;
+	k = lol - 1;	
 
 	j = 5 + 4 - 9;
 	j = j - 5;
@@ -10,6 +13,10 @@ procedure start {
 	j = 5 + true - 9;
 
 	t = 5 > 4;
+	o = 1 / 2;
 	//ERRO
-	t = true + false; 	
+	t = true + false;
+	j = i - 5;
+	i = 5 - j;
+	j = o * 1;	
 }
