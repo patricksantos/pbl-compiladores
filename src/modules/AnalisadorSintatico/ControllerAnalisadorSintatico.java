@@ -669,16 +669,23 @@ public class ControllerAnalisadorSintatico {
     public void expressionRead(){
         if(token.getTipo().equals("IDE")){
             //proximo_token();
-            int controleAux = verificarConst(token);
+            /*int controleAux = verificarConst(token);
             if(controleAux == -1){
-                verificarDeclaracao(token,"constante");
+                verificarDeclaracao(token,"constante","-");
             }else{
-                if(verificarDeclaracao(token,"variavel")){
-                    verificarInicializacao(token);
+                if(verificarDeclaracao(token,"variavel","-")){
+                    //verificarInicializacao(token);
                 }
-            }
+            }*/
             Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
             if(tokenAux.getLexema().equals("[")){
+                if(verificarDeclaracao(token,"variavel","-")){
+                    IVariaveis aux = (IVariaveis) this.filtrarVariaveis(token,"variavel");
+                    if(!(aux.getModeloVariavel().equals("vetor") || aux.getModeloVariavel().equals("matriz"))){
+                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " O identificador utilizado " +
+                                "não foi declarado como um vetor ou matriz");
+                    }
+                }
                 proximo_token();
                 proximo_token();
                 procedimentoArrayUsage();
@@ -692,6 +699,14 @@ public class ControllerAnalisadorSintatico {
                     moreReadings();
                 }
             }else if(tokenAux.getLexema().equals(",")){
+                int controleAux = verificarConst(token);
+                if(controleAux == -1){
+                    verificarDeclaracao(token,"constante","-");
+                }else{
+                    if(verificarDeclaracao(token,"variavel","-")){
+                        //verificarInicializacao(token);
+                    }
+                }
                 proximo_token();
                 moreReadings();
             }else{
@@ -750,17 +765,24 @@ public class ControllerAnalisadorSintatico {
 
     public void expressionPrint(){
         if(token.getTipo().equals("IDE")){
-            int controleAux = verificarConst(token);
+           /* int controleAux = verificarConst(token);
             if(controleAux == -1){
-                verificarDeclaracao(token,"constante");
+                verificarDeclaracao(token,"constante","-");
             }else{
-                if(verificarDeclaracao(token,"variavel")){
+                if(verificarDeclaracao(token,"variavel","-")){
                     verificarInicializacao(token);
                 }
-            }
+            }*/
             //proximo_token();
             Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
             if(tokenAux.getLexema().equals("[")){
+                if(verificarDeclaracao(token,"variavel","-")){
+                    IVariaveis aux = (IVariaveis) this.filtrarVariaveis(token,"variavel");
+                    if(!(aux.getModeloVariavel().equals("vetor") || aux.getModeloVariavel().equals("matriz"))){
+                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " O identificador utilizado " +
+                                "não foi declarado como um vetor ou matriz");
+                    }
+                }
                 proximo_token();
                 proximo_token();
                 procedimentoArrayUsage();
@@ -774,6 +796,14 @@ public class ControllerAnalisadorSintatico {
                     moreExpressions();
                 }
             }else if(tokenAux.getLexema().equals(",")){
+                int controleAux = verificarConst(token);
+                if(controleAux == -1){
+                    verificarDeclaracao(token,"constante","-");
+                }else{
+                    if(verificarDeclaracao(token,"variavel","-")){
+                        verificarInicializacao(token);
+                    }
+                }
                 proximo_token();
                 moreExpressions();
             }else{
@@ -1346,20 +1376,16 @@ public class ControllerAnalisadorSintatico {
     public void procedimentoArrayUsage(){
 
         if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
-            //verificarIndice(token,"variavel");
+            verificarIndice(token,"variavel");
             proximo_token();
             if(token.getLexema().equals("]")){
                 proximo_token();
                 if(token.getLexema().equals("[")){
                     proximo_token();
                     if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
-                        //verificarIndice(token,"variavel");
+                        verificarIndice(token,"variavel");
                         proximo_token();
                         if(token.getLexema().equals("]")){
-                            /**
-                             * Verificar se é uma matriz, se já foi declarado e se o elemento que está representando o indice está
-                             * correto.
-                             * */
                             proximo_token();
                         }else{
                             this.configurarErro(token,"]");
@@ -1370,10 +1396,6 @@ public class ControllerAnalisadorSintatico {
                         proximo_token();
                     }
                 }
-                /**
-                 * Verificar se é um array, se já foi declarado e se o elemento que está representando o indice está
-                 * correto. Colocar uma forma que se entrou em matriz, não verificar essas condições.
-                * */
             }else{
                 this.configurarErro(token,"]");
                 proximo_token();
@@ -1533,6 +1555,14 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }else if(tokenAux.getLexema().equals("[")){
+                            if(verificarDeclaracao(token,"variavel","-")){
+                                IVariaveis aux = (IVariaveis) this.filtrarVariaveis(token,"variavel");
+                                if(!(aux.getModeloVariavel().equals("vetor") || aux.getModeloVariavel().equals("matriz"))){
+                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " O identificador utilizado " +
+                                            "não foi declarado como um vetor ou matriz");
+                                }
+                                verificarInicializacao(token);
+                            }
                             proximo_token();
                             proximo_token();
                             procedimentoArrayUsage();
@@ -1627,6 +1657,13 @@ public class ControllerAnalisadorSintatico {
                 }
 
             }else if(tokenAux.getLexema().equals("[")){
+                if(verificarDeclaracao(token,"variavel","-")){
+                    IVariaveis aux = (IVariaveis) this.filtrarVariaveis(token,"variavel");
+                    if(!(aux.getModeloVariavel().equals("vetor") || aux.getModeloVariavel().equals("matriz"))){
+                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " O identificador utilizado " +
+                                "não foi declarado como um vetor ou matriz");
+                    }
+                }
                 proximo_token();
                 proximo_token();
                 procedimentoArrayUsage();
@@ -1647,6 +1684,14 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }else if(tokenAux.getLexema().equals("[")){
+                            if(verificarDeclaracao(token,"variavel","-")){
+                                IVariaveis aux = (IVariaveis) this.filtrarVariaveis(token,"variavel");
+                                if(!(aux.getModeloVariavel().equals("vetor") || aux.getModeloVariavel().equals("matriz"))){
+                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " O identificador utilizado " +
+                                            "não foi declarado como um vetor ou matriz");
+                                }
+                            }
+                            verificarInicializacao(token);
                             proximo_token();
                             proximo_token();
                             procedimentoArrayUsage();
@@ -1882,6 +1927,14 @@ public class ControllerAnalisadorSintatico {
                                     proximo_token();
                                 }
                             }else if(tokenAux.getLexema().equals("[")){
+                                if(verificarDeclaracao(token,"variavel","-")){
+                                    IVariaveis aux = (IVariaveis) this.filtrarVariaveis(token,"variavel");
+                                    if(!(aux.getModeloVariavel().equals("vetor") || aux.getModeloVariavel().equals("matriz"))){
+                                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " O identificador utilizado " +
+                                                "não foi declarado como um vetor ou matriz");
+                                    }
+                                }
+                                verificarInicializacao(token);
                                 proximo_token();
                                 proximo_token();
                                 procedimentoArrayUsage();
@@ -1920,8 +1973,16 @@ public class ControllerAnalisadorSintatico {
                             if(token.getLexema().equals(".")){
                                 proximo_token();
                                 if(token.getTipo().equals("IDE")){
+                                    Token identificadorAux1 = token;
                                     proximo_token();
                                     if(token.getLexema().equals("[")){
+                                        if(verificarDeclaracao(identificadorAux1,"variavel","-")){
+                                            IVariaveis aux = (IVariaveis) this.filtrarVariaveis(identificadorAux1,"variavel");
+                                            if(!(aux.getModeloVariavel().equals("vetor") || aux.getModeloVariavel().equals("matriz"))){
+                                                System.out.println("Erro Semântico: "+ "Linha: " + identificadorAux1.getLinha() + " O identificador utilizado " +
+                                                        "não foi declarado como um vetor ou matriz");
+                                            }
+                                        }
                                         procedimentoArrayUsage();
                                         if(token.getLexema().equals(";")){
                                             proximo_token();
@@ -2119,41 +2180,32 @@ public class ControllerAnalisadorSintatico {
     public void verificarIndice(Token token,String tipo){
         int controle = 0;
         if(token.getTipo().equals("IDE")){
-            /** Buscar na tabela o tipo do identificador **/
-            if(verificarDeclaracao(token,tipo)){
+            if(verificarDeclaracao(token,tipo,"vetor")){
                 IVariaveis aux = (IVariaveis) this.tabelaDeSimbolos.getSimbolo(token,tipo);
-                if(aux.getTipoVariavel().equals("inteiro")){
-
-                }else{
-                    System.out.println(token.getLinha() + " Tipo de indice inválido");
+                if(aux.getModeloVariavel().equals("variavel")){
+                    if(!aux.getTipoVariavel().equals("int")){
+                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " o indice do vetor deve ser do tipo inteiro(int)");
+                    }
                 }
             }
         }else if(token.getTipo().equals("NRO")){
-            /** Criar no token um atributo para verificar se é inteiro**/
             if(token.getLexema().contains(".")){
-                System.out.println(token.getLinha() + " Tipo de indice inválido");
+                System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " o indice do vetor deve ser do tipo inteiro(int)");
             }else{
 
             }
         }
-        /*
-        if(controle == 0){
-            return true;
-        }else{
-            return false;
-        }
-        */
     }
 
-    public boolean verificarDeclaracao(Token token, String tipo){
+    public boolean verificarDeclaracao(Token token, String tipo, String modelo){
         String tipoAux = " ";
         int controle = 0;
         IIdentificador aux = this.tabelaDeSimbolos.getSimbolo(token, tipo);
         if(aux == null){
-            //System.out.println(token.getLinha() + tipoAux + "não declarado(a)");
             System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " o identificador " + token.getLexema() + " não foi declarado");
             controle = 1;
         }else{
+
             controle = 0;
         }
 
@@ -2183,7 +2235,7 @@ public class ControllerAnalisadorSintatico {
 
     public void verificarTipoVariavel(Token token ,String modeloVariavel){
 
-        if(verificarDeclaracao(token,"variavel")){
+        if(verificarDeclaracao(token,"variavel","-")){
             IVariaveis aux = (IVariaveis) this.tabelaDeSimbolos.getSimbolo(token,"variavel");
             if(aux.getModeloVariavel().equals(modeloVariavel)){
 
