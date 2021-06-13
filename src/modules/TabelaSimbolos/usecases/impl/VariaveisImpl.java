@@ -11,15 +11,15 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
    private String tipoVariavel;
    private String modeloVariavel;
    private boolean inicializado;
-   private String StructPai; //Se for struct
+   private String structPai; //Se for struct
    private int maxIndice;    //Se for array
    private int maxIndice2;   //Se for matriz
    private int indiceAtual;  //Se for array
    private int indiceAtual2; //Se for matriz
    private String conteudo; // se for uma variavel normal
    private IdentificadorImpl identificador;
-   private ArrayList<String> tiposAtributosStruct;
-   private ArrayList<String> atributosStruct;
+   private ArrayList<ElementosStruct> dadosStruct;
+   //private ArrayList<String> atributosStruct;
 
     /*public VariaveisImpl(IdentificadorImpl identificador){
         this.identificador = identificador;
@@ -27,9 +27,9 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
 
     public VariaveisImpl(int id, Token token, int escopo){
         super(id,token,escopo);
-        this.tiposAtributosStruct = new ArrayList<>();
-        this.atributosStruct = new ArrayList<>();
+        this.dadosStruct = new ArrayList<>();
         this.inicializado = false;
+        this.structPai = "-";
     }
 
     public String getTipoVariavel() {
@@ -49,11 +49,11 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
     }
 
     public String getStructPai() {
-        return StructPai;
+        return structPai;
     }
 
     public void setStructPai(String structPai) {
-        StructPai = structPai;
+        structPai = structPai;
     }
 
     public int getMaxIndice() {
@@ -96,20 +96,12 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
         this.identificador = identificador;
     }
 
-    public ArrayList<String> getTiposAtributosStruct() {
-        return this.tiposAtributosStruct;
+    public ArrayList<ElementosStruct> getDadosStruct() {
+        return dadosStruct;
     }
 
-    public ArrayList<String> getAtributosStruct() {
-        return this.atributosStruct;
-    }
-
-    public void adicionarAtributosStruct(String lexema){
-        this.atributosStruct.add(lexema);
-    }
-
-    public void adcionarTiposAtributosStruct(String tipo){
-        this.tiposAtributosStruct.add(tipo);
+    public void setDadosStruct(ArrayList<ElementosStruct> dadosStruct) {
+        this.dadosStruct = dadosStruct;
     }
 
     public void setInicializado(boolean status){

@@ -4,6 +4,8 @@
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/IVariaveis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/facade/IVariaveis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/VariaveisImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/VariaveisImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,10 +200,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="485" y="48" key="#com.intellij.ide.util.MemberChooser" timestamp="1621883642771">
+    <state x="485" y="48" key="#com.intellij.ide.util.MemberChooser" timestamp="1623537159479">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="485" y="48" key="#com.intellij.ide.util.MemberChooser/0.0.1360.728@0.0.1360.728" timestamp="1621883642771" />
+    <state x="485" y="48" key="#com.intellij.ide.util.MemberChooser/0.0.1360.728@0.0.1360.728" timestamp="1623537159479" />
     <state width="1317" height="169" key="GridCell.Tab.0.bottom" timestamp="1623390517835">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
@@ -234,10 +236,10 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state width="1317" height="120" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1622785526858" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1623457168615">
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1623528017151">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1623457168615" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1623528017151" />
     <state x="336" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1622783846428">
       <screen x="0" y="0" width="1360" height="728" />
     </state>

@@ -1,5 +1,6 @@
 package modules.TabelaSimbolos.usecases.facade;
 
+import modules.TabelaSimbolos.usecases.impl.ElementosStruct;
 import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 
 import java.util.ArrayList;
@@ -39,15 +40,11 @@ public interface IVariaveis extends IIdentificador{
 
     public void setIdentificador(IdentificadorImpl identificador);
 
-    public ArrayList<String> getTiposAtributosStruct();
-
-    public void adicionarAtributosStruct(String lexema);
-
-    public void adcionarTiposAtributosStruct(String tipo);
-
-    public ArrayList<String> getAtributosStruct();
-
     public void setInicializado(boolean status);
 
     public boolean getInicializado();
+
+    public ArrayList<ElementosStruct> getDadosStruct();
+
+    public void setDadosStruct(ArrayList<ElementosStruct> dadosStruct);
 }
