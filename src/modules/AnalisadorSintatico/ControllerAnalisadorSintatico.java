@@ -18,6 +18,7 @@ public class ControllerAnalisadorSintatico {
     public ArrayList<Token> argumentosAux;
     public ArrayList<Token> argumentosFuncAux;
     public String tipoConstante;
+    public String tipoVariavel;
     public Token variavelReceptor;
     public String variavelReceptorTipo;
     public boolean controleExpressãoBooleana;
@@ -30,7 +31,10 @@ public class ControllerAnalisadorSintatico {
     public Token valorDireito;
     public Token valorEsquerdoAtributo;
     public Token valorDireitoAtributo;
-    public ArrayList<Token> atributosStruct;
+    public ArrayList<ElementosStruct> atributosStruct;
+    public boolean declaracaoStruct;
+    public ElementosStruct structAux;
+    public String atribuicao;
 
     public ArrayList<Token> listaTokens;
     public ArrayList<Token> listaTokensAuxilixar;
@@ -50,6 +54,8 @@ public class ControllerAnalisadorSintatico {
         this.tiposParametros = new ArrayList<>();
         this.argumentosAux = new ArrayList<>();
         this.tabelaDeSimbolos = new TabelaSimbolosImpl();
+        this.declaracaoStruct = false;
+        this.structAux = new ElementosStruct();
         this.tokenFimArquivo = new Token("$","EOF",false);
         if(tokens.size() != 0){
             this.token = tokens.get(this.indiceTokenAtual);
@@ -627,13 +633,17 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoVariableInit(){
-        IIdentificador aux = filtrarVariaveis(this.variavelReceptor,"variavel");
         String tipo = "erro";
-        if(aux == null){
-            System.out.println("Erro Semântico: "+ "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada");
-        }else{
-            tipo = ((IVariaveis)aux).getTipoVariavel();
-            ((IVariaveis)aux).setInicializado(true);
+        if(declaracaoStruct){
+            tipo = structAux.getTipo();
+        }else {
+            IIdentificador aux = filtrarVariaveis(this.variavelReceptor, "variavel");
+            if (aux == null) {
+                System.out.println("Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada");
+            } else {
+                tipo = ((IVariaveis) aux).getTipoVariavel();
+                ((IVariaveis) aux).setInicializado(true);
+            }
         }
         procedimentoExpression(tipo);
 
@@ -1215,6 +1225,11 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoTypedVariable(){
         if(primeiroType(token)){
+            if(this.declaracaoStruct){
+                this.structAux.setTipo(token.getLexema());
+            }else{
+                this.tipoVariavel = token.getLexema();
+            }
             proximo_token(); // pulando o tipo
             procedimentoVariables();
             if(token.getLexema().equals(";")){
@@ -1284,10 +1299,23 @@ public class ControllerAnalisadorSintatico {
     public void procedimentoVariableDeclarator(){
         if(token.getTipo().equals("IDE")){
             Token identificadorAux = token;
+            if(this.declaracaoStruct){
+                for(ElementosStruct elemento: this.atributosStruct){
+                    if(elemento.getNome().equals(identificadorAux.getLexema())){
+                        System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe um atributo com o nome " + identificadorAux.getLexema());
+                    }
+                }
+                structAux.setNome(identificadorAux.getLexema());
+                structAux.setInicializado(false);
+            }
             proximo_token();
             if(token.getLexema().equals("[")){
                 this.identificadorArrayAux = identificadorAux;
-                this.identificadorArrayDeclaradoAux = true;
+                if(declaracaoStruct){
+                    this.identificadorArrayDeclaradoAux = false;
+                }else{
+                    this.identificadorArrayDeclaradoAux = true;
+                }
                 this.identificadorArrayInicializadoAux = false;
                 proximo_token();
                 procedimentoArrayUsage();
@@ -1325,14 +1353,38 @@ public class ControllerAnalisadorSintatico {
                 if(token.getTipo().equals("IDE")){
                     Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
                     if(tokenAux.getLexema().equals(".")){
+                        this.atribuicao = "direito";
                         procedimentoStructUsage();
+                        verificarAtribuicao(identificadorAux,token,"0",this.valorDireitoAtributo.getLexema());
+                        structAux.setInicializado(true);
                     }else if(tokenAux.getLexema().equals("(")){
                         this.variavelReceptor = identificadorAux;
                         this.variavelReceptorTipo = "variavel";
                         procedimentoCallFunc("função");
                     }else if(primeiroOperadores(tokenAux)){
                         procedimentoVariableInit();
+                        structAux.setInicializado(true);
                     }else if(tokenAux.getLexema().equals(";")){
+                        if(declaracaoStruct){
+                            IIdentificador auxiliar = filtrarGlobais(token,"variavel");
+                            if(auxiliar == null){
+                                auxiliar = filtrarGlobais(token,"constante");
+                                if(auxiliar == null){
+                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " a variavel/constante " + token.getLexema() + " não foi declarada");
+                                }else{
+                                    if(!structAux.getTipo().equals(((IConstante)auxiliar).getTipoConstante())){
+                                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Tipos incompativeis");
+                                    }
+                                }
+                            }else{
+                                if(!structAux.getTipo().equals(((IVariaveis)auxiliar).getTipoVariavel())){
+                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Tipos incompativeis");
+                                }
+                            }
+                            structAux.setInicializado(true);
+                        }else{
+
+                        }
                         proximo_token();
                         //proximo_token();
                     }else{
@@ -1363,6 +1415,7 @@ public class ControllerAnalisadorSintatico {
                 }else if(token.getLexema().equals("true") || token.getLexema().equals("false") || token.getTipo().equals("NRO")
                         || token.getTipo().equals("CAD") || token.getLexema().equals("(") || token.getLexema().equals("!")){
                     procedimentoVariableInit();
+                    structAux.setInicializado(true);
                 }else{
                     this.configurarErro(token,"IDE,local,global,true,false,NRO,CAD,(,!");
                     //ErroSintatico error = new ErroSintatico(token.getLinha(),"IDE,local,global,true,false,NRO,CAD,(,!",token.getLexema());
@@ -1376,6 +1429,7 @@ public class ControllerAnalisadorSintatico {
             //System.out.println(error.info());
             proximo_token();
         }
+        this.atributosStruct.add(structAux);
     }
 
     public void procedimentoArrayUsage(){
@@ -1445,7 +1499,11 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoTypedConst(){
         if(primeiroType(token)){
-            tipoConstante = token.getLexema();
+            if(declaracaoStruct){
+                structAux.setTipo(token.getLexema());
+            }else{
+                tipoConstante = token.getLexema();
+            }
             proximo_token();
             procedimentoConstants();
             if(token.getLexema().equals(";")){
@@ -1476,21 +1534,38 @@ public class ControllerAnalisadorSintatico {
                 proximo_token();
                 if(token.getLexema().equals("true") || token.getLexema().equals("false")
                         || token.getTipo().equals("NRO") || token.getTipo().equals("CAD")){
-                    if(compatibilidadeTipos(this.tipoConstante,token)){
+                    if(this.declaracaoStruct){
+                        for(ElementosStruct elemento:this.atributosStruct){
+                            if(elemento.getNome().equals(identificadorAux.getLexema())){
+                                System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe um atributo com o nome " + identificadorAux.getLexema());
+                            }
+                        }
+                        structAux.setNome(identificadorAux.getLexema());
+                        if(compatibilidadeTipos(this.structAux.getTipo(),token)){
 
+                        }else{
+                            System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Valor atribuido a constante " + identificadorAux.getLexema() +
+                                    " não é um compativel com o tipo declarado na constante");
+                        }
+                        structAux.setInicializado(true);
+                        this.atributosStruct.add(structAux);
                     }else{
-                        System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Valor atribuido a constante " + identificadorAux.getLexema() +
-                                " não é um compativel com o tipo declarado na constante");
-                    }
-                    int controle = verificarConst(identificadorAux);
-                    if(controle == 0){
-                        ConstanteImpl constante = new ConstanteImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,-1);
-                        constante.setTipoConstante(this.tipoConstante);
-                        tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, constante);
-                    }else if(controle == -1){
-                        System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma constante com o nome " + identificadorAux.getLexema());
-                    }else{
-                        System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma variável com o nome " + identificadorAux.getLexema());
+                        if(compatibilidadeTipos(this.tipoConstante,token)){
+
+                        }else{
+                            System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Valor atribuido a constante " + identificadorAux.getLexema() +
+                                    " não é um compativel com o tipo declarado na constante");
+                        }
+                        int controle = verificarConst(identificadorAux);
+                        if(controle == 0){
+                            ConstanteImpl constante = new ConstanteImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,identificadorAux,-1);
+                            constante.setTipoConstante(this.tipoConstante);
+                            tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, constante);
+                        }else if(controle == -1){
+                            System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma constante com o nome " + identificadorAux.getLexema());
+                        }else{
+                            System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma variável com o nome " + identificadorAux.getLexema());
+                        }
                     }
                     proximo_token();
                     if(token.getLexema().equals(",")){
@@ -1524,7 +1599,11 @@ public class ControllerAnalisadorSintatico {
             if(token.getLexema().equals(".")){
                 proximo_token();
                 if(token.getTipo().equals("IDE")){
-                    this.valorEsquerdoAtributo = token;
+                    if(atribuicao.equals("esquerdo")){
+                        this.valorEsquerdoAtributo = token;
+                    }else if(atribuicao.equals("direito")){
+                        this.valorDireitoAtributo = token;
+                    }
                     verificarAtributo(identificador,token,this.identificadorStructInicializadoAux);
                     proximo_token();
                 }else{
@@ -2071,6 +2150,10 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void procedimentoStructDecl(){
+        int controle = 0;
+        int controlePai = 0;
+        boolean temPai = false;
+        String nomePai = "";
         if(token.getLexema().equals("typedef")){
             proximo_token();
             if(token.getLexema().equals("struct")){
@@ -2078,6 +2161,25 @@ public class ControllerAnalisadorSintatico {
                 if(token.getLexema().equals("extends")){
                     proximo_token();
                     if(token.getTipo().equals("IDE")){
+                        ArrayList<IIdentificador> auxiliar = this.tabelaDeSimbolos.getSimbolos(token,"variavel");
+                        if(auxiliar == null){
+                            System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Não é possível herdar da struct" + token.getLexema() +
+                                    " pois ela não foi declarada.");
+                        }else{
+                            for(IIdentificador ide: auxiliar){
+                                if(ide.getEscopo() == -1){
+                                    if(((IVariaveis)ide).getModeloVariavel().equals("struct")){
+                                        controlePai = 1;
+                                    }
+                                }
+                            }
+                        }
+                        if(controlePai == 0){
+                            System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Não é possível herdar da struct" + token.getLexema() +
+                                    " pois a variavel declarada com esse nome não é uma struct.");
+                        }
+                        temPai = true;
+                        nomePai = token.getLexema();
                         proximo_token();
                         /**
                          * verifica se o identificador é uma struct, e adicona ela como pai dessa struct
@@ -2095,6 +2197,37 @@ public class ControllerAnalisadorSintatico {
                     if(token.getLexema().equals("}")){
                         proximo_token();
                         if(token.getTipo().equals("IDE")){
+                            ArrayList<IIdentificador> aux = this.tabelaDeSimbolos.getSimbolos(token,"variavel");
+                            ArrayList<IIdentificador> aux1 = this.tabelaDeSimbolos.getSimbolos(token,"constante");
+                            if(aux != null){
+                                for(IIdentificador ide: aux){
+                                    if(ide.getEscopo() == -1){
+                                        controle = 1;
+                                    }
+                                }
+                            }
+
+                            if(controle == 0){
+                                if(aux1 != null){
+                                    controle = 1;
+                                }else{
+                                    controle = 0;
+                                }
+                            }
+
+                            if(controle == 0){
+                                VariaveisImpl variavel = new VariaveisImpl(this.tabelaDeSimbolos.numeroSimbolos()+1,token,-1);
+                                variavel.setTipoVariavel(token.getLexema());
+                                variavel.setModeloVariavel("struct");
+                                if(temPai){
+                                    variavel.setStructPai(nomePai);
+                                }
+                                variavel.setDadosStruct(atributosStruct);
+                                tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, variavel);
+
+                            }else{
+                                System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Já existe uma variavel/constante com o nome " + token.getLexema());
+                            }
                             proximo_token();
                             if(token.getLexema().equals(";")){
                                 /**
@@ -2143,7 +2276,9 @@ public class ControllerAnalisadorSintatico {
 
     public void procedimentoStructDef(){
         if(token.getLexema().equals("var") || token.getLexema().equals("const")){
+            this.declaracaoStruct = true;
             procedimentoVarDecl();
+            this.declaracaoStruct = false;
             if(token.getLexema().equals("var") || token.getLexema().equals("const")){
                 procedimentoStructDef();
             }
@@ -2719,21 +2854,23 @@ public class ControllerAnalisadorSintatico {
         ArrayList<IIdentificador> variaveis = this.tabelaDeSimbolos.getSimbolos(identificador,tipo);
         int controleGlobal = 0;
         IVariaveis variavelAux = null;
-        if(!controleStruct) {
-            for (IIdentificador variavel : variaveis) {
-                variavelAux = (IVariaveis) variavel;
-                if (variavelAux.getEscopo() == this.escopo) {
-                    controleGlobal = 1;
-                    break;
+        if(variaveis != null){
+            if(!controleStruct) {
+                for (IIdentificador variavel : variaveis) {
+                    variavelAux = (IVariaveis) variavel;
+                    if (variavelAux.getEscopo() == this.escopo) {
+                        controleGlobal = 1;
+                        break;
+                    }
                 }
             }
-        }
-        if(controleGlobal == 0){
-            for(IIdentificador variavel: variaveis){
-                variavelAux = (IVariaveis)variavel;
-                if(variavelAux.getEscopo() == -1){
-                    controleGlobal = 2;
-                    break;
+            if(controleGlobal == 0){
+                for(IIdentificador variavel: variaveis){
+                    variavelAux = (IVariaveis)variavel;
+                    if(variavelAux.getEscopo() == -1){
+                        controleGlobal = 2;
+                        break;
+                    }
                 }
             }
         }
@@ -2743,6 +2880,27 @@ public class ControllerAnalisadorSintatico {
             return variavelAux;
         }
 
+    }
+
+    public IIdentificador filtrarGlobais(Token token, String tipo){
+        ArrayList<IIdentificador> variaveis = this.tabelaDeSimbolos.getSimbolos(token,tipo);
+        int controleGlobal = 0;
+        IVariaveis variavelAux = null;
+        if(variaveis != null){
+            for(IIdentificador variavel: variaveis){
+                variavelAux = (IVariaveis)variavel;
+                if(variavelAux.getEscopo() == -1){
+                    controleGlobal = 1;
+                    break;
+                }
+            }
+        }
+
+        if(controleGlobal == 0){
+            return null;
+        }else{
+            return variavelAux;
+        }
     }
 
     /*public boolean verificarDuplicidade(Token token,String tipo, int quantidadeParametros, ArrayList<String> tipos, String retorno){

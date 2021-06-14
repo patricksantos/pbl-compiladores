@@ -12,6 +12,10 @@ public class ElementosStruct {
         this.inicializado = inicializado;
     }
 
+    public ElementosStruct(){
+        this.inicializado = false;
+    }
+
     public String getNome() {
         return nome;
     }
