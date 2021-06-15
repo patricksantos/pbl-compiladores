@@ -38,9 +38,11 @@ public class ControllerAnalisadorSintatico {
     public ElementosStruct structAux;
     public String atribuicao;
     public boolean declaracaoVariavel;
+    public String erroAux;
 
     public ArrayList<Token> listaTokens;
     public ArrayList<Token> listaTokensAuxilixar;
+    public ArrayList<String> erros_semanticos;
     public int indiceTokenAtual = 0;
     public Token tokenFimArquivo;
     public ArrayList<ErroSintatico> erros;
@@ -53,6 +55,7 @@ public class ControllerAnalisadorSintatico {
         this.indiceTokenAtual = 0;
         this.quantidadeParametrosAux = 0;
         this.listaTokens = tokens;
+        this.erros_semanticos = new ArrayList<>();
         this.listaTokensAuxilixar = new ArrayList<>();
         this.tiposParametros = new ArrayList<>();
         this.argumentosAux = new ArrayList<>();
@@ -141,6 +144,11 @@ public class ControllerAnalisadorSintatico {
         System.out.println(error.info());
         this.controleErro = true;
     }
+
+    public ArrayList<String> getErrosSemanticos(){
+        return this.erros_semanticos;
+    }
+
     public void init(){
         if(token.getLexema().equals("function") || token.getLexema().equals("procedure") || token.getTipo().equals("var")
                 || token.getLexema().equals("const") || token.getLexema().equals("typedef") /*|| token.getLexema().equals("local")
@@ -389,6 +397,8 @@ public class ControllerAnalisadorSintatico {
                     || token.getTipo().equals("CAD") || token.getLexema().equals("(") || token.getLexema().equals("!") || token.getTipo().equals("IDE")) {
                 procedimentoExpression("boolean");
                 if(!controleExpressãoBooleana){
+                    this.erroAux = "Erro Semântico: "+ "Linha: " + identificadorAux.getLinha() + " a expressão do IF deve resultar em um tipo booleano";
+                    this.erros_semanticos.add(erroAux);
                     System.out.println("Erro Semântico: "+ "Linha: " + identificadorAux.getLinha() + " a expressão do IF deve resultar em um tipo booleano");
                 }
                 this.controleExpressãoBooleana = false;
@@ -437,6 +447,8 @@ public class ControllerAnalisadorSintatico {
                     || token.getTipo().equals("CAD") || token.getLexema().equals("(") || token.getLexema().equals("!") || token.getTipo().equals("IDE")){
                 procedimentoExpression("boolean");
                 if(!controleExpressãoBooleana){
+                    this.erroAux = "Erro Semântico: "+ "Linha: " + identificadorAux.getLinha() + " a expressão do WHILE deve resultar em um tipo booleano";
+                    this.erros_semanticos.add(erroAux);
                     System.out.println("Erro Semântico: "+ "Linha: " + identificadorAux.getLinha() + " a expressão do WHILE deve resultar em um tipo booleano");
                 }
                 this.controleExpressãoBooleana = false;
@@ -493,6 +505,8 @@ public class ControllerAnalisadorSintatico {
         if(token.getLexema().equals("||") && token.getTipo().equals("LOG")){
             this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean") && (!tipo.equals("erro"))){
+                this.erroAux = "Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos");
             }
             proximo_token();
@@ -505,6 +519,8 @@ public class ControllerAnalisadorSintatico {
         if(token.getLexema().equals("&&") && token.getTipo().equals("LOG")){
             this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean") && (!tipo.equals("erro"))){
+                this.erroAux = "Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos");
             }
             proximo_token();
@@ -517,6 +533,8 @@ public class ControllerAnalisadorSintatico {
         if(token.getLexema().equals("==") || token.getLexema().equals("!=") && token.getTipo().equals("REL")){
             this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean") && (!tipo.equals("erro"))){
+                this.erroAux = "Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos");
             }
             proximo_token();
@@ -529,6 +547,8 @@ public class ControllerAnalisadorSintatico {
         if(token.getLexema().equals("<") || token.getLexema().equals(">") || token.getLexema().equals("<=") || token.getLexema().equals(">=")){
             this.controleExpressãoBooleana = true;
             if(!tipo.equals("boolean") && (!tipo.equals("erro"))){
+                this.erroAux = "Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos");
             }
             proximo_token();
@@ -540,6 +560,8 @@ public class ControllerAnalisadorSintatico {
         MultiplicationExpression(tipo);
         if(token.getLexema().equals("+") || token.getLexema().equals("-")){
             if((tipo.equals("string")) && (!tipo.equals("erro"))){
+                this.erroAux = "Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos inteiros ou booleanos";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos inteiros ou booleanos");
             }
             proximo_token();
@@ -558,6 +580,8 @@ public class ControllerAnalisadorSintatico {
     public void UnaryExpression(String tipo){
         if(token.getLexema().equals("!")){
             if((!tipo.equals("boolean")) && (!tipo.equals("erro"))){
+                this.erroAux = "Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o operador " + this.token.getLexema() + " só pode ser utilizado em tipos booleanos");
             }
             proximo_token();
@@ -598,6 +622,8 @@ public class ControllerAnalisadorSintatico {
                         if(((IVariaveis)aux3).getInicializado()){
 
                         }else{
+                            this.erroAux = "Erro Semântico: "+ "Linha: " + token.getLinha() + " a variavel " + token.getLexema() + " não foi inicializada";
+                            this.erros_semanticos.add(erroAux);
                             System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " a variavel " + token.getLexema() + " não foi inicializada");
                         }
                         if(((IVariaveis)aux3).getTipoVariavel().equals(tipo)){
@@ -612,6 +638,8 @@ public class ControllerAnalisadorSintatico {
                                 resultado = true;
                             }
                         }else{
+                            this.erroAux = "Erro Semântico:"+ " Linha: " + token.getLinha() + " a variavel/constante " + token.getLexema() + " não foi declarada";
+                            this.erros_semanticos.add(erroAux);
                             System.out.println("Erro Semântico:"+ " Linha: " + token.getLinha() + " a variavel/constante " + token.getLexema() + " não foi declarada");
                         }
 
@@ -626,6 +654,8 @@ public class ControllerAnalisadorSintatico {
                 }
                 if(controleDeclaracao){
                     if(!resultado){
+                        this.erroAux = "Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o token " + this.token.getLexema() + " é de um tipo incompatível";
+                        this.erros_semanticos.add(erroAux);
                         System.out.println("Erro Semântico: "+ "Linha: " + this.token.getLinha() + " o token " + this.token.getLexema() + " é de um tipo incompatível");
                     }
                 }
@@ -651,6 +681,8 @@ public class ControllerAnalisadorSintatico {
         }else {
             IIdentificador aux = filtrarVariaveis(this.variavelReceptor, "variavel");
             if (aux == null) {
+                this.erroAux = "Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada");
             } else {
                 tipo = ((IVariaveis) aux).getTipoVariavel();
@@ -661,6 +693,8 @@ public class ControllerAnalisadorSintatico {
 
         if(tipo.equals("boolean")){
             if(!controleExpressãoBooleana){
+                this.erroAux = "Erro Semântico:"+ " Linha: " + this.variavelReceptor.getLinha() + " a expressão deve resultar em um tipo booleano";
+                this.erros_semanticos.add(erroAux);
                 System.out.println("Erro Semântico:"+ " Linha: " + this.variavelReceptor.getLinha() + " a expressão deve resultar em um tipo booleano");
             }
         }
@@ -892,6 +926,8 @@ public class ControllerAnalisadorSintatico {
                         tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, variavel);
                     }
                 }else{
+                    this.erroAux = "Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe um procedimento com o nome " + identificadorAux.getLexema();
+                    erros_semanticos.add(erroAux);
                     System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe um procedimento com o nome " + identificadorAux.getLexema());
                 }
                 if(token.getLexema().equals(")")){

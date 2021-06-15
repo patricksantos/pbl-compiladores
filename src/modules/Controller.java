@@ -46,7 +46,8 @@ public class Controller {
                 ArrayList<Token> tokens = controllerAnalisadorLexico.analiseArquivo(conteudo);
                 //Escreve os tokens e os erros(caso ocorram), no arquivo de saida.
                 tokens = this.controllerAnalisadorSintatico.iniciarLeitura(tokens);
-                this.escritaArquivos.escrita(tokens, controllerAnalisadorLexico.getErros(), arquivo);
+                ArrayList<String> errosSemanticos = this.controllerAnalisadorSintatico.getErrosSemanticos();
+                this.escritaArquivos.escrita(tokens, controllerAnalisadorLexico.getErros(),errosSemanticos,arquivo);
             }
         }
     }

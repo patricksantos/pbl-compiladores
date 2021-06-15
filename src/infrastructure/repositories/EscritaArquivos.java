@@ -45,7 +45,7 @@ public class EscritaArquivos implements IEscritaArquivos {
      * @param nomeArquivo nome do arquivo de onde os tokens e os possiveis erro foram retirados.
      * */
     @Override
-    public void escrita(ArrayList<Token> tokens, ArrayList<Token> erros,String nomeArquivo) throws IOException {
+    public void escrita(ArrayList<Token> tokens, ArrayList<Token> erros,ArrayList<String> errosSemanticos,String nomeArquivo) throws IOException {
 
         //Cria o nome do arquivo de saida a partir do nome do arquivo de entrada.
         int auxiliar = nomeArquivo.lastIndexOf("a");
@@ -65,13 +65,21 @@ public class EscritaArquivos implements IEscritaArquivos {
 
         escrever.writeChars("\n");
         //Mensagem de sucesso caso não tenha nenhum erro no arquivo de entrada que foi lido
-        if(erros.size() == 0 && (!erroSintatico)){
+        if(erros.size() == 0 && (!erroSintatico) && errosSemanticos.size() == 0){
             escrever.writeBytes("Análise feita com sucesso, nenhum erro foi encontrado.");
         }
         //Caso tenha, escreve os erros no arquivo de saida
         for(Token token : erros){
             escrever.writeBytes(token.info());
             escrever.writeChars("\n");
+        }
+        if(errosSemanticos.size() > 0){
+            escrever.writeBytes("Erros Semânticos:");
+            escrever.writeChars("\n");
+            for(String erro: errosSemanticos){
+                escrever.writeBytes(erro);
+                escrever.writeChars("\n");
+            }
         }
         escrever.flush();
         escrever.close();
