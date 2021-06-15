@@ -45,7 +45,7 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
     }
 
     public void setModeloVariavel(String modeloVariavel) {
-        this.modeloVariavel = tipoVariavel;
+        this.modeloVariavel = modeloVariavel;
     }
 
     public String getStructPai() {
