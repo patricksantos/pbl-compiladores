@@ -681,9 +681,16 @@ public class ControllerAnalisadorSintatico {
         }else {
             IIdentificador aux = filtrarVariaveis(this.variavelReceptor, "variavel");
             if (aux == null) {
-                this.erroAux = "Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada";
-                this.erros_semanticos.add(erroAux);
-                System.out.println("Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada");
+                IConstante aux1 = filtrarConstantes(this.variavelReceptor);
+                if(aux1 != null){
+                    this.erroAux = "Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " Não é possível mudar o valor de uma constante.";
+                    this.erros_semanticos.add(erroAux);
+                    System.out.println("Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " Não é possível mudar o valor de uma constante.");
+                }else{
+                    this.erroAux = "Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada";
+                    this.erros_semanticos.add(erroAux);
+                    System.out.println("Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() + " a variavel " + this.variavelReceptor.getLexema() + " não foi declarada");
+                }
             } else {
                 tipo = ((IVariaveis) aux).getTipoVariavel();
                 ((IVariaveis) aux).setInicializado(true);
@@ -1825,6 +1832,7 @@ public class ControllerAnalisadorSintatico {
             this.valorEsquerdo = token;
             Token tokenAux = listaTokens.get(indiceTokenAtual + 1);
             if(tokenAux.getLexema().equals(".")){
+                this.atribuicao = "esquerdo";
                 procedimentoStructUsage();
                 if(token.getLexema().equals(";")){
                     proximo_token();
@@ -1835,7 +1843,9 @@ public class ControllerAnalisadorSintatico {
                         this.valorDireito = token;
                         tokenAux = listaTokens.get(indiceTokenAtual + 1);
                         if(tokenAux.getLexema().equals(".")){
+                            this.atribuicao = "direito";
                             procedimentoStructUsage();
+                            verificarAtribuicao(valorEsquerdo,valorDireito,this.valorEsquerdoAtributo.getLexema(),this.valorDireitoAtributo.getLexema());
                             if(token.getLexema().equals(";")){
                                 proximo_token();
                             }else{
@@ -1852,6 +1862,7 @@ public class ControllerAnalisadorSintatico {
                             proximo_token();
                             procedimentoArrayUsage();
                             this.identificadorArrayInicializadoAux = false;
+                            verificarAtribuicao(this.valorEsquerdo,this.valorDireito,"0","0");
                             if(token.getLexema().equals(";")){
                                 proximo_token();
                             }else{
@@ -1873,7 +1884,7 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }else if(primeiroOperadores(tokenAux)){
-                            this.variavelReceptor = identificadorAux2;
+                            this.variavelReceptor = identificadorAux;
                             procedimentoVariableInit();
                             if(token.getLexema().equals(";")){
                                 proximo_token();
@@ -1884,6 +1895,7 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }else if(tokenAux.getLexema().equals(";")){
+                            verificarAtribuicao(valorEsquerdo,valorDireito,valorEsquerdoAtributo.getLexema(),"0");
                             proximo_token();
                             proximo_token();
                         }else{
@@ -1895,7 +1907,7 @@ public class ControllerAnalisadorSintatico {
                         }
                     }else if(token.getLexema().equals("true") || token.getLexema().equals("false") || token.getTipo().equals("NRO")
                             || token.getTipo().equals("CAD") || token.getLexema().equals("(") || token.getLexema().equals("!")){
-                        this.variavelReceptor = token;
+                        this.variavelReceptor = valorEsquerdo;
                         procedimentoVariableInit();
                         if(token.getLexema().equals(";")){
                             proximo_token();
@@ -1961,7 +1973,9 @@ public class ControllerAnalisadorSintatico {
                         this.valorDireito = token;
                         tokenAux = listaTokens.get(indiceTokenAtual + 1);
                         if(tokenAux.getLexema().equals(".")){
+                            this.atribuicao = "direito";
                             procedimentoStructUsage();
+                            verificarAtribuicao(valorEsquerdo,valorDireito,"0",valorDireitoAtributo.getLexema());
                             if(token.getLexema().equals(";")){
                                 proximo_token();
                             }else{
@@ -1977,6 +1991,7 @@ public class ControllerAnalisadorSintatico {
                             proximo_token();
                             proximo_token();
                             procedimentoArrayUsage();
+                            verificarAtribuicao(valorEsquerdo,valorDireito,"0","0");
                             this.identificadorArrayInicializadoAux = false;
                             if(token.getLexema().equals(";")){
                                 proximo_token();
@@ -1986,7 +2001,31 @@ public class ControllerAnalisadorSintatico {
                                 //System.out.println(erro.info());
                                 proximo_token();
                             }
+                        }else if(tokenAux.getLexema().equals("(")){
+                            this.variavelReceptor = valorEsquerdo;
+                            this.variavelReceptorTipo = "variavel";
+                            procedimentoCallFunc("função");
+                            if(token.getLexema().equals(";")){
+                                proximo_token();
+                            }else{
+                                this.configurarErro(token,";");
+                                //ErroSintatico erro = new ErroSintatico(token.getLinha(),";",token.getLexema());
+                                //System.out.println(erro.info());
+                                proximo_token();
+                            }
+                        }else if(primeiroOperadores(tokenAux)){
+                            this.variavelReceptor = valorEsquerdo;
+                            procedimentoVariableInit();
+                            if(token.getLexema().equals(";")){
+                                proximo_token();
+                            }else{
+                                this.configurarErro(token,";");
+                                //ErroSintatico erro = new ErroSintatico(token.getLinha(),";",token.getLexema());
+                                //System.out.println(erro.info());
+                                proximo_token();
+                            }
                         }else if(tokenAux.getLexema().equals(";")){
+                            verificarAtribuicao(valorEsquerdo,valorDireito,"0","0");
                             proximo_token();
                             proximo_token();
                         }else{
@@ -1996,8 +2035,10 @@ public class ControllerAnalisadorSintatico {
                             //System.out.println(erro.info());
                             proximo_token();
                         }
-                    }else if(token.getTipo().equals("NRO") || token.getTipo().equals("IDE") || token.getLexema().equals("true") || token.getLexema().equals("false")){
+                    }else if(token.getTipo().equals("NRO") /*|| token.getTipo().equals("IDE")*/ || token.getLexema().equals("true") || token.getLexema().equals("false") || token.getTipo().equals("CAD")){
                         this.valorDireito = token;
+                        this.variavelReceptor = valorEsquerdo;
+                        procedimentoVariableInit();
                         proximo_token();
                         if(token.getLexema().equals(";")){
                             proximo_token();
@@ -2093,7 +2134,9 @@ public class ControllerAnalisadorSintatico {
                         this.valorDireito = token;
                         tokenAux = listaTokens.get(indiceTokenAtual + 1);
                         if(tokenAux.getLexema().equals(".")){
+                            this.atribuicao = "direito";
                             procedimentoStructUsage();
+                            verificarAtribuicao(identificadorAux,token,"0",this.valorDireitoAtributo.getLexema());
                             if(token.getLexema().equals(";")){
                                 proximo_token();
                             }else{
@@ -2124,6 +2167,8 @@ public class ControllerAnalisadorSintatico {
                                 proximo_token();
                             }
                         }else if(tokenAux.getLexema().equals(";")){
+                            verificarAtribuicao(identificadorAux,token,"0","0");
+                            proximo_token();
                             proximo_token();
                         }else{
                             proximo_token();
@@ -2972,6 +3017,7 @@ public class ControllerAnalisadorSintatico {
                 }
             }else{
                 valorEsquerdo = variavelAux.getTipoVariavel();
+                variavelAux.setInicializado(true);
             }
         }
 
@@ -3027,6 +3073,7 @@ public class ControllerAnalisadorSintatico {
         if(!(valorEsquerdo.equals("")) && valorDireito != null){
             if (!compatibilidadeTipos(valorEsquerdo, valorDireito)) {
                 System.out.println("Erro Semântico: " + "Linha: " + identificador.getLinha() + " Está sendo atribuído um tipo incorreto na variavel " + identificador.getLexema());
+
             }
         }
     }
