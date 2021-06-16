@@ -62,7 +62,8 @@ public class ControllerAnalisadorLexico {
                 //Retorna os tokens identificados no arquivo.
                 ArrayList<Token> tokens = analisadorLexico.analiseArquivo(conteudo);
                 //Escreve os tokens e os erros(caso ocorram), no arquivo de saida.
-                this.escritaArquivos.escrita(tokens, analisadorLexico.getErros(), arquivo);
+                ArrayList<String> errosSemanticos = new ArrayList<>();
+                this.escritaArquivos.escrita(tokens, analisadorLexico.getErros(),errosSemanticos ,arquivo);
             }
         }
     }

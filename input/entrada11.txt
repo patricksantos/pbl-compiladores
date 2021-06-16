@@ -1,0 +1,14 @@
+//read e print
+var {int m = 5;}
+const {real p = 1.5;}
+procedure imprimir (string msg, int a) {
+ 	var {boolean h = false; int h = m;}
+}
+
+procedure imprimir (int msg, int a) {
+ 	var {string f; real x = 1.5;}
+}
+
+procedure start {
+	var {string b = "a", n = 1.5;}
+}

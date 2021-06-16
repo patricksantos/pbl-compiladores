@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ce8d6117-72c6-435d-8088-a85fe870d766" name="Default Changelist" comment="criação da tabela de simbolos e finalização do automato palavrasReservadasIdentificadores">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/repositories/IEscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/repositories/IEscritaArquivos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/infrastructure/repositories/EscritaArquivos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/Saida8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output/Saida8.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorLexico/ControllerAnalisadorLexico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/AnalisadorSintatico/ControllerAnalisadorSintatico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/TabelaSimbolosImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/TabelaSimbolos/usecases/impl/TabelaSimbolosImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,22 +205,22 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state x="485" y="48" key="#com.intellij.ide.util.MemberChooser/0.0.1360.728@0.0.1360.728" timestamp="1623537159479" />
-    <state width="1317" height="169" key="GridCell.Tab.0.bottom" timestamp="1623717976541">
+    <state width="1317" height="169" key="GridCell.Tab.0.bottom" timestamp="1623823069815">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="169" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1623717976541" />
-    <state width="1317" height="169" key="GridCell.Tab.0.center" timestamp="1623717976541">
+    <state width="1317" height="169" key="GridCell.Tab.0.bottom/0.0.1360.728@0.0.1360.728" timestamp="1623823069815" />
+    <state width="1317" height="169" key="GridCell.Tab.0.center" timestamp="1623823069815">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="169" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1623717976541" />
-    <state width="1317" height="169" key="GridCell.Tab.0.left" timestamp="1623717976541">
+    <state width="1317" height="169" key="GridCell.Tab.0.center/0.0.1360.728@0.0.1360.728" timestamp="1623823069815" />
+    <state width="1317" height="169" key="GridCell.Tab.0.left" timestamp="1623823069815">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="169" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1623717976541" />
-    <state width="1317" height="169" key="GridCell.Tab.0.right" timestamp="1623717976541">
+    <state width="1317" height="169" key="GridCell.Tab.0.left/0.0.1360.728@0.0.1360.728" timestamp="1623823069815" />
+    <state width="1317" height="169" key="GridCell.Tab.0.right" timestamp="1623823069815">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state width="1317" height="169" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1623717976541" />
+    <state width="1317" height="169" key="GridCell.Tab.0.right/0.0.1360.728@0.0.1360.728" timestamp="1623823069815" />
     <state width="1317" height="120" key="GridCell.Tab.1.bottom" timestamp="1622785526858">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
@@ -237,10 +237,10 @@
       <screen x="0" y="0" width="1360" height="728" />
     </state>
     <state width="1317" height="120" key="GridCell.Tab.1.right/0.0.1360.728@0.0.1360.728" timestamp="1622785526858" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1623783614536">
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1623819585080">
       <screen x="0" y="0" width="1360" height="728" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1623783614536" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1360.728@0.0.1360.728" timestamp="1623819585080" />
     <state x="336" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1622783846428">
       <screen x="0" y="0" width="1360" height="728" />
     </state>

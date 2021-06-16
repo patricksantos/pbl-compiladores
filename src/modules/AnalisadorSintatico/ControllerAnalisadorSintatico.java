@@ -150,7 +150,7 @@ public class ControllerAnalisadorSintatico {
     }
 
     public void init(){
-        if(token.getLexema().equals("function") || token.getLexema().equals("procedure") || token.getTipo().equals("var")
+        if(token.getLexema().equals("function") || token.getLexema().equals("procedure") || token.getLexema().equals("var")
                 || token.getLexema().equals("const") || token.getLexema().equals("typedef") /*|| token.getLexema().equals("local")
                 || token.getLexema().equals("global")*/){
 
@@ -1002,6 +1002,8 @@ public class ControllerAnalisadorSintatico {
                             tabelaDeSimbolos.adicionarSimbolo(this.tabelaDeSimbolos.numeroSimbolos() + 1, variavel);
                         }
                     }else{
+                        this.erroAux = "Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma função com o nome " + identificadorAux.getLexema();
+                        this.erros_semanticos.add(erroAux);
                         System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() + " Já existe uma função com o nome " + identificadorAux.getLexema());
                     }
                     if(token.getLexema().equals(")")){
@@ -1077,11 +1079,15 @@ public class ControllerAnalisadorSintatico {
                     IIdentificador aux = filtrarVariaveis(token,"variavel");
                     String tipo = "---";
                     if(aux == null){
-                        aux = filtrarVariaveis(token,"constante");
+                        //aux = filtrarVariaveis(token,"constante");
+                        aux = filtrarConstantes(token);
                     }else{
                         tipo = ((IVariaveis)aux).getTipoVariavel();
                     }
                     if(aux == null){
+                        this.erroAux = "Erro Semântico: " + "Linha: " + token.getLinha() +
+                                " A variavel/constante " + token.getLexema() + " não foi declarada";
+                        this.erros_semanticos.add(erroAux);
                         System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() +
                                 " A variavel/constante " + token.getLexema() + " não foi declarada");
                     }else{
@@ -1089,6 +1095,9 @@ public class ControllerAnalisadorSintatico {
                             tipo = ((IConstante)aux).getTipoConstante();
                         }
                         if(!this.tipoRetorno.equals(tipo)){
+                            this.erroAux = "Erro Semântico: " + "Linha: " + token.getLinha() +
+                                    " O tipo de retorno da função não é compatível";
+                            this.erros_semanticos.add(erroAux);
                             System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() +
                                     " O tipo de retorno da função não é compatível");
                         }
@@ -1097,18 +1106,27 @@ public class ControllerAnalisadorSintatico {
                 }
             }else if(token.getTipo().equals("CAD")){
                 if(!compatibilidadeTipos(this.tipoRetorno,token)){
+                    this.erroAux = "Erro Semântico: " + "Linha: " + token.getLinha() +
+                            " O tipo de retorno da função não é compatível";
+                    this.erros_semanticos.add(erroAux);
                     System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() +
                             " O tipo de retorno da função não é compatível");
                 }
                 proximo_token();
             }else if(token.getTipo().equals("NRO")){
                 if(!compatibilidadeTipos(this.tipoRetorno,token)){
+                    this.erroAux = "Erro Semântico: " + "Linha: " + token.getLinha() +
+                            " O tipo de retorno da função não é compatível";
+                    this.erros_semanticos.add(erroAux);
                     System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() +
                             " O tipo de retorno da função não é compatível");
                 }
                 proximo_token();
             }else if(token.getLexema().equals("true") || token.getLexema().equals("false")){
                 if(!compatibilidadeTipos(this.tipoRetorno,token)){
+                    this.erroAux = "Erro Semântico: " + "Linha: " + token.getLinha() +
+                            " O tipo de retorno da função não é compatível";
+                    this.erros_semanticos.add(erroAux);
                     System.out.println("Erro Semântico: " + "Linha: " + token.getLinha() +
                             " O tipo de retorno da função não é compatível");
                 }
@@ -1177,6 +1195,9 @@ public class ControllerAnalisadorSintatico {
                         IFuncao temp2 = (IFuncao)temp;
                         if(this.variavelReceptorTipo.equals("função")){
                             if(!temp2.getTipoRetorno().equals(this.tipoRetorno)){
+                                this.erroAux = "Erro Semântico: " + "Linha: " + identificadorAux.getLinha() +
+                                        " O tipo de retorno da função não é compatível";
+                                this.erros_semanticos.add(erroAux);
                                 System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() +
                                         " O tipo de retorno da função não é compatível");
                             }
@@ -1186,10 +1207,16 @@ public class ControllerAnalisadorSintatico {
                             if(temp3 != null) {
                                 IVariaveis temp4 = (IVariaveis) temp3;
                                 if (!temp2.getTipoRetorno().equals(temp4.getTipoVariavel())) {
+                                    this.erroAux = "Erro Semântico: " + "Linha: " + identificadorAux.getLinha() +
+                                            " O tipo de retorno da função não é compatível";
+                                    this.erros_semanticos.add(erroAux);
                                     System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() +
                                             " O tipo de retorno da função não é compatível");
                                 }
                             }else{
+                                this.erroAux = "Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() +
+                                        " A variável não foi declarada";
+                                this.erros_semanticos.add(erroAux);
                                 System.out.println("Erro Semântico: " + "Linha: " + this.variavelReceptor.getLinha() +
                                         " A variável não foi declarada");
                             }
@@ -1197,6 +1224,10 @@ public class ControllerAnalisadorSintatico {
 
                     }
                 }else{
+                    this.erroAux = "Erro Semântico: " + "Linha: " + identificadorAux.getLinha() +
+                            " o identificador " + identificadorAux.getLexema() + " que foi utilizado não é um(a) " +
+                            "procedimento/função ou não foi declarado.";
+                    this.erros_semanticos.add(erroAux);
                     System.out.println("Erro Semântico: " + "Linha: " + identificadorAux.getLinha() +
                             " o identificador " + identificadorAux.getLexema() + " que foi utilizado não é um(a) " +
                             "procedimento/função ou não foi declarado.");
@@ -1500,33 +1531,38 @@ public class ControllerAnalisadorSintatico {
                                     System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " a variavel/constante " + token.getLexema() + " não foi declarada");
                                 }else{
                                     if(!structAux.getTipo().equals(((IConstante)auxiliar).getTipoConstante())){
-                                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Tipos incompativeis");
+                                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " A variavel/constante " + token.getLexema()
+                                                + " é de um tipo incompatível");
                                     }
                                 }
                             }else{
                                 if(!structAux.getTipo().equals(((IVariaveis)auxiliar).getTipoVariavel())){
-                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Tipos incompativeis");
+                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " A variavel/constante " + token.getLexema()
+                                            + " é de um tipo incompatível");
                                 }
                             }
                             structAux.setInicializado(true);
                         }else{
                             IIdentificador auxiliar = filtrarVariaveis(token,"variavel");
                             if(auxiliar == null){
-                                auxiliar = filtrarVariaveis(token,"constante");
+                                //auxiliar = filtrarVariaveis(token,"constante");
+                                auxiliar = filtrarConstantes(token);
                                 if(auxiliar == null){
                                     System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " a variavel/constante " + token.getLexema() + " não foi declarada");
                                 }else{
-                                    if(!structAux.getTipo().equals(((IConstante)auxiliar).getTipoConstante())){
-                                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Tipos incompativeis");
+                                    if(!this.tipoVariavel.equals(((IConstante)auxiliar).getTipoConstante())){
+                                        System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " A variavel/constante " + token.getLexema()
+                                                + " é de um tipo incompatível");
                                     }
                                 }
                             }else{
-                                if(!structAux.getTipo().equals(((IVariaveis)auxiliar).getTipoVariavel())){
-                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " Tipos incompativeis");
+                                if(!this.tipoVariavel.equals(((IVariaveis)auxiliar).getTipoVariavel())){
+                                    System.out.println("Erro Semântico: "+ "Linha: " + token.getLinha() + " A variavel/constante " + token.getLexema()
+                                    + " é de um tipo incompatível");
                                 }
                             }
                         }
-                        //proximo_token();
+                        proximo_token();
                         //proximo_token();
                     }else{
                         proximo_token();
@@ -3004,11 +3040,11 @@ public class ControllerAnalisadorSintatico {
         ArrayList<IIdentificador> variaveis = this.tabelaDeSimbolos.getSimbolos(identificador,tipo);
         int controleGlobal = 0;
         IVariaveis variavelAux = null;
-        if(variaveis != null){
+        if(variaveis.size() > 0){
             if(!controleStruct) {
                 for (IIdentificador variavel : variaveis) {
                     variavelAux = (IVariaveis) variavel;
-                    if (variavelAux.getEscopo() == this.escopo) {
+                    if (variavel.getEscopo() == this.escopo) {
                         controleGlobal = 1;
                         break;
                     }
@@ -3017,7 +3053,7 @@ public class ControllerAnalisadorSintatico {
             if(controleGlobal == 0){
                 for(IIdentificador variavel: variaveis){
                     variavelAux = (IVariaveis)variavel;
-                    if(variavelAux.getEscopo() == -1){
+                    if(variavel.getEscopo() == -1){
                         controleGlobal = 2;
                         break;
                     }
@@ -3028,6 +3064,31 @@ public class ControllerAnalisadorSintatico {
             return null;
         }else{
             return variavelAux;
+        }
+
+    }
+
+    public IConstante filtrarConstantes(Token identificador){
+        boolean controleStruct = false;
+        ArrayList<IIdentificador> variaveis = this.tabelaDeSimbolos.getSimbolos(identificador,"constante");
+        int controle = 0;
+        IConstante constanteAux = null;
+
+        if(variaveis.size() > 0){
+            if(!controleStruct) {
+                for(IIdentificador variavel: variaveis){
+                    constanteAux = (IConstante)variavel;
+                    if(variavel.getEscopo() == -1){
+                        controle = 1;
+                        break;
+                    }
+                }
+            }
+        }
+        if(controle == 0){
+            return null;
+        }else{
+            return constanteAux;
         }
 
     }
