@@ -17,7 +17,11 @@ public class TabelaSimbolosImpl implements ITabelaSimbolos {
         //this.inserirPalavrasReservadas(); // Insere todas as palavras reservadas dentro da tabela
     }
 
-     /**
+    public HashMap<Integer, IdentificadorImpl> getTabelaSimbolos() {
+        return tabelaSimbolos;
+    }
+
+    /**
      * @return todos os Tokens dentro da tabela
      * */
     @Override

@@ -4,6 +4,7 @@ import domain.entities.Token;
 import modules.TabelaSimbolos.usecases.impl.IdentificadorImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface ITabelaSimbolos {
@@ -25,6 +26,8 @@ public interface ITabelaSimbolos {
     IIdentificador getSimboloL(Token token, String tipo);
 
     public ArrayList<IIdentificador> getSimbolos(Token token,String tipo);
+
+    public HashMap<Integer, IdentificadorImpl> getTabelaSimbolos();
 
     int numeroSimbolos();
 }
