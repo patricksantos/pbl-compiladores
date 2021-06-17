@@ -1,0 +1,35 @@
+//Teste envolvendo condições do if e while.
+
+procedure start {
+	if(true)then{
+
+	}
+
+	if(false)then{
+
+	}	
+
+	if(5 < 4)then{
+
+	}
+
+	if(5 + 4)then{
+
+	}
+
+	while(true){
+
+	}
+
+	while(false){
+
+	}	
+
+	while(5 == 4){
+
+	}
+
+	while(5 / 4){
+
+	}
+}

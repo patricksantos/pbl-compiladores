@@ -1,0 +1,39 @@
+//read e print.
+var {int t = 5;}
+const {real p = 1.5;}
+
+typedef struct{
+    var{int idade, nome = 5, altura;
+        boolean isTrue = true;
+	int tudo = 5.1;
+	string nome;
+    }
+} pessoa;
+
+procedure imprimir (string msg, int a) {
+ 	var {boolean t = false; int h;}
+	//print(t);//normal
+	print(ww);//variavel não declarada
+	print(h);//variavel não inicializada
+	print("opa");//normal
+	print(p);//constante
+}
+
+procedure imprimir (int msg, int a) {
+ 	var {string f; real x = 1.5;}
+	read(t);//normal
+	read(g);//variavel não declarada
+	read(xx);//variavel não declarada
+}
+
+procedure start {
+	var {string b = "a", n[5];}
+	print(b,"eita",q,n);// q e n não foram inicializados
+	read(n[4],i);// i não foi declarado
+	print(pessoa.nome);
+	print(pessoa.idade);// atributo não foi inicializado
+	read(pessoa.nome);
+	read(pessoa.idade);
+	read(pessoa.peso);// atributo não existe
+	print(pessoa.peso);// atributo não existe	
+}

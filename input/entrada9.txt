@@ -1,0 +1,15 @@
+//Teste envolvendo de utilização dos parametros das funções.
+
+procedure teste (int x, int a, int y, int result) {
+ 	result = x + y + a;  
+}
+
+function real opa (real x, real y, int m, string a) {
+	x = y + m + a;
+			
+	return m;
+}
+
+procedure start {
+	
+}

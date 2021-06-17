@@ -1,0 +1,24 @@
+//Verificando tipagem em expressões.
+const {real pi = 3.14;int lol = 1;}
+var {string h = "a"; int j = 5, o = 4, p; boolean t = false; real k = 1.5;}
+procedure start {
+	h = "10";
+	k = pi + 2.2;
+	//ERRO
+	h = h - j + t;
+	k = lol - 1;	
+
+	j = 5 + 4 - 9;
+	j = j - 5;
+	//ERRO
+	j = 5 + true - 9;
+
+	t = 5 > 4;
+	o = 1 / 2;
+	
+	//ERRO
+	t = true + false;
+	j = i - 5;
+	i = 5 - j;
+	j = p * 1;
+}

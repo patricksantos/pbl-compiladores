@@ -1,0 +1,49 @@
+// chamada de funções e procedimentos
+var {string h = "a"; int j = 5, o = 4; boolean t = false; real k = 1.5;}
+function int somar (real x, real y) {
+	var { real result; }
+			
+	return 1;
+}
+
+function boolean isso (int x, string y) {
+	var { real result; }
+			
+	return true;
+}
+
+function boolean isso (boolean x, int y) {
+	var { real result; }
+			
+	return false;
+}	
+
+procedure imprimir (string msg, int a) {
+ 	//result = x + y + a;  // erro01: tipos incompativeis
+}
+
+procedure imprimir (int msg, int a) {
+ 	//result = x + y + a;  // erro01: tipos incompativeis
+}
+
+procedure opa (int msg, real a) {
+ 	//result = x + y + a;  // erro01: tipos incompativeis
+}
+
+
+procedure start {
+	//h = "10";
+	//j = somar(1,2);
+	//t = true; 
+	imprimir(h,j);
+	imprimir(20,10);	
+	opa(5,1.6); 
+	//ERRO - procedimento não declarado
+	opa(5,1.6,"a"); 	
+
+	isso(true,10);
+	isso(5,h);
+	j = somar(1.1,k);
+	//ERRO - função não declarada
+	eita(5);
+}

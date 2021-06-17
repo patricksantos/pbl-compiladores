@@ -1,6 +1,6 @@
-//Escopos diferentes e variaveis não inicializadas.
+//Matrizes e vetores.
 var {int t = 5, m = 8;}
-var {int lk = 5;}
+var {int lk = 5, kk;}
 const {int opa = 5;real cbf = 1.5;}
 procedure imprimir (string msg, int a) {
  	var {boolean t[9];string k; boolean g;int f = 1, d, bb[4];}
@@ -8,7 +8,7 @@ procedure imprimir (string msg, int a) {
 	t[5] = false;//normal
 	t[f] = true;//normal
 	bb[1] = 0;//normal
-	//t[bb[1]] = true;//normal
+
 	t[1.5] = 5;// indice errado e tipo errado
 	t[k] = true;//indice errado e não foi inicializado
 	t[1] = t[5];//normal
@@ -22,27 +22,31 @@ procedure imprimir (string msg, int a) {
 }
 
 procedure imprimir (int msg, int a) {
- 	/*var {string t[m],y[5.1];int teste;}//indice errado
+ 	var {string t[m],y[5.1];int teste;}//indice errado
 	teste = 3;
 	t[teste] = "eita";//normal
 	t[lk] = "eita";//normal
 	t[teste] = teste;//tipos diferentes
+	t[teste] = y[7]; // vetor y não foi inicializado
 	teste[5] = 1;//variavel não é um array
 	print(t[2]);
-	print(t[7]);//indice não tem nenhum valor
+	print(t[kk]);//indice não tem nenhum valor
 	read(t[1]);
-	read(t[t]);*/
+	read(t[kk]);
 }
 
 procedure start {
-	/*var {int r[6][7];string k;real b[5][t],int c}
+	var {int r[6][7], hh[5][5];string k;real b[5][t];int c;}
 	r[1][2] = 10;//normal
 	r[lk][2] = 10;//normal
+	r[lk][2] = c;//identificador não inicializado
 	r[1][2] = 10.6;//tipos diferentes
-	b[t][t] = 5.1;//normal
+	b[t][c] = 5.1;//indice não foi inicializado
 	k[1][1] = "l";//variavel não é uma matriz
 	lll[3][3];//matriz não foi declarada
 	print(r[1][2]);
-	print(r[0][0]);//posição não inicializada;
-	read(r[lk][t]);*/
+	print(r[0][0]);
+	read(r[lk][t]);
+	print(hh[0][0]);//vetor não inicializada;
+	read(hh[lk][t]);
 }

@@ -53,7 +53,7 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
     }
 
     public void setStructPai(String structPai) {
-        structPai = structPai;
+        this.structPai = structPai;
     }
 
     public int getMaxIndice() {

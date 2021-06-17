@@ -1,0 +1,29 @@
+//Structs
+typedef struct{
+    var{int idade, nome = 5, altura;
+        boolean isTrue = true;
+	int tudo = 5.1;//tipos incompativeis
+	string nome;// atributo com esse nome já existe
+    }
+} pessoa;
+
+typedef struct{
+    var{int peso,altura; boolean isFalse = true;}
+} pessoa;//struct com esse nome já existe
+
+typedef struct extends pessoa{
+    var{int idade, nome = 5;
+        boolean isFalse = true;
+    }
+} homem;
+
+procedure start{
+	pessoa.idade = 6;
+	pessoa.idade = pessoa.nome;
+	pessoa.idade = pessoa.isTrue;//tipos diferentes
+	pessoa.idade = "oi";//tipos diferentes
+	pessoa.peso = 5.1;// atributo não existe
+	pessoa.idade = pessoa.altura;// atributo não inicializado
+	senhor.idade = 9;// struct não existe
+	homem.isTrue = false;
+}
