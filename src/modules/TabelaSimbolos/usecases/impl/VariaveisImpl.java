@@ -97,11 +97,14 @@ public class VariaveisImpl extends IdentificadorImpl implements IVariaveis  {
     }
 
     public ArrayList<ElementosStruct> getDadosStruct() {
-        return dadosStruct;
+        return this.dadosStruct;
     }
 
     public void setDadosStruct(ArrayList<ElementosStruct> dadosStruct) {
-        this.dadosStruct = dadosStruct;
+        for(ElementosStruct elemento: dadosStruct){
+            this.dadosStruct.add(elemento);
+        }
+        //this.dadosStruct = dadosStruct;
     }
 
     public void setInicializado(boolean status){
